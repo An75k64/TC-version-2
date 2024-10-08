@@ -2,7 +2,7 @@ import { Box, Heading, Text, Button, VStack, HStack, useBreakpointValue } from '
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
-import hVideo from "../../assets/videos/Camnew.mp4"; // Local video
+import hVideo from "../../assets/videos/camnew.mp4"; // Local video
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
