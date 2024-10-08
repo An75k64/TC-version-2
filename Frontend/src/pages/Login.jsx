@@ -1,276 +1,159 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Box, Button, Input, Text, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import axios from 'axios';
+import React, { useState } from "react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Input,
+  Button,
+  Stack,
+  Text,
+  useColorModeValue,
+  Divider,
+  Image,
+  Icon,
+  Alert,
+  AlertIcon,
+  Link as ChakraLink
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
+import { FaUserFriends } from "react-icons/fa"; // Only keeping Affiliate icon
+import LoginImage from "../assets/images/Login/log.svg"; // Adjust image import if needed
 
-const backgroundImage = 'url(https://4kwallpapers.com/images/walls/thumbs_3t/18274.png)';
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const FormError = ({ error }) => (
+  error ? (
+    <Alert status="error">
+      <AlertIcon />
+      {error}
+    </Alert>
+  ) : null
+);
 
-const AdminLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const [otp, setResetCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [timer, setTimer] = useState(90);
-  const [canResend, setCanResend] = useState(false);
+export default function LoginPage() {
+  const navigate = useNavigate(); // Hook for navigation
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [role] = useState("affiliate"); // Only affiliate role is tracked
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  useEffect(() => {
-    let interval = null;
-    if (!canResend && isForgotPassword) {
-      interval = setInterval(() => {
-        setTimer((prev) => {
-          if (prev === 1) {
-            setCanResend(true);
-            clearInterval(interval);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [canResend, isForgotPassword]);
-
-  //Handle login
-  const handleLogin = async (e) => {
-    console.log(apiUrl);
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError('');
-    try {
-      const response = await fetch(`${apiUrl}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.message || 'Login failed');
-        return;
-      }
-
-      const data = await response.json();
-      login(data.token);
-      navigate('/admin/dashboard');
-    } catch (error) {
-      console.error('Login error:', error);
-      setError('An unexpected error occurred. Please try again later.');
-    }
+    console.log("Affiliate login", formData);
+    // Implement actual login logic
   };
 
-   // Handle forgot password submission
-  const handleForgotPasswordSubmit = async () => {
-    console.log(apiUrl);
-    try {
-      // Automatically send OTP when Forgot Password is clicked
-      await axios.post(`${apiUrl}/api/forgot-password`, { username });
-      setMessage('The OTP has been sent to the registered Gmail ID.');
-      setIsForgotPassword(true);
-      setCanResend(false);
-      setTimer(90); // Reset the timer
-    } catch (err) {
-      setMessage('Error sending password reset code.');
-    }
-  };
-
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      setMessage('Passwords do not match.');
-      return;
-    }
-    try {
-      await axios.post(`${apiUrl}/api/reset-password`, { username, otp, newPassword });
-      setMessage('Password has been reset successfully.');
-      setIsForgotPassword(false);
-    } catch (err) {
-      setMessage('Error resetting password.');
-    }
-  };
-
-  const handleResendCode = async () => {
-    if (canResend) {
-      try {
-         await axios.post(`${apiUrl}/api/forgot-password`, { username });
-        setMessage('Password reset code resent to your email.');
-        setCanResend(false);
-        setTimer(90); // Reset the timer
-      } catch (err) {
-        setMessage('Error resending password reset code.');
-      }
-    }
+  const toggleSignUp = () => {
+    navigate("/affiliate-form"); // Redirect to the affiliate form
   };
 
   return (
     <Flex
-      direction="column"
-      align="center"
-      justify="center"
-      h="100vh"
-      w="100vw"
-      backgroundImage={backgroundImage}
-      backgroundSize="cover"
-      backgroundPosition="center"
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+      mt={"50"}
     >
-      <Box
-        bg="rgba(248, 246, 240)"
-        opacity={0.9}      
-        borderRadius="lg"
-        p="8"
-        boxShadow="lg"
-        width={{ base: "90%", sm: "70%", md: "50%", lg: "30%" }}
+      <Flex
+        w="full"
+        maxW="1200px"
+        mx="auto"
+        direction={{ base: "column", md: "row" }}
       >
-        <Text fontSize="2xl" mb="4" textAlign="center">
-          {isForgotPassword ? 'Reset Password' : 'Admin Login'}
-        </Text>
-        {error && <Text color="red.500" mb="4" textAlign="center">{error}</Text>}
-        {message && <Text color="green.500" mb="4" textAlign="center">{message}</Text>}
-        <form onSubmit={isForgotPassword ? handleResetPassword : handleLogin}>
-          {!isForgotPassword ? (
-            <>
-              <Input
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                mb="4"
-                size="lg"
-              />
-              <InputGroup size="lg">
+        {/* Login Form */}
+        <Box flex="1" p={10}>
+          <Stack spacing={8} mx={"auto"} maxW={"lg"}>
+            <Stack align={"center"} spacing={4}>
+              <Flex justify="center" mb={4}>
+                <Icon
+                  as={FaUserFriends} // Affiliate icon only
+                  boxSize={10}
+                  color={useColorModeValue("blue.400", "blue.300")}
+                  zIndex="docked"
+                />
+              </Flex>
+              <Text fontSize={"lg"} color={"gray.600"}>
+                Welcome back, Affiliate!
+              </Text>
+            </Stack>
+            <Box
+              rounded={"lg"}
+              bg={useColorModeValue("white", "gray.700")}
+              boxShadow={"lg"}
+              p={8}
+            >
+              <Stack spacing={4}>
                 <Input
-                  type={showPassword ? 'text' : 'password'}
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email Address / Phone Number"
+                  isRequired
+                />
+                <Input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  mb="4"
+                  isRequired
                 />
-                <InputRightElement>
-                  <Button
-                    variant="link"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <Button
-                type="submit"
-                colorScheme="teal"
-                width="full"
-                mb="4"
-                size="lg"
-              >
-                Login
-              </Button>
-              <Button
-                variant="link"
-                onClick={handleForgotPasswordSubmit}
-                size="sm"
-                colorScheme="teal"
-                width="full"
-              >
-                Forgot Password?
-              </Button>
-            </>
-          ) : (
-            <>
-
-              <Input
-                placeholder="Username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                mb="4"
-                size="lg"
-              />
-              <Input
-                placeholder="Reset Code"
-                value={otp}
-                onChange={(e) => setResetCode(e.target.value)}
-                mb="4"
-                size="lg"
-              />
-              <InputGroup size="lg">
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="New Password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  mb="4"
-                />
-                <InputRightElement>
-                  <Button
-                    variant="link"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <InputGroup size="lg">
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Confirm New Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  mb="4"
-                />
-                <InputRightElement>
-                  <Button
-                    variant="link"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-             
-              <Button
-                variant="link"
-                onClick={handleResetPassword}
-                type="submit"
-                colorScheme="teal"
-                width="full"
-                mb="4"
-                size="lg"
-              >
-                Reset Password
-              </Button>
-              <Button
-                variant="link"
-                onClick={handleResendCode}
-                colorScheme="teal"
-                isDisabled={!canResend}
-              >
-                {canResend ? 'Resend Code' : `Resend Code (${Math.floor(timer / 60)}:${timer % 60})`}
-              </Button>
-            </>
-          )}
-        </form>
-        {isForgotPassword && (
-          <Button
-            variant="link"
-            onClick={() => setIsForgotPassword(false)}
-            colorScheme="teal"
-            width="full"
-          >
-            Back to Login
-          </Button>
-        )}
-      </Box>
+                <FormError error={error} />
+                <Button
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                  onClick={handleLogin}
+                >
+                  Sign In
+                </Button>
+                <Stack pt={6} spacing={4}>
+                  <Text align={"center"}>
+                    New Affiliate?{" "}
+                    <ChakraLink
+                      color={"blue.400"}
+                      onClick={toggleSignUp} // Redirects to affiliate form
+                      as="span"
+                      cursor="pointer"
+                    >
+                      Register Now
+                    </ChakraLink>
+                  </Text>
+                </Stack>
+              </Stack>
+            </Box>
+          </Stack>
+        </Box>
+        <Box
+          flex="1"
+          p={8}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Stack spacing={4} textAlign="center">
+            <Heading fontSize={"4xl"} mb={4}>
+              Affiliate Sign In
+            </Heading>
+            <Image
+              src={LoginImage}
+              alt="Login Illustration"
+              objectFit="cover"
+            />
+          </Stack>
+        </Box>
+      </Flex>
     </Flex>
   );
-};
-
-export default AdminLogin;
+}

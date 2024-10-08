@@ -1,6 +1,6 @@
 import React from "react";
 import { ChakraProvider, Box } from "@chakra-ui/react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Home from "./pages/Home.jsx";
 import Services from "./pages/Services.jsx";
@@ -23,6 +23,14 @@ import Workforce from "./components/Service/Workforce/Workforce.jsx";
 import CareerCraft from "./components/Service/CareerCraft/CareerCraft.jsx";
 import WhatsAppIcon from "./components/WhatsAppIcon.jsx";
 import theme from "./theme";  // Import the custom theme
+import Affiliate from "./pages/Affiliate.jsx";
+import AffiliateForm from "./components/Affiliate/AffiliateForm.jsx";
+import AffiliateDashboard from "./pages/AffiliateDashboard.jsx";
+import AffiliateHeader from "./components/AffiliateDashboard/AffiliateHeader/AffiliateHeader.jsx";
+import AffiliateFooter from "./components/AffiliateDashboard/AffiliateFooter.jsx";
+import Login from "./pages/Login.jsx";
+import JobPostForm from "./components/AffiliateDashboard/JobPostForm.jsx";
+
 
 // Import Admin components
 import Layout from "./Admin/AdminComponents/Layout.jsx";
@@ -35,7 +43,7 @@ import StudentApplied from "./Admin/AdminComponents/Job Panel/StudentApplied.jsx
 import Dashboard from "./Admin/AdminPages/Dashboard.jsx";
 
 // Import new pages for admin authentication
-import AdminLogin from "./pages/Login.jsx";
+import AdminLogin from "./pages/AdminLogin.jsx";
 import AdminResetPassword from "./pages/ResetPassword.jsx";
 
 // Import AuthProvider
@@ -43,6 +51,19 @@ import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import NotificationPanel from "./Admin/AdminPages/NotificationPanel.jsx";
 
 const NotFound = () => <div>Page Not Found</div>;
+
+const Layoutt = ({ children }) => {
+  const location = useLocation();
+  const isAffiliateDashboard = location.pathname.startsWith('/affiliate-dashboard');
+
+  return (
+    <>
+      {isAffiliateDashboard ? <AffiliateHeader /> : <Header />}
+      {children}
+      {isAffiliateDashboard ? <AffiliateFooter /> : <Footer />}
+    </>
+  );
+};
 
 const App = () => {
   return (
@@ -60,9 +81,11 @@ const App = () => {
               path="/*"
               element={
                 <>
-                  <Header />
+                  
+                  <Layoutt>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/oncampus" element={<OnCampus />} />
                     <Route path="/offcampus" element={<OffCampus />} />
@@ -79,9 +102,14 @@ const App = () => {
                     <Route path="/college-form" element={<CollegeForm />} />
                     <Route path="/company-form" element={<CompanyForm />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/affiliate" element={<Affiliate />} />
+                    <Route path="/affiliate-form" element={<AffiliateForm />} />
+                    <Route path="/affiliate-dashboard" element={<AffiliateDashboard />} />
+                    <Route path="/affiliate-dashboard/postjob" element={<JobPostForm />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
-                  <Footer />
+                  </Layoutt>
+                  
                   <Box position="fixed" bottom="4" right="4" zIndex="1000">
                     <WhatsAppIcon />
                   </Box>
