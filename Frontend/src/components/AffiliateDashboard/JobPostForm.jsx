@@ -37,9 +37,9 @@ const JobPostForm = () => {
     initialValues: {
       technology: '',
       skillset: '',
-      experience: '',
+      experience: '', // Changed to string instead of select
       location: '',
-      domain: '',
+      domain: '', // Changed to string instead of select
       salary: '',
     },
     validationSchema,
@@ -141,20 +141,15 @@ const JobPostForm = () => {
                   <Icon as={FaUserTie} w={5} h={5} color="purple.500" mr={2} />
                   <FormLabel>Experience</FormLabel>
                 </Flex>
-                <Select
+                <Input
                   name="experience"
-                  placeholder="Select experience level"
+                  placeholder="Enter experience level"
                   value={formik.values.experience}
                   onChange={formik.handleChange}
                   borderRadius="full"
                   focusBorderColor="purple.400"
                   shadow="sm"
-                >
-                  <option value="Fresher">Fresher</option>
-                  <option value="1-3 years">1-3 years</option>
-                  <option value="3-5 years">3-5 years</option>
-                  <option value="5+ years">5+ years</option>
-                </Select>
+                />
                 <FormErrorMessage>{formik.errors.experience}</FormErrorMessage>
               </FormControl>
 
@@ -182,20 +177,15 @@ const JobPostForm = () => {
                   <Icon as={FaLaptopCode} w={5} h={5} color="teal.500" mr={2} />
                   <FormLabel>Domain</FormLabel>
                 </Flex>
-                <Select
+                <Input
                   name="domain"
-                  placeholder="Select job domain"
+                  placeholder="Enter job domain"
                   value={formik.values.domain}
                   onChange={formik.handleChange}
                   borderRadius="full"
                   focusBorderColor="teal.400"
                   shadow="sm"
-                >
-                  <option value="IT">IT</option>
-                  <option value="Marketing">Marketing</option>
-                  <option value="Finance">Finance</option>
-                  <option value="Healthcare">Healthcare</option>
-                </Select>
+                />
                 <FormErrorMessage>{formik.errors.domain}</FormErrorMessage>
               </FormControl>
 

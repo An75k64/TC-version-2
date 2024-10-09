@@ -57,7 +57,7 @@ const AffiliateHero = () => {
                 _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
                 onClick={handleSignInRedirect}
               >
-                Refer Talent
+                Login
               </Button>
             </HStack>
           </VStack>
