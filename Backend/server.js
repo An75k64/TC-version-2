@@ -15,6 +15,7 @@ const studentRoutes = require("./routes/studentRoutes");
 const cardRoutes = require("./routes/cardRoutes");
 const loginRoutes = require("./routes/admin");
 const notificationRoutes = require("./routes/notificationRoutes");
+const affiliateRoutes = require("./routes/affiliateRoutes");
 
 
 const app = express();
@@ -55,6 +56,7 @@ app.use("/api/contact", contactRouter);
 app.use('/api/job-applications', jobApplicationRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/cards", cardRoutes);
+app.use("/api/affiliate", affiliateRoutes);
 
 app.use("/api", loginRoutes);
 

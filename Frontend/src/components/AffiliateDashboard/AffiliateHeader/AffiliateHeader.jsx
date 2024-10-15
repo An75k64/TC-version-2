@@ -64,12 +64,12 @@ const AffiliateHeader = () => {
         <Stack flex={{ base: 1, md: 0 }} justify={"flex-end"} direction={"row"} spacing={6}>
           
 
-          <IconButton
+        {/*  <IconButton
             size="lg"
             variant="ghost"
             aria-label="Notifications"
             icon={<BellIcon />}
-          />
+          /> */}
 
           <Menu>
             <MenuButton
@@ -86,7 +86,7 @@ const AffiliateHeader = () => {
             </MenuButton>
             <MenuList>
               <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
+            {/*  <MenuItem>Settings</MenuItem> */}
               <MenuItem>Logout</MenuItem>
             </MenuList>
           </Menu>
@@ -107,13 +107,13 @@ const DesktopNav = () => {
   const NAV_ITEMS = [
     { label: "Dashboard", href: "/affiliate-dashboard" },
     { label: "Referrals", href: "/affiliate-dashboard/referrals" },
-    { label: "Earnings", href: "/affiliate-dashboard/earnings" },
+   // { label: "Earnings", href: "/affiliate-dashboard/earnings" },
     { label: "Post a Job", href: "/affiliate-dashboard/postjob" },
-    { label: "Support", href: "/affiliate-dashboard/support" },
+   // { label: "Support", href: "/affiliate-dashboard/support" },
   ];
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction="row" spacing={4} justify="center" align="center">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <ChakraLink
@@ -143,9 +143,9 @@ const MobileNav = () => {
   const NAV_ITEMS = [
      { label: "Dashboard", href: "/affiliate-dashboard" },
     { label: "Referrals", href: "/affiliate-dashboard/referrals" },
-    { label: "Earnings", href: "/affiliate-dashboard/earnings" },
+  //  { label: "Earnings", href: "/affiliate-dashboard/earnings" },
     { label: "Post a Job", href: "/affiliate-dashboard/postjob" },
-    { label: "Support", href: "/affiliate-dashboard/support" },
+   // { label: "Support", href: "/affiliate-dashboard/support" },
   ];
 
   return (

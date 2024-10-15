@@ -14,9 +14,7 @@ import {
   InputRightElement,
   Stack,
   Text,
-  Textarea,
   useTheme,
-  Select,
   useToast,
   FormErrorMessage,
   IconButton,
@@ -40,7 +38,7 @@ const validationSchema = Yup.object({
   phoneNumber: Yup.string().required('Phone Number is required'),
   companyName: Yup.string().required('Company Name is required'),
   companyEmail: Yup.string().email('Invalid email address').required('Company Email Address is required'),
-  post: Yup.string().required('Post is required'),
+  designation: Yup.string().required('Designation is required'),
 });
 
 const PasswordInput = (props) => {
@@ -79,10 +77,10 @@ const AffiliateForm = () => {
       phoneNumber: '',
       companyName: '',
       companyEmail: '',
-      post: '',
+      designation: '', // Corrected from "post" to "designation"
     },
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setSubmitting }) => {
       try {
         const response = await axios.post('http://localhost:5000/api/affiliate', values);
         toast({
@@ -101,6 +99,8 @@ const AffiliateForm = () => {
           duration: 5000,
           isClosable: true,
         });
+      } finally {
+        setSubmitting(false); // Reset submitting state
       }
     }
   });
@@ -200,6 +200,7 @@ const AffiliateForm = () => {
                 placeholder="Enter your full name"
                 value={formik.values.fullName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.fullName && formik.errors.fullName}</FormErrorMessage>
             </FormControl>
@@ -213,6 +214,7 @@ const AffiliateForm = () => {
                 placeholder="Enter your email address"
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.email && formik.errors.email}</FormErrorMessage>
             </FormControl>
@@ -225,6 +227,7 @@ const AffiliateForm = () => {
                 placeholder="Enter your password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.password && formik.errors.password}</FormErrorMessage>
             </FormControl>
@@ -237,6 +240,7 @@ const AffiliateForm = () => {
                 placeholder="Confirm your password"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.confirmPassword && formik.errors.confirmPassword}</FormErrorMessage>
             </FormControl>
@@ -249,6 +253,7 @@ const AffiliateForm = () => {
                 placeholder="Enter your phone number"
                 value={formik.values.phoneNumber}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.phoneNumber && formik.errors.phoneNumber}</FormErrorMessage>
             </FormControl>
@@ -261,45 +266,48 @@ const AffiliateForm = () => {
                 placeholder="Enter your company name"
                 value={formik.values.companyName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.companyName && formik.errors.companyName}</FormErrorMessage>
             </FormControl>
 
             {/* Company Email */}
             <FormControl isInvalid={formik.touched.companyEmail && formik.errors.companyEmail}>
-              <FormLabel>Company Email</FormLabel>
+              <FormLabel>Company Email Address</FormLabel>
               <Input
                 name="companyEmail"
                 type="email"
                 placeholder="Enter your company email address"
                 value={formik.values.companyEmail}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
               <FormErrorMessage>{formik.touched.companyEmail && formik.errors.companyEmail}</FormErrorMessage>
             </FormControl>
 
-            {/* Post */}
-            <FormControl isInvalid={formik.touched.post && formik.errors.post}>
-              <FormLabel>Post</FormLabel>
+            {/* Designation */}
+            <FormControl isInvalid={formik.touched.designation && formik.errors.designation}>
+              <FormLabel>Designation</FormLabel>
               <Input
-                name="post"
-                placeholder="Enter your post"
-                value={formik.values.post}
+                name="designation"
+                placeholder="Enter your designation"
+                value={formik.values.designation}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur} // Added onBlur for touch
               />
-              <FormErrorMessage>{formik.touched.post && formik.errors.post}</FormErrorMessage>
+              <FormErrorMessage>{formik.touched.designation && formik.errors.designation}</FormErrorMessage>
             </FormControl>
-
-            <Button
-              mt={4}
-              colorScheme="teal"
-              type="submit"
-              isFullWidth
-              isLoading={formik.isSubmitting}
-            >
-              Submit Application
-            </Button>
           </Stack>
+
+          <Button
+            mt={6}
+            colorScheme="blue"
+            type="submit"
+            isLoading={formik.isSubmitting} // Loading state for submit button
+            width="full"
+          >
+            Submit Application
+          </Button>
         </form>
       </Box>
     </Box>

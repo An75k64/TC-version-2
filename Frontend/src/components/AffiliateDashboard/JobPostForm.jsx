@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -10,14 +10,22 @@ import {
   Heading,
   Input,
   Stack,
-  Select,
   Icon,
   useToast,
   FormErrorMessage,
   Flex,
   Text,
+  Select,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  IconButton,
+  useColorModeValue
 } from '@chakra-ui/react';
-import { FaLaptopCode, FaLightbulb, FaMapMarkerAlt, FaUserTie, FaRupeeSign } from 'react-icons/fa';
+import { FaLaptopCode, FaLightbulb, FaMapMarkerAlt, FaUserTie, FaRupeeSign, FaEdit, FaTrashAlt, FaEye } from 'react-icons/fa';
 import axios from 'axios';
 
 // Validation schema using Yup
@@ -31,15 +39,30 @@ const validationSchema = Yup.object({
 });
 
 const JobPostForm = () => {
+  const [postedJobs, setPostedJobs] = useState([]);
   const toast = useToast();
+
+  // Fetch posted jobs
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/jobs'); // Assuming an endpoint exists
+        setPostedJobs(response.data);
+      } catch (error) {
+        console.error('Error fetching jobs:', error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
       technology: '',
       skillset: '',
-      experience: '', // Changed to string instead of select
+      experience: '',
       location: '',
-      domain: '', // Changed to string instead of select
+      domain: '',
       salary: '',
     },
     validationSchema,
@@ -54,6 +77,8 @@ const JobPostForm = () => {
           isClosable: true,
         });
         formik.resetForm();
+        // Refresh the posted jobs list
+        setPostedJobs([...postedJobs, response.data]);
       } catch (error) {
         toast({
           title: "Error",
@@ -65,6 +90,29 @@ const JobPostForm = () => {
       }
     },
   });
+
+  // Handle job delete
+  const handleDelete = async (jobId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/jobs/${jobId}`);
+      setPostedJobs(postedJobs.filter(job => job._id !== jobId));
+      toast({
+        title: "Job Deleted",
+        description: "The job has been removed.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an issue deleting the job.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <Box
@@ -96,8 +144,9 @@ const JobPostForm = () => {
           borderColor="gray.200"
           borderWidth={1}
         >
+          {/* Job Posting Form */}
           <form onSubmit={formik.handleSubmit}>
-            <Stack spacing={5}>
+<Stack spacing={5}>
 
               {/* Technology */}
               <FormControl isInvalid={formik.touched.technology && formik.errors.technology}>
@@ -226,6 +275,59 @@ const JobPostForm = () => {
               </Button>
             </Stack>
           </form>
+        </Box>
+
+        {/* Posted Jobs List */}
+        <Heading as="h2" size="lg" mt={16} mb={8}>
+          Your Posted Jobs
+        </Heading>
+        <Box
+          bg={useColorModeValue("white", "gray.800")}
+          p={8}
+          borderRadius="lg"
+          shadow="lg"
+        >
+          {postedJobs.length === 0 ? (
+            <Text>No jobs posted yet.</Text>
+          ) : (
+            <Table variant="simple">
+              <Thead>
+                <Tr>
+                  <Th>Job Title</Th>
+                  <Th>Location</Th>
+                  <Th>Actions</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {postedJobs.map((job) => (
+                  <Tr key={job._id}>
+                    <Td>{job.technology}</Td>
+                    <Td>{job.location}</Td>
+                    <Td>
+                      <IconButton
+                        icon={<FaEye />}
+                        aria-label="View"
+                        colorScheme="blue"
+                        mr={2}
+                      />
+                      <IconButton
+                        icon={<FaEdit />}
+                        aria-label="Edit"
+                        colorScheme="yellow"
+                        mr={2}
+                      />
+                      <IconButton
+                        icon={<FaTrashAlt />}
+                        aria-label="Delete"
+                        colorScheme="red"
+                        onClick={() => handleDelete(job._id)}
+                      />
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          )}
         </Box>
       </Container>
     </Box>

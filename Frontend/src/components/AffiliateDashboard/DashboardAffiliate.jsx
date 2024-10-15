@@ -86,7 +86,7 @@ const DashboardAffiliate = () => {
   return (
     <Box bg={useColorModeValue('gray.50', 'gray.900')} minH="100vh" py={12}>
       <Flex direction="column" align="center" maxW="7xl" mx="auto" px={4}>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={10}>
           <DashboardCard
             title="Job Postings"
             icon={FaBriefcase}
@@ -95,7 +95,7 @@ const DashboardAffiliate = () => {
             actionText="Post New Job"
             actionLink="/affiliate-dashboard/postjob"
             viewAllText="View All"
-            viewAllLink="/job-postings"
+            viewAllLink="/affiliate-dashboard/postjob"
           />
           <DashboardCard
             title="Referrals"
@@ -103,11 +103,11 @@ const DashboardAffiliate = () => {
             value="87"
             subheading="Track your student referrals"
             actionText="Manage Referrals"
-            actionLink="/manage-referrals"
+            actionLink="/affiliate-dashboard/referrals"
             viewAllText="View All"
-            viewAllLink="/referrals"
+            viewAllLink="/affiliate-dashboard/referrals"
           />
-          <DashboardCard
+        {/* <DashboardCard
             title="Earnings"
             icon={FaMoneyBillWave}
             value="₹1,245"
@@ -115,7 +115,7 @@ const DashboardAffiliate = () => {
            // actionText="Request Payout"
            // actionLink="/request-payout"
             viewAllLink="/earnings-details"
-          />
+          />  */} 
         </SimpleGrid>
       </Flex>
     </Box>

@@ -7,31 +7,27 @@ import {
   Button,
   Stack,
   Text,
-  useColorModeValue,
-  Divider,
   Image,
-  Icon,
+  useColorModeValue,
   Alert,
   AlertIcon,
-  Link as ChakraLink
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
 import { FaUserFriends } from "react-icons/fa"; // Only keeping Affiliate icon
 import LoginImage from "../assets/images/Login/log.svg"; // Adjust image import if needed
+import axios from "axios"; // Import axios for making API requests
 
-const FormError = ({ error }) => (
+const FormError = ({ error }) =>
   error ? (
     <Alert status="error">
       <AlertIcon />
       {error}
     </Alert>
-  ) : null
-);
+  ) : null;
 
 export default function LoginPage() {
   const navigate = useNavigate(); // Hook for navigation
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [role] = useState("affiliate"); // Only affiliate role is tracked
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -43,10 +39,18 @@ export default function LoginPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Affiliate login", formData);
-    // Implement actual login logic
+    setError(""); // Reset error message
+    try {
+      const response = await axios.post("/api/affiliate/login", formData); // Update the URL based on your backend setup
+      console.log("Login successful", response.data);
+      // Handle successful login (e.g., save token, redirect)
+      navigate("/dashboard"); // Redirect to dashboard or appropriate page
+    } catch (err) {
+      console.error(err);
+      setError("Login failed. Please check your credentials and try again.");
+    }
   };
 
   const toggleSignUp = () => {
@@ -72,8 +76,7 @@ export default function LoginPage() {
           <Stack spacing={8} mx={"auto"} maxW={"lg"}>
             <Stack align={"center"} spacing={4}>
               <Flex justify="center" mb={4}>
-                <Icon
-                  as={FaUserFriends} // Affiliate icon only
+                <FaUserFriends
                   boxSize={10}
                   color={useColorModeValue("blue.400", "blue.300")}
                   zIndex="docked"
@@ -95,7 +98,7 @@ export default function LoginPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Email Address / Phone Number"
+                  placeholder="Email Address"
                   isRequired
                 />
                 <Input

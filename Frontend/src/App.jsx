@@ -49,6 +49,7 @@ import AdminResetPassword from "./pages/ResetPassword.jsx";
 // Import AuthProvider
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import NotificationPanel from "./Admin/AdminPages/NotificationPanel.jsx";
+import Referrals from "./components/AffiliateDashboard/Referrals.jsx";
 
 const NotFound = () => <div>Page Not Found</div>;
 
@@ -106,6 +107,7 @@ const App = () => {
                     <Route path="/affiliate-form" element={<AffiliateForm />} />
                     <Route path="/affiliate-dashboard" element={<AffiliateDashboard />} />
                     <Route path="/affiliate-dashboard/postjob" element={<JobPostForm />} />
+                    <Route path="/affiliate-dashboard/referrals" element={<Referrals />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   </Layoutt>
