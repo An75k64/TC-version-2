@@ -18,6 +18,9 @@ import { FaUserFriends } from "react-icons/fa"; // Only keeping Affiliate icon
 import LoginImage from "../assets/images/Login/log.svg"; // Adjust image import if needed
 import axios from "axios"; // Import axios for making API requests
 
+
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 const FormError = ({ error }) =>
   error ? (
     <Alert status="error">
@@ -43,10 +46,10 @@ export default function LoginPage() {
     e.preventDefault();
     setError(""); // Reset error message
     try {
-      const response = await axios.post("/api/affiliate/login", formData); // Update the URL based on your backend setup
+      const response = await axios.post(`${apiUrl}/api/affiliate/login`, formData); // Update the URL based on your backend setup
       console.log("Login successful", response.data);
       // Handle successful login (e.g., save token, redirect)
-      navigate("/dashboard"); // Redirect to dashboard or appropriate page
+      navigate("/affiliate-dashboard"); // Redirect to dashboard or appropriate page
     } catch (err) {
       console.error(err);
       setError("Login failed. Please check your credentials and try again.");

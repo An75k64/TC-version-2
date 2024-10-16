@@ -304,6 +304,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 var Affiliate = __webpack_require__(/*! ../models/Affiliate */ "./models/Affiliate.js");
 var bcrypt = __webpack_require__(/*! bcrypt */ "bcrypt");
+var jwt = __webpack_require__(/*! jsonwebtoken */ "jsonwebtoken"); // Optional: For generating tokens, if using JWT
+
 exports.createAffiliate = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
     var _req$body, fullName, email, password, phoneNumber, companyName, companyEmail, designation, hashedPassword, affiliate;
@@ -348,6 +350,81 @@ exports.createAffiliate = /*#__PURE__*/function () {
   }));
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
+  };
+}();
+
+// New login function
+exports.loginAffiliate = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
+    var _req$body2, email, password, affiliate, isPasswordValid, token;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _req$body2 = req.body, email = _req$body2.email, password = _req$body2.password;
+          _context2.prev = 1;
+          _context2.next = 4;
+          return Affiliate.findOne({
+            email: email
+          });
+        case 4:
+          affiliate = _context2.sent;
+          if (affiliate) {
+            _context2.next = 7;
+            break;
+          }
+          return _context2.abrupt("return", res.status(401).json({
+            message: "Invalid email or password."
+          }));
+        case 7:
+          _context2.next = 9;
+          return bcrypt.compare(password, affiliate.password);
+        case 9:
+          isPasswordValid = _context2.sent;
+          if (isPasswordValid) {
+            _context2.next = 12;
+            break;
+          }
+          return _context2.abrupt("return", res.status(401).json({
+            message: "Invalid email or password."
+          }));
+        case 12:
+          // Optional: Generate a token (if using JWT)
+          token = jwt.sign({
+            id: affiliate._id
+          }, process.env.JWT_SECRET, {
+            expiresIn: "1h" // Adjust the expiration time as needed
+          });
+          res.status(200).json({
+            message: "Login successful!",
+            token: token,
+            // Send the token in response (if applicable)
+            affiliate: {
+              id: affiliate._id,
+              fullName: affiliate.fullName,
+              email: affiliate.email,
+              phoneNumber: affiliate.phoneNumber,
+              companyName: affiliate.companyName,
+              companyEmail: affiliate.companyEmail,
+              designation: affiliate.designation
+            }
+          });
+          _context2.next = 20;
+          break;
+        case 16:
+          _context2.prev = 16;
+          _context2.t0 = _context2["catch"](1);
+          console.error(_context2.t0);
+          res.status(500).json({
+            message: "Internal server error."
+          });
+        case 20:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[1, 16]]);
+  }));
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
   };
 }();
 
@@ -3181,11 +3258,15 @@ module.exports = router;
 
 var express = __webpack_require__(/*! express */ "express");
 var _require = __webpack_require__(/*! ../controllers/affiliateController */ "./controllers/affiliateController.js"),
-  createAffiliate = _require.createAffiliate;
+  createAffiliate = _require.createAffiliate,
+  loginAffiliate = _require.loginAffiliate;
 var router = express.Router();
 
 // Route to create a new affiliate
 router.post("/", createAffiliate);
+
+// Route to log in an affiliate
+router.post("/login", loginAffiliate);
 module.exports = router;
 
 /***/ }),
