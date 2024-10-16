@@ -42,9 +42,9 @@ const AffiliateHeader = () => {
         align={"center"}
       >
         <Flex
-          flex={{ base: 1, md: "auto" }}
+          flex={{ base: 1, lg: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
         >
           <IconButton
             onClick={onToggle}
@@ -53,15 +53,15 @@ const AffiliateHeader = () => {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }} align="center">
+        <Flex flex={{ base: 1 }} justify={{ base: "center", lg: "start" }} align="center">
           <Logo />
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
 
-        <Stack flex={{ base: 1, md: 0 }} justify={"flex-end"} direction={"row"} spacing={6}>
+        <Stack flex={{ base: 1, lg: 0 }} justify={"flex-end"} direction={"row"} spacing={6}>
           
 
         {/*  <IconButton
@@ -149,7 +149,7 @@ const MobileNav = () => {
   ];
 
   return (
-    <Stack bg={useColorModeValue("white", "gray.800")} p={4} display={{ md: "none" }}>
+    <Stack bg={useColorModeValue("white", "gray.800")} p={4} display={{ lg: "none" }}>
       {NAV_ITEMS.map((navItem) => (
         <Flex
           key={navItem.label}

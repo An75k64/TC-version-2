@@ -40,30 +40,40 @@ const AffiliateIntro = () => {
     >
       <Container maxW="container.xl">
         <VStack spacing={8} align="center">
-          <Heading as="h1" size="2xl" textAlign="center"  fontFamily={"ClashDisplay"} color={"blue.400"} >
+          <Heading
+            as="h1"
+            size={{ base: "xl", md: 'xl', xl:"2xl" }}
+            textAlign="center"
+            fontFamily="ClashDisplay"
+            color="blue.400"
+          >
             Why Join TalentConnect's Affiliate Program?
           </Heading>
-          <Text fontSize="xl" textAlign="center" maxW="800px">
+          <Text
+            fontSize={{ base: "md", md: "md", lg: 'lg', xl: 'xl' }}
+            textAlign="center"
+            maxW="800px"
+          >
             Discover the advantages of becoming a TalentConnect affiliate. Our program offers you the chance to leverage your professional network, access exclusive tools, and earn rewards by connecting top-tier talent with the right opportunities.
           </Text>
 
           <Box width="100%" maxW="full">
-            
-            <Flex justify="space-around" wrap="wrap" spacing={4}>
+            <Flex justify="space-between" wrap="wrap">
               {steps.map((step) => (
                 <Box
                   key={step.number}
                   textAlign="center"
-                  width={{ base: "full", md: "24%" }}
+                  width={{ base: "100%", md: "45%",lg: '45%', xl: "24%" }}
+                  mb={{ base: 8, md: 8, lg: 10 }}
                 >
-                  <Icon as={step.icon} color="blue.400" w={10} h={10} mb={4} mx="auto" />
+                  <Icon as={step.icon} color="blue.400" w={{ base: 8, md: 10 }} h={{ base: 8, md: 10 }} mb={4} mx="auto" />
                   <Heading as="h3" size="md" mb={2}>
                     <Text as="span" fontSize="lg" fontWeight="bold" color="blue.500">
                       {step.number}.
-                    </Text>
-                    {" "}{step.title}
+                    </Text>{" "}
+                    {step.title}
                   </Heading>
-                  <Text>{step.description}</Text>
+                  <Text fontSize={{ base: "sm", md: "md" }}>{step.description}</Text>
                 </Box>
               ))}
             </Flex>

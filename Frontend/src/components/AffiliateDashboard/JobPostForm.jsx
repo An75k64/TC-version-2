@@ -11,11 +11,11 @@ import {
   Input,
   Stack,
   Icon,
+  Textarea,
   useToast,
   FormErrorMessage,
   Flex,
   Text,
-  Select,
   Table,
   Thead,
   Tbody,
@@ -146,22 +146,22 @@ const JobPostForm = () => {
         >
           {/* Job Posting Form */}
           <form onSubmit={formik.handleSubmit}>
-<Stack spacing={5}>
-
+            <Stack spacing={5}>
               {/* Technology */}
               <FormControl isInvalid={formik.touched.technology && formik.errors.technology}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="blue.500" mr={2} />
                   <FormLabel>Technology</FormLabel>
                 </Flex>
-                <Input
+                <Textarea
                   name="technology"
                   placeholder="Enter technology stack"
                   value={formik.values.technology}
                   onChange={formik.handleChange}
-                  borderRadius="full"
+                  borderRadius="lg"
                   focusBorderColor="blue.400"
                   shadow="sm"
+                  rows={3} // For multiline
                 />
                 <FormErrorMessage>{formik.errors.technology}</FormErrorMessage>
               </FormControl>
@@ -172,14 +172,15 @@ const JobPostForm = () => {
                   <Icon as={FaLightbulb} w={5} h={5} color="pink.500" mr={2} />
                   <FormLabel>Skillset</FormLabel>
                 </Flex>
-                <Input
+                <Textarea
                   name="skillset"
                   placeholder="Enter required skills"
                   value={formik.values.skillset}
                   onChange={formik.handleChange}
-                  borderRadius="full"
+                  borderRadius="lg"
                   focusBorderColor="pink.400"
                   shadow="sm"
+                  rows={3} // For multiline
                 />
                 <FormErrorMessage>{formik.errors.skillset}</FormErrorMessage>
               </FormControl>
@@ -226,14 +227,15 @@ const JobPostForm = () => {
                   <Icon as={FaLaptopCode} w={5} h={5} color="teal.500" mr={2} />
                   <FormLabel>Domain</FormLabel>
                 </Flex>
-                <Input
+                <Textarea
                   name="domain"
                   placeholder="Enter job domain"
                   value={formik.values.domain}
                   onChange={formik.handleChange}
-                  borderRadius="full"
+                  borderRadius="lg"
                   focusBorderColor="teal.400"
                   shadow="sm"
+                  rows={3} // For multiline
                 />
                 <FormErrorMessage>{formik.errors.domain}</FormErrorMessage>
               </FormControl>
@@ -282,52 +284,48 @@ const JobPostForm = () => {
           Your Posted Jobs
         </Heading>
         <Box
-          bg={useColorModeValue("white", "gray.800")}
-          p={8}
+          bg={useColorModeValue('white', 'gray.800')}
+          p={6}
           borderRadius="lg"
           shadow="lg"
         >
-          {postedJobs.length === 0 ? (
-            <Text>No jobs posted yet.</Text>
-          ) : (
-            <Table variant="simple">
-              <Thead>
-                <Tr>
-                  <Th>Job Title</Th>
-                  <Th>Location</Th>
-                  <Th>Actions</Th>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Technology</Th>
+                <Th>Skillset</Th>
+                <Th>Experience</Th>
+                <Th>Location</Th>
+                <Th>Domain</Th>
+                <Th>Salary</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {postedJobs.map((job) => (
+                <Tr key={job._id}>
+                  <Td>{job.technology}</Td>
+                  <Td>{job.skillset}</Td>
+                  <Td>{job.experience}</Td>
+                  <Td>{job.location}</Td>
+                  <Td>{job.domain}</Td>
+                  <Td>{job.salary}</Td>
+                  <Td>
+                    <IconButton
+                      icon={<FaEdit />}
+                      mr={2}
+                      onClick={() => console.log('Edit', job._id)}
+                    />
+                    <IconButton
+                      icon={<FaTrashAlt />}
+                      colorScheme="red"
+                      onClick={() => handleDelete(job._id)}
+                    />
+                  </Td>
                 </Tr>
-              </Thead>
-              <Tbody>
-                {postedJobs.map((job) => (
-                  <Tr key={job._id}>
-                    <Td>{job.technology}</Td>
-                    <Td>{job.location}</Td>
-                    <Td>
-                      <IconButton
-                        icon={<FaEye />}
-                        aria-label="View"
-                        colorScheme="blue"
-                        mr={2}
-                      />
-                      <IconButton
-                        icon={<FaEdit />}
-                        aria-label="Edit"
-                        colorScheme="yellow"
-                        mr={2}
-                      />
-                      <IconButton
-                        icon={<FaTrashAlt />}
-                        aria-label="Delete"
-                        colorScheme="red"
-                        onClick={() => handleDelete(job._id)}
-                      />
-                    </Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          )}
+              ))}
+            </Tbody>
+          </Table>
         </Box>
       </Container>
     </Box>
