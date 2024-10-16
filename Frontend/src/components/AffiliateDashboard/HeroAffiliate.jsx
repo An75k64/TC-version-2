@@ -54,7 +54,7 @@ const HeroAffiliate = () => {
       <Container maxW={{ base: 'container.sm', md: 'container.md', lg: 'container.lg' }}>
         <Flex direction="column" align="center" justify="center" height="100%">
           <VStack spacing={{ base: 6, md: 8 }} align="center">
-            <Heading as="h1" fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }} fontWeight="bold" fontFamily={"ClashDisplay"}
+            <Heading as="h1" fontSize={{ base: '3xl', md: '4xl', lg: '4xl', xl: '5xl' }} fontWeight="bold" fontFamily={"ClashDisplay"}
                 color={"blue.400"}>
               Welcome to the Affiliate Dashboard
             </Heading>

@@ -86,7 +86,7 @@ const DashboardAffiliate = () => {
   return (
     <Box bg={useColorModeValue('gray.50', 'gray.900')} minH="100vh" py={12}>
       <Flex direction="column" align="center" maxW="7xl" mx="auto" px={4}>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={10}>
+        <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={10}>
           <DashboardCard
             title="Job Postings"
             icon={FaBriefcase}

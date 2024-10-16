@@ -14,15 +14,11 @@ import {
   Stack,
   Avatar,
   useColorModeValue,
-  Icon,
-  Button,
-  Spacer,
   Tag
 } from "@chakra-ui/react";
-import { FiUser, FiCheckCircle } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 
 const Referrals = () => {
-  // Mock data for jobs and referrals
   const [jobs, setJobs] = useState([
     {
       jobId: 1,
@@ -49,55 +45,92 @@ const Referrals = () => {
   };
 
   return (
-    <Box p={8} mx="auto" maxW="1200px" bg={useColorModeValue("gray.50", "gray.800")} borderRadius="lg" boxShadow="2xl">
-      <Heading as="h2" size="xl" textAlign="center" mb={10} color={useColorModeValue("blue.500", "blue.300")}>
+    <Box
+      p={{ base: 4, md: 2, lg: 8 }}
+      mx="auto"
+      maxW={{ base: "100%", md: "100%", lg: "80%" }}
+      bg={useColorModeValue("gray.50", "gray.800")}
+      borderRadius="lg"
+      boxShadow="2xl"
+    >
+      <Heading
+        as="h2"
+        size={{ base: "lg", lg: "xl" }}
+        textAlign="center"
+        mb={{ base: 6, md: 10 }}
+        color={useColorModeValue("blue.500", "blue.300")}
+      >
         Referrals Overview
       </Heading>
 
       {/* Job List */}
       {jobs.map((job) => (
-        <Box key={job.jobId} mb={12} p={6} bg={useColorModeValue("white", "gray.700")} borderRadius="lg" boxShadow="lg">
-          <Flex align="center" justify="space-between" mb={4}>
-            <Heading as="h3" size="lg" color={useColorModeValue("blue.600", "blue.400")}>
+        <Box
+          key={job.jobId}
+          mb={{ base: 6, md: 8, lg: 12 }}
+          p={{ base: 4, lg: 6 }}
+          bg={useColorModeValue("white", "gray.700")}
+          borderRadius="lg"
+          boxShadow="lg"
+        >
+          <Flex
+            direction={{ base: "column", lg: "row" }}
+            align={{ base: "flex-start", lg: "center" }}
+            justify="space-between"
+            mb={4}
+          >
+            <Heading
+              as="h3"
+              size={{ base: "md", lg: "lg" }}
+              color={useColorModeValue("blue.600", "blue.400")}
+              mb={{ base: 2, md: 0 }}
+              textAlign={{ base: "left", lg: "center" }}
+            >
               {job.title}
             </Heading>
-            <Tag size="lg" colorScheme="blue" borderRadius="full" py={1} px={4}>
+            <Tag
+              size={{ base: "md", lg: "lg" }}
+              colorScheme="blue"
+              borderRadius="full"
+              py={{ base: 1, lg: 2 }}
+              px={{ base: 3, lg: 4 }}
+            >
               {job.referrals.length} Referrals
             </Tag>
           </Flex>
 
           {/* Referrals Table */}
-          <Table variant="simple">
+          <Table variant="simple" size={{ base: "sm", lg: "md" }}>
             <Thead>
               <Tr>
                 <Th>Candidate</Th>
                 <Th>Email</Th>
                 <Th>Status</Th>
-               
               </Tr>
             </Thead>
             <Tbody>
               {job.referrals.map((referral, index) => (
                 <Tr key={index}>
                   <Td>
-                    <Stack direction="row" align="center">
+                    <Stack direction="row" align="center" spacing={4}>
                       <Avatar size="sm" icon={<FiUser />} />
-                      <Text fontWeight="bold">{referral.name}</Text>
+                      <Text fontWeight="bold" fontSize={{ base: "sm", lg: "md" }}>
+                        {referral.name}
+                      </Text>
                     </Stack>
                   </Td>
-                  <Td>{referral.email}</Td>
+                  <Td fontSize={{ base: "sm", lg: "md" }}>{referral.email}</Td>
                   <Td>
                     <Badge
                       px={3}
                       py={1}
                       borderRadius="md"
-                      fontSize="0.9em"
+                      fontSize={{ base: "xs", lg: "0.9em" }}
                       colorScheme={statusColorScheme[referral.status]}
                     >
                       {referral.status}
                     </Badge>
                   </Td>
-                 
                 </Tr>
               ))}
             </Tbody>
