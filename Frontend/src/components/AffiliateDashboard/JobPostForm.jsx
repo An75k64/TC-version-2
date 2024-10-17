@@ -25,7 +25,7 @@ import {
   IconButton,
   useColorModeValue
 } from '@chakra-ui/react';
-import { FaLaptopCode, FaLightbulb, FaMapMarkerAlt, FaUserTie, FaRupeeSign, FaEdit, FaTrashAlt, FaEye } from 'react-icons/fa';
+import { FaLaptopCode, FaLightbulb, FaMapMarkerAlt, FaUserTie, FaRupeeSign, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import axios from 'axios';
 
 // Validation schema using Yup
@@ -46,7 +46,7 @@ const JobPostForm = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/jobs'); // Assuming an endpoint exists
+        const response = await axios.get('http://localhost:5000/api/jobs');
         setPostedJobs(response.data);
       } catch (error) {
         console.error('Error fetching jobs:', error);
@@ -77,7 +77,6 @@ const JobPostForm = () => {
           isClosable: true,
         });
         formik.resetForm();
-        // Refresh the posted jobs list
         setPostedJobs([...postedJobs, response.data]);
       } catch (error) {
         toast({
@@ -121,10 +120,13 @@ const JobPostForm = () => {
       minH="100vh"
       textAlign="center"
     >
-      <Container maxW="container.md">
+      <Container
+        maxW={{ base: '100%', md: '90%', lg: '70%' }}
+        px={{ base: 4, md: 8 }}
+      >
         <Heading
           as="h1"
-          size="xl"
+          size={{ base: 'lg', md: 'xl' }}
           mb={8}
           fontWeight="bold"
           bgGradient="linear(to-r, blue.400, pink.300)"
@@ -132,13 +134,13 @@ const JobPostForm = () => {
         >
           Post a Job
         </Heading>
-        <Text fontSize="lg" mb={10} color="gray.600">
+        <Text fontSize={{ base: 'md', md: 'lg' }} mb={10} color="gray.600">
           Fill in the details below to share your job opportunity!
         </Text>
 
         <Box
           bg="white"
-          p={8}
+          p={{ base: 6, md: 8 }}
           borderRadius="lg"
           shadow="lg"
           borderColor="gray.200"
@@ -151,7 +153,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.technology && formik.errors.technology}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="blue.500" mr={2} />
-                  <FormLabel>Technology</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Technology</FormLabel>
                 </Flex>
                 <Textarea
                   name="technology"
@@ -161,7 +163,7 @@ const JobPostForm = () => {
                   borderRadius="lg"
                   focusBorderColor="blue.400"
                   shadow="sm"
-                  rows={3} // For multiline
+                  rows={3}
                 />
                 <FormErrorMessage>{formik.errors.technology}</FormErrorMessage>
               </FormControl>
@@ -170,7 +172,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.skillset && formik.errors.skillset}>
                 <Flex alignItems="center">
                   <Icon as={FaLightbulb} w={5} h={5} color="pink.500" mr={2} />
-                  <FormLabel>Skillset</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Skillset</FormLabel>
                 </Flex>
                 <Textarea
                   name="skillset"
@@ -180,7 +182,7 @@ const JobPostForm = () => {
                   borderRadius="lg"
                   focusBorderColor="pink.400"
                   shadow="sm"
-                  rows={3} // For multiline
+                  rows={3}
                 />
                 <FormErrorMessage>{formik.errors.skillset}</FormErrorMessage>
               </FormControl>
@@ -189,7 +191,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.experience && formik.errors.experience}>
                 <Flex alignItems="center">
                   <Icon as={FaUserTie} w={5} h={5} color="purple.500" mr={2} />
-                  <FormLabel>Experience</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Experience</FormLabel>
                 </Flex>
                 <Input
                   name="experience"
@@ -207,7 +209,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.location && formik.errors.location}>
                 <Flex alignItems="center">
                   <Icon as={FaMapMarkerAlt} w={5} h={5} color="green.500" mr={2} />
-                  <FormLabel>Location</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Location</FormLabel>
                 </Flex>
                 <Input
                   name="location"
@@ -225,7 +227,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.domain && formik.errors.domain}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="teal.500" mr={2} />
-                  <FormLabel>Domain</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Domain</FormLabel>
                 </Flex>
                 <Textarea
                   name="domain"
@@ -235,7 +237,7 @@ const JobPostForm = () => {
                   borderRadius="lg"
                   focusBorderColor="teal.400"
                   shadow="sm"
-                  rows={3} // For multiline
+                  rows={3}
                 />
                 <FormErrorMessage>{formik.errors.domain}</FormErrorMessage>
               </FormControl>
@@ -244,7 +246,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.salary && formik.errors.salary}>
                 <Flex alignItems="center">
                   <Icon as={FaRupeeSign} w={5} h={5} color="yellow.500" mr={2} />
-                  <FormLabel>Salary</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Salary</FormLabel>
                 </Flex>
                 <Input
                   name="salary"
@@ -258,20 +260,14 @@ const JobPostForm = () => {
                 <FormErrorMessage>{formik.errors.salary}</FormErrorMessage>
               </FormControl>
 
-              {/* Submit Button */}
               <Button
-                mt={6}
-                colorScheme="teal"
                 type="submit"
-                isFullWidth
-                isLoading={formik.isSubmitting}
-                borderRadius="full"
+                colorScheme="blue"
                 size="lg"
-                bgGradient="linear(to-r, teal.400, blue.400)"
-                _hover={{
-                  bgGradient: "linear(to-r, teal.500, blue.500)",
-                  boxShadow: "xl",
-                }}
+                w="full"
+                shadow="md"
+                borderRadius="full"
+                mt={4}
               >
                 Post Job
               </Button>
@@ -279,11 +275,9 @@ const JobPostForm = () => {
           </form>
         </Box>
 
-        {/* Posted Jobs List */}
-        <Heading as="h2" size="lg" mt={16} mb={8}>
-          Your Posted Jobs
-        </Heading>
+        {/* Job Table */}
         <Box
+          mt={10}
           bg={useColorModeValue('white', 'gray.800')}
           p={6}
           borderRadius="lg"
@@ -333,3 +327,4 @@ const JobPostForm = () => {
 };
 
 export default JobPostForm;
+ 
