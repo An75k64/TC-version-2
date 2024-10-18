@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Heading, Input, Button, Flex, useBreakpointValue, Stack, Text, List, ListItem } from '@chakra-ui/react';
+import { Box, Heading, Input, Button, Flex, useBreakpointValue, Stack, List, ListItem } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import { FaLocationDot } from "react-icons/fa6";
 import Card from '../Card/Card.jsx';
@@ -17,21 +17,30 @@ function Opening() {
     const cardsPerPage = 12;
 
     useEffect(() => {
-        axios.get(`${apiUrl}/api/cards/cards`)
-            .then(response => {
-                setCards(response.data);
-                setFilteredCards(response.data); // Initially display all cards
-            })
-            .catch(error => {
+        // Fetch cards from both API endpoints
+        const fetchData = async () => {
+            try {
+                const cardResponse = await axios.get(`${apiUrl}/api/cards/cards`);
+                const affiliateResponse = await axios.get(`${apiUrl}/api/affiliatejob`);
+                
+                // Combine the data from both responses
+                const allCards = [...cardResponse.data, ...affiliateResponse.data];
+                
+                setCards(allCards);
+                setFilteredCards(allCards); // Initially display all cards
+            } catch (error) {
                 console.error('There was an error fetching the data!', error);
-            });
+            }
+        };
+
+        fetchData();
     }, []);
 
     // Handle search filter for jobs
     const handleSearch = () => {
         const filtered = cards.filter(card =>
-            card.title.toLowerCase().includes(titleQuery.toLowerCase()) &&
-            card.location.toLowerCase().includes(locationQuery.toLowerCase())
+            (card.title?.toLowerCase().includes(titleQuery.toLowerCase()) || card.jobTitle?.toLowerCase().includes(titleQuery.toLowerCase())) &&
+            card.location?.toLowerCase().includes(locationQuery.toLowerCase())
         );
         setFilteredCards(filtered);
         setCurrentPage(1); // Reset to the first page when search is performed
@@ -45,7 +54,6 @@ function Opening() {
     // Fetch location suggestions
     const fetchLocationSuggestions = (query) => {
         if (query.length >= 1) { // Fetch suggestions if input is at least 2 characters
-            // You can replace this with an API call to fetch real location data
             axios.get(`${apiUrl}/api/cards/locations?query=${query}`)
                 .then(response => {
                     setLocationSuggestions(response.data); // Assume API returns location suggestions
@@ -160,24 +168,34 @@ function Opening() {
             </Flex>
            
             <Flex wrap="wrap" gap={6} justify="center">
-                {currentCards.map(card => (
+                {currentCards.map(card => {
+                    // Define the logic to determine if the job is an affiliate job
+                    const isAffiliate = card.affiliateId ? true : false;
+
+                    return (
                     <Card
-                        key={card.jobId}
-                        title={card.title}
+                        key={card.jobId || card._id}
+                        title={isAffiliate ? card.jobTitle : card.title}
                         location={card.location}
                         salary={card.salary}
                         experience={card.experience}
-                        jobDescription={card.jobDescription}
-                        jobId={card.jobId}
+                        jobDescription={card.jobDescription || ""}
+                        jobId={card.jobId || ""}
+                        affiliateJobId={isAffiliate ? card._id : ""}  // Assign affiliateJobId only if isAffiliate is true
                         department={card.department}
                         roleCategory={card.roleCategory}
                         employmentType={card.employmentType}
-                        eductaion={card.eductaion}
+                        education={card.education}
                         englishLevel={card.englishLevel}
                         gender={card.gender}
+                        skillset={card.skillset || ""}
+                        domain={card.domain || ""}
+                        affiliateId={"" || card.affiliateId }
                     />
-                ))}
-            </Flex>
+                    );
+                })}
+                </Flex>
+
             <Stack spacing={4} align="center" mt={8}>
                 <Flex gap={2}>
                     {Array.from({ length: totalPages }, (_, index) => (

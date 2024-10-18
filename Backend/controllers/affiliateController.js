@@ -77,3 +77,71 @@ exports.loginAffiliate = async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 };
+
+
+
+exports.getAffiliateProfile = async (req, res) => {
+  const affiliateId = req.params.id; // Extract affiliate ID from request parameters
+  ///console.log("Received affiliateId:", affiliateId); // Log the affiliateId
+
+  try {
+    // Find affiliate by ID
+    const affiliate = await Affiliate.findById(affiliateId);
+
+    if (!affiliate) {
+      return res.status(404).json({ message: "Affiliate not found" });
+    }
+
+    // Send affiliate details in response
+    res.status(200).json({
+      affiliate: {
+        id: affiliate._id,
+        fullName: affiliate.fullName,
+        email: affiliate.email,
+        phoneNumber: affiliate.phoneNumber,
+        companyName: affiliate.companyName,
+        companyEmail: affiliate.companyEmail,
+        designation: affiliate.designation,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+
+
+// Change Password Function
+exports.changePassword = async (req, res) => {
+  const { affiliateId, oldPassword, newPassword } = req.body;
+
+  try {
+    // Find the affiliate by ID
+    const affiliate = await Affiliate.findById(affiliateId);
+
+    if (!affiliate) {
+      return res.status(404).json({ message: "Affiliate not found" });
+    }
+
+    // Check if the old password matches
+    const isOldPasswordValid = await bcrypt.compare(oldPassword, affiliate.password);
+    if (!isOldPasswordValid) {
+      return res.status(401).json({ message: "Old password is incorrect." });
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the password
+    affiliate.password = hashedNewPassword;
+    await affiliate.save();
+
+    res.status(200).json({ message: "Password changed successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+

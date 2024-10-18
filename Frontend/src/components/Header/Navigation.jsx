@@ -50,7 +50,7 @@ const NAV_ITEMS = [
   { label: "CampusToCubicle", href: "/campus-to-cubicle" },
   { label: "Contact us", href: "/contact" },
    { label: "Affiliate", href: "/affiliate" },
-   { label: "Affiliate dashboard", href: "/affiliate-dashboard" },
+  // { label: "Affiliate dashboard", href: "/affiliate-dashboard" },
 ];
 
 const DesktopNav = () => {

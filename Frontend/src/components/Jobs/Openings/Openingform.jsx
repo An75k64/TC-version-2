@@ -3,7 +3,7 @@ import { Box, Heading, Text, Input, Button, Stack, Icon, VStack, HStack } from '
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { FaGraduationCap, FaClock , FaBriefcase,FaBuilding, FaTags } from 'react-icons/fa';
+import { FaGraduationCap, FaClock, FaBuilding, FaTags,FaTools, FaBriefcase,  FaProjectDiagram, FaMoneyBillWave } from 'react-icons/fa';
 import { FaLocationDot } from "react-icons/fa6";
 import { IoPerson } from "react-icons/io5";
 import { RiSpeakFill } from "react-icons/ri";
@@ -13,51 +13,60 @@ const apiUrl = import.meta.env.VITE_API_BASE_URL;
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required').matches(/^[A-Za-z\s]+$/, 'Name should only contain letters and spaces'),
   email: Yup.string().email('Invalid email').matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Email must be a valid Gmail address').required('Email is required'),
-  phone: Yup.string().matches(/^[6-9]\d{9}$/,"Phone Number must be valid").required('Phone number is required'),
+  phone: Yup.string().matches(/^[6-9]\d{9}$/, "Phone Number must be valid").required('Phone number is required'),
   resume: Yup.mixed().required('Resume is required'),
 });
 
-export default function OpeningForm({ jobId }) {
+export default function OpeningForm({ jobId, affiliateJobId, affiliateId }) {
+  const isAffiliate = affiliateJobId ? true : false;
+        
   const [message, setMessage] = useState(null);
   const [jobDetails, setJobDetails] = useState(null);
   const fileInputRef = useRef();
 
   useEffect(() => {
     const fetchJobDetails = async () => {
-      if (!jobId) {
-        console.error("No jobId provided");
+        
+        const id = isAffiliate ? affiliateJobId : jobId;
+
+      if (!id) {
+        console.error("No jobId or affiliateJobId provided");
         return;
       }
-      
+
       try {
-        const response = await axios.get(`${apiUrl}/api/cards/cards/${jobId}`);
+        const endpoint = isAffiliate 
+          ? `${apiUrl}/api/affiliatejob/job/${id}` 
+          : `${apiUrl}/api/cards/cards/${id}`;
+        const response = await axios.get(endpoint);
+        //console.log("Fetched job details:", response.data); // Log the fetched data
         setJobDetails(response.data);
+       // console.log("Fetched job details:", response.data); // Log the fetched details
       } catch (error) {
         console.error("Error fetching job details:", error.response ? error.response.data : error.message);
+        setMessage({ text: 'Failed to load job details.', type: 'error' }); // Set error message
       }
     };
 
     fetchJobDetails();
-  }, [jobId]);
+  }, [jobId, affiliateJobId, isAffiliate]);
 
-const handleFileChange = (event, setFieldValue) => {
-  const file = event.currentTarget.files[0];
-  const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
+  const handleFileChange = (event, setFieldValue) => {
+    const file = event.currentTarget.files[0];
+    const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
 
-  if (!file) {
-    setMessage({ text: "No file selected.", type: "error" });
-    return;
-  }
+    if (!file) {
+      setMessage({ text: "No file selected.", type: "error" });
+      return;
+    }
 
-  // Validate file extension
-  if (!allowedExtensions.exec(file.name)) {
-    setMessage({ text: "Please upload a valid resume in .pdf or .doc/.docx format.", type: "error" });
-    fileInputRef.current.value = ""; // Reset the file input
-  } else {
-    setFieldValue("resume", file);
-  }
-};
-
+    if (!allowedExtensions.exec(file.name)) {
+      setMessage({ text: "Please upload a valid resume in .pdf or .doc/.docx format.", type: "error" });
+      fileInputRef.current.value = "";
+    } else {
+      setFieldValue("resume", file);
+    }
+  };
 
   const handleSubmit = async (values, actions) => {
     const data = new FormData();
@@ -65,8 +74,11 @@ const handleFileChange = (event, setFieldValue) => {
     data.append('email', values.email);
     data.append('phone', values.phone);
     data.append('resume', values.resume);
-    data.append('jobId', jobId);
-    data.append('jobTitle', jobDetails.title);
+    data.append('jobId', isAffiliate ? affiliateJobId : jobId);
+    const jobTitle = isAffiliate ? jobDetails?.jobTitle : jobDetails?.title; // Use optional chaining to safely access properties
+   // console.log('Submitting job title:', jobTitle); // Log jobTitle for debugging
+    data.append('jobTitle', jobTitle || 'Not specified'); // Use a default value if jobTitle is not available
+    data.append('affiliateId', isAffiliate ? affiliateId : "");
 
     try {
       await axios.post(`${apiUrl}/api/job-applications/apply`, data, {
@@ -93,22 +105,20 @@ const handleFileChange = (event, setFieldValue) => {
       overflowY="auto"
       p={4}
       css={{
-        /* For Webkit browsers (Chrome, Safari, Edge) */
         '&::-webkit-scrollbar': {
           width: '8px',
         },
         '&::-webkit-scrollbar-thumb': {
-          backgroundColor: '#4299E1', // Blue color for scrollbar
+          backgroundColor: '#4299E1',
           borderRadius: '10px',
         },
         '&::-webkit-scrollbar-thumb:hover': {
-          backgroundColor: '#2B6CB0', // Darker blue on hover
+          backgroundColor: '#2B6CB0',
         },
         '&::-webkit-scrollbar-track': {
-          backgroundColor: '#E2E8F0', // Light gray track background
+          backgroundColor: '#E2E8F0',
           borderRadius: '10px',
         },
-        /* For Firefox */
         scrollbarWidth: 'thin',
         scrollbarColor: '#4299E1 #E2E8F0',
       }}
@@ -121,57 +131,106 @@ const handleFileChange = (event, setFieldValue) => {
         {({ setFieldValue, isSubmitting, errors, touched }) => (
           <Form>
             <Stack spacing={4} bg={'white'} rounded={'xl'} p={{ base: 4, sm: 6, md: 8 }}>
-              <Heading fontSize="2xl" mb={4}>Job Description</Heading>
-              <Text fontSize="lg" mb={6}>{jobDetails.jobDescription}</Text><hr></hr>
+              {!isAffiliate &&(
+                <>
+                  <Heading fontSize="2xl" mb={4}>Job Description</Heading>
+                   <Text fontSize="lg" mb={6}>{jobDetails.jobDescription}</Text>
+                </>
+              )}
 
-              <Heading fontSize="2xl" mb={4}>Job Role</Heading>
-              <VStack align="start" spacing={2} mb={6}>
-                <HStack spacing={2}>
-                  <Icon as={FaLocationDot} boxSize={5} />
-                  <Text color="gray.500">Work Location:</Text>
-                  <Text>{jobDetails.location}</Text>
-                </HStack>
-                <HStack spacing={2}>
-                  <Icon as={FaBuilding} boxSize={5} />
-                  <Text color="gray.500">Department:</Text>
-                  <Text>{jobDetails.department}</Text>
-                </HStack>
-                <HStack spacing={2}>
-                  <Icon as={FaTags} boxSize={5} />
-                  <Text width="120px" color="gray.500">Role / Category:</Text>
-                  <Text width="auto">{jobDetails.jobRole} & {jobDetails.roleCategory}</Text>
-                </HStack>
-                <HStack spacing={2}>
-                  <Icon as={FaClock} boxSize={5} />
-                  <Text color="gray.500">Employment type:</Text>
-                  <Text>{jobDetails.employmentType}</Text>
-                </HStack>
-              </VStack>
-              <hr></hr>
+                  
+              
 
-              <Heading fontSize="2xl" mb={4}>Job Requirements</Heading>
-              <VStack align="start" spacing={2} mb={6}>
-                <HStack spacing={2}>
-                  <Icon as={FaBriefcase} boxSize={5} />
-                  <Text color="gray.500">Experience:</Text>
-                  <Text>{jobDetails.experience}</Text>
-                </HStack>
-                <HStack spacing={2}>
-                  <Icon as={FaGraduationCap} boxSize={5} />
-                  <Text color="gray.500">Education:</Text>
-                  <Text>{jobDetails.education}</Text>
-                </HStack>
-                <HStack spacing={2}>
-                  <Icon as={RiSpeakFill} boxSize={5} />
-                  <Text color="gray.500">English level:</Text>
-                  <Text>{jobDetails.englishLevel}</Text>
-                </HStack>
-                <HStack spacing={2}>
-                  <Icon as={IoPerson} boxSize={5} />
-                  <Text color="gray.500">Gender:</Text>
-                  <Text>{jobDetails.gender}</Text>
-                </HStack>
-              </VStack>
+              {!isAffiliate && (
+                <>
+                  <Heading fontSize="2xl" mb={4}>Job Role</Heading>
+                  <VStack align="start" spacing={2} mb={6}>
+                    <HStack spacing={2}>
+                      <Icon as={FaLocationDot} boxSize={5} />
+                      <Text color="gray.500">Work Location:</Text>
+                      <Text>{jobDetails.location}</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                      <Icon as={FaBuilding} boxSize={5} />
+                      <Text color="gray.500">Department:</Text>
+                      <Text>{jobDetails.department}</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                      <Icon as={FaTags} boxSize={5} />
+                      <Text width="120px" color="gray.500">Role / Category:</Text>
+                      <Text width="auto">{jobDetails.jobRole} & {jobDetails.roleCategory}</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                      <Icon as={FaClock} boxSize={5} />
+                      <Text color="gray.500">Employment type:</Text>
+                      <Text>{jobDetails.employmentType}</Text>
+                    </HStack>
+                  </VStack>
+                </>
+              )}
+
+
+               {isAffiliate && (
+                      <>
+                        <Heading fontSize="2xl" mb={4}>Job Role</Heading>
+                        <VStack align="start" spacing={2} mb={6}>
+                          <HStack spacing={2}>
+                            <Icon as={FaTools} boxSize={5} />
+                            <Text color="gray.500">Skillset:</Text>
+                            <Text>{jobDetails.skillset}</Text>
+                          </HStack>
+                          <HStack spacing={2}>
+                            <Icon as={FaBriefcase} boxSize={5} />
+                            <Text color="gray.500">Experience:</Text>
+                            <Text>{jobDetails.experience}</Text>
+                          </HStack>
+                          <HStack spacing={2}>
+                            <Icon as={FaLocationDot} boxSize={5} />
+                            <Text color="gray.500">Work Location:</Text>
+                            <Text>{jobDetails.location}</Text>
+                          </HStack>
+                          <HStack spacing={2}>
+                            <Icon as={FaProjectDiagram} boxSize={5} />
+                            <Text color="gray.500">Domain:</Text>
+                            <Text>{jobDetails.domain}</Text>
+                          </HStack>
+                          <HStack spacing={2}>
+                            <Icon as={FaMoneyBillWave} boxSize={5} />
+                            <Text color="gray.500">Salary:</Text>
+                            <Text>{jobDetails.salary}</Text>
+                          </HStack>
+                        </VStack>
+                      </>
+                    )}
+
+              {!isAffiliate && (
+                <>
+                  <hr />
+                  <Heading fontSize="2xl" mb={4}>Job Requirements</Heading>
+                  <VStack align="start" spacing={2} mb={6}>
+                    <HStack spacing={2}>
+                      <Icon as={FaBriefcase} boxSize={5} />
+                      <Text color="gray.500">Experience:</Text>
+                      <Text>{jobDetails.experience}</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                      <Icon as={FaGraduationCap} boxSize={5} />
+                      <Text color="gray.500">Education:</Text>
+                      <Text>{jobDetails.education}</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                      <Icon as={RiSpeakFill} boxSize={5} />
+                      <Text color="gray.500">English level:</Text>
+                      <Text>{jobDetails.englishLevel}</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                      <Icon as={IoPerson} boxSize={5} />
+                      <Text color="gray.500">Gender:</Text>
+                      <Text>{jobDetails.gender}</Text>
+                    </HStack>
+                  </VStack>
+                </>
+              )}
 
               <Field name="name">
                 {({ field }) => (
@@ -217,7 +276,6 @@ const handleFileChange = (event, setFieldValue) => {
                     placeholder="Phone Number"
                     bg={"gray.100"}
                     border={0}
-                    maxLength={10}
                     color={"gray.500"}
                     _placeholder={{ color: "gray.500" }}
                     size="lg"
@@ -229,47 +287,37 @@ const handleFileChange = (event, setFieldValue) => {
               )}
 
               <Field name="resume">
-                {() => (
-                  <Box>
-                    <Input
-                      type="file"
-                      accept=".pdf,.doc,.docx"
-                      onChange={(event) =>
-                            handleFileChange(event, setFieldValue)
-                          }
-                      ref={fileInputRef}
-                      style={{
-                        padding: "8px",
-                        border: "none",
-                        borderRadius: "4px",
-                        background: "#f7fafc",
-                      }}
-                    />
-                    <Text fontSize="sm" color="gray.500" mt={2}>
-                      Upload your resume in .pdf or .docx format.
-                    </Text>
-                    {errors.resume && <Text color="red.500">{errors.resume}</Text>}
-                  </Box>
+                {({ field }) => (
+                  <Input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf, .doc, .docx"
+                    onChange={(event) => handleFileChange(event, setFieldValue)}
+                    bg={"gray.100"}
+                    border={0}
+                    color={"gray.500"}
+                    size="lg"
+                  />
                 )}
               </Field>
-
-              {message && (
-                <Text color={message.type === 'success' ? 'green.500' : 'red.500'} textAlign="center">
-                  {message.text}
-                </Text>
+              {errors.resume && touched.resume && (
+                <Text color="red.500" textAlign="center">{errors.resume}</Text>
               )}
 
               <Button
-                type="submit"
-                bg={"blue.400"}
-                color={"white"}
-                size="lg"
-                fontSize="md"
-                _hover={{ bg: "blue.500" }}
+                mt={4}
+                colorScheme="blue"
                 isLoading={isSubmitting}
+                type="submit"
               >
                 Submit Application
               </Button>
+
+              {message && (
+                <Text textAlign="center" color={message.type === "success" ? "green.500" : "red.500"}>
+                  {message.text}
+                </Text>
+              )}
             </Stack>
           </Form>
         )}

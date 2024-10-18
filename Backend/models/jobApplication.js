@@ -23,9 +23,14 @@ const JobApplicationSchema = new mongoose.Schema({
     ref: "Card", // Assuming you have a Job model
     required: true,
   },
+  affiliateId: {
+    type: String,
+    ref: "AffiliateJob", // Assuming you have a Job model
+    
+  },
   jobTitle: {
     type: String,
-    required: true,
+    
   },
   appliedAt: {
     type: Date,

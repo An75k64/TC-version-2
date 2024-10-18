@@ -48,7 +48,7 @@ const AffiliatePage = () => {
                 Join as an Affiliate
               </Button>
             </Link>
-            <Link to="/login">
+            <Link to="/affiliate-login">
               <Button
                 size={{ base: "md", md: "md", xl: "lg" }}
                 bg="gray.300"

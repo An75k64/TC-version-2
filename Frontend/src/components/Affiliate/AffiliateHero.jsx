@@ -18,7 +18,7 @@ const AffiliateHero = () => {
   const navigate = useNavigate();
 
   const handleSignInRedirect = () => {
-    navigate("/login"); // Change this path to match your Affiliate Sign In route
+    navigate("/affiliate-login"); // Change this path to match your Affiliate Sign In route
   };
 
   return (

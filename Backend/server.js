@@ -16,6 +16,7 @@ const cardRoutes = require("./routes/cardRoutes");
 const loginRoutes = require("./routes/admin");
 const notificationRoutes = require("./routes/notificationRoutes");
 const affiliateRoutes = require("./routes/affiliateRoutes");
+const affiliateJobRoutes = require("./routes/affiliateJobRoutes");
 
 
 const app = express();
@@ -57,6 +58,8 @@ app.use('/api/job-applications', jobApplicationRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/cards", cardRoutes);
 app.use("/api/affiliate", affiliateRoutes);
+// Use routes
+app.use('/api/affiliateJob', affiliateJobRoutes);
 
 app.use("/api", loginRoutes);
 

@@ -22,7 +22,7 @@ const upload = multer({ storage });
 
 const createJobApplication = async (req, res) => {
   try {
-    const { name, email, phone, jobId, jobTitle } = req.body;
+    const { name, email, phone, jobId, affiliateId, jobTitle } = req.body;
     const resume = req.file ? req.file.filename : null;
 
     if (!resume) {
@@ -35,6 +35,7 @@ const createJobApplication = async (req, res) => {
       phone,
       resume,
       jobId,
+      affiliateId,
       jobTitle,
     });
 

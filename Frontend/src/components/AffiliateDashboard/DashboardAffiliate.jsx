@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Box,
   Flex,
@@ -14,6 +14,8 @@ import {
 import { motion } from 'framer-motion';
 import { FaMoneyBillWave, FaUserFriends, FaBriefcase } from 'react-icons/fa';
 import { Link as RouterLink } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext'; // Adjust the import path as necessary
+import axios from 'axios'; // Import axios for making HTTP requests
 
 // Create a MotionButton component
 const MotionButton = motion(Button);
@@ -36,11 +38,11 @@ const DashboardCard = ({ title, icon, value, subheading, actionText, actionLink,
         <Flex align="center">
           {icon && <Box as={icon} w={10} h={10} color={useColorModeValue('blue.500', 'blue.300')} />}
           <Box ml={4}>
-            <Text  fontSize="lg" fontWeight="bold">{title}</Text>            
+            <Text fontSize="lg" fontWeight="bold">{title}</Text>
           </Box>
-        </Flex>        
+        </Flex>
       </Flex>
-      <br />      
+      <br />
       <Text fontSize="md" color={useColorModeValue('gray.600', 'gray.400')}>{subheading}</Text>
     </CardHeader>
     <CardBody>
@@ -83,6 +85,26 @@ const DashboardCard = ({ title, icon, value, subheading, actionText, actionLink,
 );
 
 const DashboardAffiliate = () => {
+  const { affiliateId } = useContext(AuthContext); // Get affiliateId from AuthContext
+  const [jobCount, setJobCount] = useState(0); // State to hold the job count
+  const apiurl = "http://localhost:5000/api/affiliatejob/count"; // Define the API URL
+
+  // Fetch the job count on component mount
+  useEffect(() => {
+    const fetchJobCount = async () => {
+      try {
+        const response = await axios.get(`${apiurl}/${affiliateId}`); // Fetch job count
+        setJobCount(response.data.count); // Set job count from the response
+      } catch (error) {
+        console.error("Error fetching job count:", error); // Handle errors
+      }
+    };
+
+    if (affiliateId) {
+      fetchJobCount(); // Only fetch if affiliateId is present
+    }
+  }, [affiliateId]);
+
   return (
     <Box bg={useColorModeValue('gray.50', 'gray.900')} minH="100vh" py={12}>
       <Flex direction="column" align="center" maxW="7xl" mx="auto" px={4}>
@@ -90,7 +112,7 @@ const DashboardAffiliate = () => {
           <DashboardCard
             title="Job Postings"
             icon={FaBriefcase}
-            value="24"
+            value={jobCount} // Display fetched job count
             subheading="Manage your job opportunities"
             actionText="Post New Job"
             actionLink="/affiliate-dashboard/postjob"

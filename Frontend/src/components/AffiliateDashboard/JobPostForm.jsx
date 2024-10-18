@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -25,12 +25,13 @@ import {
   IconButton,
   useColorModeValue
 } from '@chakra-ui/react';
-import { FaLaptopCode, FaLightbulb, FaMapMarkerAlt, FaUserTie, FaRupeeSign, FaEdit, FaTrashAlt, FaEye } from 'react-icons/fa';
+import { FaLaptopCode, FaLightbulb, FaMapMarkerAlt, FaUserTie, FaRupeeSign, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import axios from 'axios';
+import { AuthContext } from "../../contexts/AuthContext";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
-  technology: Yup.string().required('Technology is required'),
+  jobTitle: Yup.string().required('Job Title is required'),
   skillset: Yup.string().required('Skillset is required'),
   experience: Yup.string().required('Experience is required'),
   location: Yup.string().required('Location is required'),
@@ -40,25 +41,35 @@ const validationSchema = Yup.object({
 
 const JobPostForm = () => {
   const [postedJobs, setPostedJobs] = useState([]);
+  const { affiliateId } = useContext(AuthContext);
   const toast = useToast();
+
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   // Fetch posted jobs
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/jobs'); // Assuming an endpoint exists
-        setPostedJobs(response.data);
+        const response = await axios.get(`${apiUrl}/api/affiliateJob/${affiliateId}`);
+
+        if (Array.isArray(response.data)) {
+          setPostedJobs(response.data);
+        } else {
+          setPostedJobs([]);
+        }
       } catch (error) {
         console.error('Error fetching jobs:', error);
       }
     };
 
-    fetchJobs();
-  }, []);
+    if (affiliateId) {
+      fetchJobs();
+    }
+  }, [affiliateId, apiUrl]);
 
   const formik = useFormik({
     initialValues: {
-      technology: '',
+      jobTitle: '',
       skillset: '',
       experience: '',
       location: '',
@@ -67,25 +78,35 @@ const JobPostForm = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      try {
-        const response = await axios.post('http://localhost:5000/api/jobs', values);
-        toast({
-          title: "Job Posted",
-          description: "Your job posting is live!",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        formik.resetForm();
-        // Refresh the posted jobs list
-        setPostedJobs([...postedJobs, response.data]);
-      } catch (error) {
+      if (!affiliateId) {
         toast({
           title: "Error",
-          description: "There was an issue posting the job.",
+          description: "Affiliate ID is required.",
           status: "error",
-          duration: 5000,
-          isClosable: true,
+        });
+        return;
+      }
+
+      try {
+        const response = await axios.post(`${apiUrl}/api/affiliateJob`, {
+          affiliateId,
+          ...values,
+        });
+
+        toast({
+          title: "Success",
+          description: "Job posted successfully!",
+          status: "success",
+        });
+
+        // Clear form fields
+        formik.resetForm();
+      } catch (error) {
+        console.error(error);
+        toast({
+          title: "Error",
+          description: "Failed to post job.",
+          status: "error",
         });
       }
     },
@@ -95,7 +116,7 @@ const JobPostForm = () => {
   const handleDelete = async (jobId) => {
     try {
       await axios.delete(`http://localhost:5000/api/jobs/${jobId}`);
-      setPostedJobs(postedJobs.filter(job => job._id !== jobId));
+      setPostedJobs((prevJobs) => prevJobs.filter(job => job._id !== jobId));
       toast({
         title: "Job Deleted",
         description: "The job has been removed.",
@@ -147,23 +168,24 @@ const JobPostForm = () => {
           {/* Job Posting Form */}
           <form onSubmit={formik.handleSubmit}>
             <Stack spacing={5}>
-              {/* Technology */}
-              <FormControl isInvalid={formik.touched.technology && formik.errors.technology}>
+              {/* Job Title */}
+              <FormControl isInvalid={formik.touched.jobTitle && formik.errors.jobTitle}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="blue.500" mr={2} />
-                  <FormLabel>Technology</FormLabel>
+                  <FormLabel>Job Title</FormLabel>
                 </Flex>
                 <Textarea
-                  name="technology"
-                  placeholder="Enter technology stack"
-                  value={formik.values.technology}
+                  name="jobTitle"
+                  placeholder="Enter Job Title"
+                  value={formik.values.jobTitle}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="lg"
                   focusBorderColor="blue.400"
                   shadow="sm"
-                  rows={3} // For multiline
+                  rows={3}
                 />
-                <FormErrorMessage>{formik.errors.technology}</FormErrorMessage>
+                <FormErrorMessage>{formik.errors.jobTitle}</FormErrorMessage>
               </FormControl>
 
               {/* Skillset */}
@@ -177,10 +199,11 @@ const JobPostForm = () => {
                   placeholder="Enter required skills"
                   value={formik.values.skillset}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="lg"
                   focusBorderColor="pink.400"
                   shadow="sm"
-                  rows={3} // For multiline
+                  rows={3}
                 />
                 <FormErrorMessage>{formik.errors.skillset}</FormErrorMessage>
               </FormControl>
@@ -196,6 +219,7 @@ const JobPostForm = () => {
                   placeholder="Enter experience level"
                   value={formik.values.experience}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="full"
                   focusBorderColor="purple.400"
                   shadow="sm"
@@ -214,6 +238,7 @@ const JobPostForm = () => {
                   placeholder="Enter job location"
                   value={formik.values.location}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="full"
                   focusBorderColor="green.400"
                   shadow="sm"
@@ -232,10 +257,11 @@ const JobPostForm = () => {
                   placeholder="Enter job domain"
                   value={formik.values.domain}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="lg"
                   focusBorderColor="teal.400"
                   shadow="sm"
-                  rows={3} // For multiline
+                  rows={3}
                 />
                 <FormErrorMessage>{formik.errors.domain}</FormErrorMessage>
               </FormControl>
@@ -243,90 +269,94 @@ const JobPostForm = () => {
               {/* Salary */}
               <FormControl isInvalid={formik.touched.salary && formik.errors.salary}>
                 <Flex alignItems="center">
-                  <Icon as={FaRupeeSign} w={5} h={5} color="yellow.500" mr={2} />
+                  <Icon as={FaRupeeSign} w={5} h={5} color="orange.500" mr={2} />
                   <FormLabel>Salary</FormLabel>
                 </Flex>
                 <Input
                   name="salary"
-                  placeholder="Enter salary range"
+                  placeholder="Enter salary"
                   value={formik.values.salary}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="full"
-                  focusBorderColor="yellow.400"
+                  focusBorderColor="orange.400"
                   shadow="sm"
                 />
                 <FormErrorMessage>{formik.errors.salary}</FormErrorMessage>
               </FormControl>
 
-              {/* Submit Button */}
               <Button
-                mt={6}
-                colorScheme="teal"
                 type="submit"
-                isFullWidth
-                isLoading={formik.isSubmitting}
+                bg="blue.500"
+                color="white"
+                _hover={{ bg: "blue.600" }}
                 borderRadius="full"
+                shadow="lg"
                 size="lg"
-                bgGradient="linear(to-r, teal.400, blue.400)"
-                _hover={{
-                  bgGradient: "linear(to-r, teal.500, blue.500)",
-                  boxShadow: "xl",
-                }}
               >
                 Post Job
               </Button>
             </Stack>
           </form>
         </Box>
+      </Container>
 
-        {/* Posted Jobs List */}
-        <Heading as="h2" size="lg" mt={16} mb={8}>
-          Your Posted Jobs
+      {/* Posted Jobs Table */}
+      <Container maxW="container.lg" mt={16}>
+        <Heading as="h2" size="lg" mb={8} fontWeight="bold" color="blue.500">
+          Posted Jobs
         </Heading>
-        <Box
-          bg={useColorModeValue('white', 'gray.800')}
-          p={6}
-          borderRadius="lg"
-          shadow="lg"
-        >
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Technology</Th>
-                <Th>Skillset</Th>
-                <Th>Experience</Th>
-                <Th>Location</Th>
-                <Th>Domain</Th>
-                <Th>Salary</Th>
-                <Th>Actions</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {postedJobs.map((job) => (
-                <Tr key={job._id}>
-                  <Td>{job.technology}</Td>
-                  <Td>{job.skillset}</Td>
-                  <Td>{job.experience}</Td>
-                  <Td>{job.location}</Td>
-                  <Td>{job.domain}</Td>
-                  <Td>{job.salary}</Td>
-                  <Td>
-                    <IconButton
-                      icon={<FaEdit />}
-                      mr={2}
-                      onClick={() => console.log('Edit', job._id)}
-                    />
-                    <IconButton
-                      icon={<FaTrashAlt />}
-                      colorScheme="red"
-                      onClick={() => handleDelete(job._id)}
-                    />
-                  </Td>
+        <Table variant="simple" size="lg" bg="white" shadow="lg" borderRadius="md">
+          <Thead bg="gray.100">
+            <Tr>
+               <Th>S.No</Th>
+              <Th>Job Title</Th>
+              <Th>Skillset</Th>
+              <Th>Experience</Th>
+              <Th>Location</Th>
+              <Th>Domain</Th>
+              <Th>Salary</Th>
+              {/*<Th>Actions</Th> */} 
+            </Tr>
+          </Thead>
+          <Tbody>
+            {Array.isArray(postedJobs) && postedJobs.length > 0 ? (
+            postedJobs.map((job,index) => (
+              <Tr key={job._id}>
+                <Td>{index + 1}</Td>
+                <Td>{job.jobTitle}</Td>
+                <Td>{job.skillset}</Td>
+                <Td>{job.experience}</Td>
+                <Td>{job.location}</Td>
+                <Td>{job.domain}</Td>
+                <Td>{job.salary}</Td>
+                  {/* <Td>
+                    <Flex>
+                      <IconButton
+                        icon={<FaEdit />}
+                        colorScheme="yellow"
+                        mr={2}
+                        onClick={() => console.log('Edit job', job._id)}
+                      />
+                      <IconButton
+                        icon={<FaTrashAlt />}
+                        colorScheme="red"
+                        onClick={() => handleDelete(job._id)}
+                      />
+                    </Flex>
+                  </Td> */} 
+
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </Box>
+                   ))
+                 ) : (
+                  <Tr>
+                    <Td colSpan="7" textAlign="center" fontStyle="italic" color="gray.500">
+                      No jobs posted
+                    </Td>
+                  </Tr>
+                )}
+          </Tbody>
+        </Table>
       </Container>
     </Box>
   );

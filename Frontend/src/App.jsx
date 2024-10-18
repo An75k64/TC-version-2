@@ -28,9 +28,10 @@ import AffiliateForm from "./components/Affiliate/AffiliateForm.jsx";
 import AffiliateDashboard from "./pages/AffiliateDashboard.jsx";
 import AffiliateHeader from "./components/AffiliateDashboard/AffiliateHeader/AffiliateHeader.jsx";
 import AffiliateFooter from "./components/AffiliateDashboard/AffiliateFooter.jsx";
-import Login from "./pages/Login.jsx";
+import Login from "./pages/AffiliateLogin.jsx";
 import JobPostForm from "./components/AffiliateDashboard/JobPostForm.jsx";
 
+//import PrivateAffiliateRoute from './PrivateAffiliateRoute';
 
 // Import Admin components
 import Layout from "./Admin/AdminComponents/Layout.jsx";
@@ -38,7 +39,7 @@ import StudentPanel from "./Admin/AdminPages/StudentPanel.jsx";
 import CollegePanel from "./Admin/AdminPages/CollegePanel.jsx";
 import CompanyPanel from "./Admin/AdminPages/CompanyPanel.jsx";
 import ContactPanel from "./Admin/AdminPages/ContactPanel.jsx";
-import PostJob from "./Admin/AdminPages/PostJob";
+import PostJob from "./Admin/AdminPages/PostJob.jsx";
 import StudentApplied from "./Admin/AdminComponents/Job Panel/StudentApplied.jsx";
 import Dashboard from "./Admin/AdminPages/Dashboard.jsx";
 
@@ -50,6 +51,7 @@ import AdminResetPassword from "./pages/ResetPassword.jsx";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import NotificationPanel from "./Admin/AdminPages/NotificationPanel.jsx";
 import Referrals from "./components/AffiliateDashboard/Referrals.jsx";
+import AffiliateProfile from "./components/AffiliateDashboard/AffiliateProfile.jsx";
 
 const NotFound = () => <div>Page Not Found</div>;
 
@@ -66,6 +68,22 @@ const Layoutt = ({ children }) => {
   );
 };
 
+const PrivateRoute = ({ children }) => {
+  const { isAuthenticated } = React.useContext(AuthContext);
+  if (!isAuthenticated) {
+    return <Navigate to="/admin" />;
+  }
+  return children;
+};
+
+const PrivateAffiliateRoute = ({ children }) => {
+  const { isAffiliateAuthenticated } = React.useContext(AuthContext); 
+  if (!isAffiliateAuthenticated) {
+    return <Navigate to="/affiliate-login" />;
+  }
+  return children;
+};
+
 const App = () => {
   return (
     <ChakraProvider theme={theme}>
@@ -73,45 +91,55 @@ const App = () => {
         <AuthProvider>
           <ScrollToTop />
           <Routes>
-            {/* Authentication Routes for Admin */}
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/forgot-password" element={<AdminResetPassword />} />
+            {/* Affiliate Dashboard Routes */}
+            <Route
+              path="/affiliate-dashboard/*"
+              element={ 
+                <PrivateAffiliateRoute>
+                  <Layoutt>                   
+                    <Routes>                   
+                      <Route path="postjob" element={<JobPostForm />} />
+                      <Route path="referrals" element={<Referrals />} />
+                      <Route path="profile" element={<AffiliateProfile />} />
+                      <Route path="*" element={<AffiliateDashboard />} />
+                    </Routes>
+                  </Layoutt>
+                </PrivateAffiliateRoute>
+              }
+            />
 
-            {/* General Header and Footer for non-admin pages */}
+            {/* Public Routes */}
             <Route
               path="/*"
               element={
                 <>
-                  
                   <Layoutt>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/oncampus" element={<OnCampus />} />
-                    <Route path="/offcampus" element={<OffCampus />} />
-                    <Route path="/seminar" element={<Seminar />} />
-                    <Route path="/counselling" element={<Counselling />} />
-                    <Route path="/careercraft" element={<CareerCraft />} />
-                    <Route path="/workforce" element={<Workforce />} />
-                    <Route path="/jobs" element={<Jobs />} />
-                    <Route path="/jobs/post-resume" element={<PostResume />} />
-                    <Route path="/jobs/current-opening" element={<CurrentOpening />} />
-                    <Route path="/employer" element={<Employer />} />
-                    <Route path="/college" element={<College />} />
-                    <Route path="/campus-to-cubicle" element={<CampusToCubicle />} />
-                    <Route path="/college-form" element={<CollegeForm />} />
-                    <Route path="/company-form" element={<CompanyForm />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/affiliate" element={<Affiliate />} />
-                    <Route path="/affiliate-form" element={<AffiliateForm />} />
-                    <Route path="/affiliate-dashboard" element={<AffiliateDashboard />} />
-                    <Route path="/affiliate-dashboard/postjob" element={<JobPostForm />} />
-                    <Route path="/affiliate-dashboard/referrals" element={<Referrals />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/affiliate-login" element={<Login />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/oncampus" element={<OnCampus />} />
+                      <Route path="/offcampus" element={<OffCampus />} />
+                      <Route path="/seminar" element={<Seminar />} />
+                      <Route path="/counselling" element={<Counselling />} />
+                      <Route path="/careercraft" element={<CareerCraft />} />
+                      <Route path="/workforce" element={<Workforce />} />
+                      <Route path="/jobs" element={<Jobs />} />
+                      <Route path="/jobs/post-resume" element={<PostResume />} />
+                      <Route path="/jobs/current-opening" element={<CurrentOpening />} />
+                      <Route path="/employer" element={<Employer />} />
+                      <Route path="/college" element={<College />} />
+                      <Route path="/campus-to-cubicle" element={<CampusToCubicle />} />
+                      <Route path="/college-form" element={<CollegeForm />} />
+                      <Route path="/company-form" element={<CompanyForm />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/affiliate" element={<Affiliate />} />
+                      <Route path="/affiliate-form" element={<AffiliateForm />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
                   </Layoutt>
                   
+                  {/* WhatsApp Icon */}
                   <Box position="fixed" bottom="4" right="4" zIndex="1000">
                     <WhatsAppIcon />
                   </Box>
@@ -119,7 +147,11 @@ const App = () => {
               }
             />
 
-            {/* Admin routes */}
+            {/* Admin Authentication Routes */}
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/forgot-password" element={<AdminResetPassword />} />
+
+            {/* Admin Protected Routes */}
             <Route
               path="/admin/*"
               element={
@@ -145,14 +177,6 @@ const App = () => {
       </Router>
     </ChakraProvider>
   );
-};
-
-const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = React.useContext(AuthContext);
-  if (!isAuthenticated) {
-    return <Navigate to="/admin" />;
-  }
-  return children;
 };
 
 export default App;

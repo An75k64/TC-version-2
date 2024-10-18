@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   Flex,
@@ -13,11 +13,11 @@ import {
   AlertIcon,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for programmatic navigation
-import { FaUserFriends } from "react-icons/fa"; // Only keeping Affiliate icon
-import LoginImage from "../assets/images/Login/log.svg"; // Adjust image import if needed
-import axios from "axios"; // Import axios for making API requests
-
+import { useNavigate } from "react-router-dom";
+import { FaUserFriends } from "react-icons/fa";
+import LoginImage from "../assets/images/Login/log.svg";
+import axios from "axios";
+import { AuthContext } from '../contexts/AuthContext'; // Adjust path as needed
 
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -30,11 +30,9 @@ const FormError = ({ error }) =>
   ) : null;
 
 export default function LoginPage() {
-  const navigate = useNavigate(); // Hook for navigation
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const navigate = useNavigate();
+  const { loginAffiliate } = useContext(AuthContext);  // Pull setAffiliateId from context
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -44,12 +42,19 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message
+    setError("");
     try {
-      const response = await axios.post(`${apiUrl}/api/affiliate/login`, formData); // Update the URL based on your backend setup
+      const response = await axios.post(`${apiUrl}/api/affiliate/login`, formData);
       console.log("Login successful", response.data);
-      // Handle successful login (e.g., save token, redirect)
-      navigate("/affiliate-dashboard"); // Redirect to dashboard or appropriate page
+      
+      if (response.data.token && response.data.affiliate) {
+        // Pass both the token and affiliateId
+        loginAffiliate(response.data.token, response.data.affiliate.id);  
+        
+        navigate("/affiliate-dashboard");
+      } else {
+        setError("Login failed. No token or affiliate data received.");
+      }
     } catch (err) {
       console.error(err);
       setError("Login failed. Please check your credentials and try again.");
@@ -57,7 +62,7 @@ export default function LoginPage() {
   };
 
   const toggleSignUp = () => {
-    navigate("/affiliate-form"); // Redirect to the affiliate form
+    navigate("/affiliate-form");
   };
 
   return (
@@ -68,21 +73,15 @@ export default function LoginPage() {
       bg={useColorModeValue("gray.50", "gray.800")}
       mt={"50"}
     >
-      <Flex
-        w="full"
-        maxW="1200px"
-        mx="auto"
-        direction={{ base: "column", md: "row" }}
-      >
-        {/* Login Form */}
+      <Flex w="full" maxW="1200px" mx="auto" direction={{ base: "column", md: "row" }}>
         <Box flex="1" p={10}>
           <Stack spacing={8} mx={"auto"} maxW={"lg"}>
             <Stack align={"center"} spacing={4}>
               <Flex justify="center" mb={4}>
                 <FaUserFriends
-                  boxSize={10}
+                  //boxSize={10}
                   color={useColorModeValue("blue.400", "blue.300")}
-                  zIndex="docked"
+                 // zIndex="docked"
                 />
               </Flex>
               <Text fontSize={"lg"} color={"gray.600"}>
@@ -116,9 +115,7 @@ export default function LoginPage() {
                 <Button
                   bg={"blue.400"}
                   color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
+                  _hover={{ bg: "blue.500" }}
                   onClick={handleLogin}
                 >
                   Sign In
@@ -128,7 +125,7 @@ export default function LoginPage() {
                     New Affiliate?{" "}
                     <ChakraLink
                       color={"blue.400"}
-                      onClick={toggleSignUp} // Redirects to affiliate form
+                      onClick={toggleSignUp}
                       as="span"
                       cursor="pointer"
                     >
@@ -140,23 +137,12 @@ export default function LoginPage() {
             </Box>
           </Stack>
         </Box>
-        <Box
-          flex="1"
-          p={8}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Box flex="1" p={8} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
           <Stack spacing={4} textAlign="center">
             <Heading fontSize={"4xl"} mb={4}>
               Affiliate Sign In
             </Heading>
-            <Image
-              src={LoginImage}
-              alt="Login Illustration"
-              objectFit="cover"
-            />
+            <Image src={LoginImage} alt="Login Illustration" objectFit="cover" />
           </Stack>
         </Box>
       </Flex>

@@ -15,6 +15,7 @@ const cardSchema = new mongoose.Schema(
     education: String,
     englishLevel: String,
     gender: String,
+   
   },
   { timestamps: true }
 );

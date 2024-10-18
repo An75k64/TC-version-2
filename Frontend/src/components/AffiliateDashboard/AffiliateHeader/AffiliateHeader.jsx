@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Flex,
@@ -12,21 +12,27 @@ import {
   Avatar,
   useDisclosure,
   useColorModeValue,
-  Input,
-  InputGroup,
-  InputRightElement,
   Collapse,
   Text,
   Link as ChakraLink
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, BellIcon, SearchIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Header/Logo"; // Ensure you have a Logo component
+import { AuthContext } from "../../../contexts/AuthContext"; // Import your AuthContext
 
 const AffiliateHeader = () => {
   const { isOpen, onToggle } = useDisclosure();
+  const { logout } = useContext(AuthContext); // Access logout function from AuthContext
+  const navigate = useNavigate(); // For navigation after logout
+
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("blue.400", "blue.300");
+
+  const handleLogout = () => {
+    logout(); // Call the logout function
+    navigate('/affiliate-login'); // Redirect after logout
+  };
 
   return (
     <Box>
@@ -62,15 +68,6 @@ const AffiliateHeader = () => {
         </Flex>
 
         <Stack flex={{ base: 1, lg: 0 }} justify={"flex-end"} direction={"row"} spacing={6}>
-          
-
-        {/*  <IconButton
-            size="lg"
-            variant="ghost"
-            aria-label="Notifications"
-            icon={<BellIcon />}
-          /> */}
-
           <Menu>
             <MenuButton
               as={Button}
@@ -85,9 +82,8 @@ const AffiliateHeader = () => {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem>Profile</MenuItem>
-            {/*  <MenuItem>Settings</MenuItem> */}
-              <MenuItem>Logout</MenuItem>
+              <MenuItem as={Link} to="/affiliate-dashboard/profile">Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </MenuList>
           </Menu>
         </Stack>
@@ -107,9 +103,7 @@ const DesktopNav = () => {
   const NAV_ITEMS = [
     { label: "Dashboard", href: "/affiliate-dashboard" },
     { label: "Referrals", href: "/affiliate-dashboard/referrals" },
-   // { label: "Earnings", href: "/affiliate-dashboard/earnings" },
     { label: "Post a Job", href: "/affiliate-dashboard/postjob" },
-   // { label: "Support", href: "/affiliate-dashboard/support" },
   ];
 
   return (
@@ -141,11 +135,9 @@ const DesktopNav = () => {
 
 const MobileNav = () => {
   const NAV_ITEMS = [
-     { label: "Dashboard", href: "/affiliate-dashboard" },
+    { label: "Dashboard", href: "/affiliate-dashboard" },
     { label: "Referrals", href: "/affiliate-dashboard/referrals" },
-  //  { label: "Earnings", href: "/affiliate-dashboard/earnings" },
     { label: "Post a Job", href: "/affiliate-dashboard/postjob" },
-   // { label: "Support", href: "/affiliate-dashboard/support" },
   ];
 
   return (
