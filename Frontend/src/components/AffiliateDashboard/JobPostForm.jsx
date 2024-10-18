@@ -50,13 +50,8 @@ const JobPostForm = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/affiliateJob/${affiliateId}`);
-
-        if (Array.isArray(response.data)) {
-          setPostedJobs(response.data);
-        } else {
-          setPostedJobs([]);
-        }
+        const response = await axios.get('http://localhost:5000/api/jobs');
+        setPostedJobs(response.data);
       } catch (error) {
         console.error('Error fetching jobs:', error);
       }
@@ -101,6 +96,7 @@ const JobPostForm = () => {
 
         // Clear form fields
         formik.resetForm();
+        setPostedJobs([...postedJobs, response.data]);
       } catch (error) {
         console.error(error);
         toast({
@@ -142,10 +138,13 @@ const JobPostForm = () => {
       minH="100vh"
       textAlign="center"
     >
-      <Container maxW="container.md">
+      <Container
+        maxW={{ base: '100%', md: '90%', lg: '70%' }}
+        px={{ base: 4, md: 8 }}
+      >
         <Heading
           as="h1"
-          size="xl"
+          size={{ base: 'lg', md: 'xl' }}
           mb={8}
           fontWeight="bold"
           bgGradient="linear(to-r, blue.400, pink.300)"
@@ -153,13 +152,13 @@ const JobPostForm = () => {
         >
           Post a Job
         </Heading>
-        <Text fontSize="lg" mb={10} color="gray.600">
+        <Text fontSize={{ base: 'md', md: 'lg' }} mb={10} color="gray.600">
           Fill in the details below to share your job opportunity!
         </Text>
 
         <Box
           bg="white"
-          p={8}
+          p={{ base: 6, md: 8 }}
           borderRadius="lg"
           shadow="lg"
           borderColor="gray.200"
@@ -172,7 +171,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.jobTitle && formik.errors.jobTitle}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="blue.500" mr={2} />
-                  <FormLabel>Job Title</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Technology</FormLabel>
                 </Flex>
                 <Textarea
                   name="jobTitle"
@@ -192,7 +191,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.skillset && formik.errors.skillset}>
                 <Flex alignItems="center">
                   <Icon as={FaLightbulb} w={5} h={5} color="pink.500" mr={2} />
-                  <FormLabel>Skillset</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Skillset</FormLabel>
                 </Flex>
                 <Textarea
                   name="skillset"
@@ -212,7 +211,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.experience && formik.errors.experience}>
                 <Flex alignItems="center">
                   <Icon as={FaUserTie} w={5} h={5} color="purple.500" mr={2} />
-                  <FormLabel>Experience</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Experience</FormLabel>
                 </Flex>
                 <Input
                   name="experience"
@@ -231,7 +230,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.location && formik.errors.location}>
                 <Flex alignItems="center">
                   <Icon as={FaMapMarkerAlt} w={5} h={5} color="green.500" mr={2} />
-                  <FormLabel>Location</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Location</FormLabel>
                 </Flex>
                 <Input
                   name="location"
@@ -250,7 +249,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.domain && formik.errors.domain}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="teal.500" mr={2} />
-                  <FormLabel>Domain</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Domain</FormLabel>
                 </Flex>
                 <Textarea
                   name="domain"
@@ -269,8 +268,8 @@ const JobPostForm = () => {
               {/* Salary */}
               <FormControl isInvalid={formik.touched.salary && formik.errors.salary}>
                 <Flex alignItems="center">
-                  <Icon as={FaRupeeSign} w={5} h={5} color="orange.500" mr={2} />
-                  <FormLabel>Salary</FormLabel>
+                  <Icon as={FaRupeeSign} w={5} h={5} color="yellow.500" mr={2} />
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Salary</FormLabel>
                 </Flex>
                 <Input
                   name="salary"
@@ -287,65 +286,60 @@ const JobPostForm = () => {
 
               <Button
                 type="submit"
-                bg="blue.500"
-                color="white"
-                _hover={{ bg: "blue.600" }}
-                borderRadius="full"
-                shadow="lg"
+                colorScheme="blue"
                 size="lg"
+                w="full"
+                shadow="md"
+                borderRadius="full"
+                mt={4}
               >
                 Post Job
               </Button>
             </Stack>
           </form>
         </Box>
-      </Container>
 
-      {/* Posted Jobs Table */}
-      <Container maxW="container.lg" mt={16}>
-        <Heading as="h2" size="lg" mb={8} fontWeight="bold" color="blue.500">
-          Posted Jobs
-        </Heading>
-        <Table variant="simple" size="lg" bg="white" shadow="lg" borderRadius="md">
-          <Thead bg="gray.100">
-            <Tr>
-               <Th>S.No</Th>
-              <Th>Job Title</Th>
-              <Th>Skillset</Th>
-              <Th>Experience</Th>
-              <Th>Location</Th>
-              <Th>Domain</Th>
-              <Th>Salary</Th>
-              {/*<Th>Actions</Th> */} 
-            </Tr>
-          </Thead>
-          <Tbody>
-            {Array.isArray(postedJobs) && postedJobs.length > 0 ? (
-            postedJobs.map((job,index) => (
-              <Tr key={job._id}>
-                <Td>{index + 1}</Td>
-                <Td>{job.jobTitle}</Td>
-                <Td>{job.skillset}</Td>
-                <Td>{job.experience}</Td>
-                <Td>{job.location}</Td>
-                <Td>{job.domain}</Td>
-                <Td>{job.salary}</Td>
-                  {/* <Td>
-                    <Flex>
-                      <IconButton
-                        icon={<FaEdit />}
-                        colorScheme="yellow"
-                        mr={2}
-                        onClick={() => console.log('Edit job', job._id)}
-                      />
-                      <IconButton
-                        icon={<FaTrashAlt />}
-                        colorScheme="red"
-                        onClick={() => handleDelete(job._id)}
-                      />
-                    </Flex>
-                  </Td> */} 
-
+        {/* Job Table */}
+        <Box
+          mt={10}
+          bg={useColorModeValue('white', 'gray.800')}
+          p={6}
+          borderRadius="lg"
+          shadow="lg"
+        >
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Technology</Th>
+                <Th>Skillset</Th>
+                <Th>Experience</Th>
+                <Th>Location</Th>
+                <Th>Domain</Th>
+                <Th>Salary</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {postedJobs.map((job) => (
+                <Tr key={job._id}>
+                  <Td>{job.technology}</Td>
+                  <Td>{job.skillset}</Td>
+                  <Td>{job.experience}</Td>
+                  <Td>{job.location}</Td>
+                  <Td>{job.domain}</Td>
+                  <Td>{job.salary}</Td>
+                  <Td>
+                    <IconButton
+                      icon={<FaEdit />}
+                      mr={2}
+                      onClick={() => console.log('Edit', job._id)}
+                    />
+                    <IconButton
+                      icon={<FaTrashAlt />}
+                      colorScheme="red"
+                      onClick={() => handleDelete(job._id)}
+                    />
+                  </Td>
                 </Tr>
                    ))
                  ) : (
@@ -363,3 +357,4 @@ const JobPostForm = () => {
 };
 
 export default JobPostForm;
+ 

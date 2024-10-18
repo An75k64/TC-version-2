@@ -564,7 +564,7 @@ const handleDeleteSelected = async () => {
               </FormControl>
               <FormControl mt={4}>
               <FormLabel>Job Role</FormLabel>
-              <Input
+              <Textarea
                 value={formData.jobRole}
                 onChange={(e) =>
                   setFormData({ ...formData, jobRole: e.target.value })
@@ -583,8 +583,8 @@ const handleDeleteSelected = async () => {
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Role Category</FormLabel>
-              <Input
+              <FormLabel>Skillset</FormLabel>
+              <Textarea
                 value={formData.roleCategory}
                 onChange={(e) =>
                   setFormData({ ...formData, roleCategory: e.target.value })
@@ -604,7 +604,7 @@ const handleDeleteSelected = async () => {
 
             <FormControl mt={4}>
               <FormLabel>Education</FormLabel>
-              <Input
+              <Textarea
                 value={formData.education}
                 onChange={(e) =>
                   setFormData({ ...formData, education: e.target.value })
