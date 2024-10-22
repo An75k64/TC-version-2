@@ -50,8 +50,12 @@ const JobPostForm = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/jobs');
-        setPostedJobs(response.data);
+        const response = await axios.get(`${apiUrl}/api/affiliateJob/${affiliateId}`);
+        if (Array.isArray(response.data)) {
+          setPostedJobs(response.data);
+        } else {
+          setPostedJobs([]);
+        }
       } catch (error) {
         console.error('Error fetching jobs:', error);
       }
@@ -96,7 +100,7 @@ const JobPostForm = () => {
 
         // Clear form fields
         formik.resetForm();
-        setPostedJobs([...postedJobs, response.data]);
+      //  setPostedJobs([...postedJobs, response.data]);
       } catch (error) {
         console.error(error);
         toast({
@@ -171,7 +175,7 @@ const JobPostForm = () => {
               <FormControl isInvalid={formik.touched.jobTitle && formik.errors.jobTitle}>
                 <Flex alignItems="center">
                   <Icon as={FaLaptopCode} w={5} h={5} color="blue.500" mr={2} />
-                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Technology</FormLabel>
+                  <FormLabel fontSize={{ base: 'sm', md: 'md' }}>Job Title</FormLabel>
                 </Flex>
                 <Textarea
                   name="jobTitle"
@@ -298,59 +302,65 @@ const JobPostForm = () => {
             </Stack>
           </form>
         </Box>
+        </Container>
 
-        {/* Job Table */}
-        <Box
-          mt={10}
-          bg={useColorModeValue('white', 'gray.800')}
-          p={6}
-          borderRadius="lg"
-          shadow="lg"
-        >
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Technology</Th>
-                <Th>Skillset</Th>
-                <Th>Experience</Th>
-                <Th>Location</Th>
-                <Th>Domain</Th>
-                <Th>Salary</Th>
-                <Th>Actions</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {postedJobs.map((job) => (
-                <Tr key={job._id}>
-                  <Td>{job.technology}</Td>
-                  <Td>{job.skillset}</Td>
-                  <Td>{job.experience}</Td>
-                  <Td>{job.location}</Td>
-                  <Td>{job.domain}</Td>
-                  <Td>{job.salary}</Td>
-                  <Td>
-                    <IconButton
-                      icon={<FaEdit />}
-                      mr={2}
-                      onClick={() => console.log('Edit', job._id)}
-                    />
-                    <IconButton
-                      icon={<FaTrashAlt />}
-                      colorScheme="red"
-                      onClick={() => handleDelete(job._id)}
-                    />
-                  </Td>
-                </Tr>
-                   ))
-                 ) : (
+         {/* Posted Jobs Table */}
+      <Container maxW="container.lg" mt={16}>
+        <Heading as="h2" size="lg" mb={8} fontWeight="bold" color="blue.500">
+          Posted Jobs
+        </Heading>
+        <Table variant="simple" size="lg" bg="white" shadow="lg" borderRadius="md">
+          <Thead bg="gray.100">
+            <Tr>
+               <Th>S.No</Th>
+              <Th>Job Title</Th>
+              <Th>Skillset</Th>
+              <Th>Experience</Th>
+              <Th>Location</Th>
+              <Th>Domain</Th>
+              <Th>Salary</Th>
+              {/*<Th>Actions</Th> */} 
+            </Tr>
+          </Thead>
+          <Tbody>
+            {Array.isArray(postedJobs) && postedJobs.length > 0 ? (
+            postedJobs.map((job,index) => (
+              <Tr key={job._id}>
+                <Td>{index + 1}</Td>
+                <Td>{job.jobTitle}</Td>
+                <Td>{job.skillset}</Td>
+                <Td>{job.experience}</Td>
+                <Td>{job.location}</Td>
+                <Td>{job.domain}</Td>
+                <Td>{job.salary}</Td>
+                  {/* <Td>
+                    <Flex>
+                      <IconButton
+                        icon={<FaEdit />}
+                        colorScheme="yellow"
+                        mr={2}
+                        onClick={() => console.log('Edit job', job._id)}
+                      />
+                      <IconButton
+                        icon={<FaTrashAlt />}
+                        colorScheme="red"
+                        onClick={() => handleDelete(job._id)}
+                      />
+                    </Flex>
+                  </Td> */} 
+                    </Tr>
+                  ))
+                ) : (
                   <Tr>
                     <Td colSpan="7" textAlign="center" fontStyle="italic" color="gray.500">
                       No jobs posted
                     </Td>
                   </Tr>
                 )}
+
           </Tbody>
         </Table>
+        
       </Container>
     </Box>
   );

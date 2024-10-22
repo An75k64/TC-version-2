@@ -4,6 +4,8 @@ import {
   Flex,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
   Button,
   Stack,
   Text,
@@ -15,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FaUserFriends } from "react-icons/fa";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"; // Added icons for password visibility
 import LoginImage from "../assets/images/Login/log.svg";
 import axios from "axios";
 import { AuthContext } from '../contexts/AuthContext'; // Adjust path as needed
@@ -34,6 +37,7 @@ export default function LoginPage() {
   const { loginAffiliate } = useContext(AuthContext);  // Pull setAffiliateId from context
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,9 +83,8 @@ export default function LoginPage() {
             <Stack align={"center"} spacing={4}>
               <Flex justify="center" mb={4}>
                 <FaUserFriends
-                  //boxSize={10}
+                  size={64} // Increased the size of the icon
                   color={useColorModeValue("blue.400", "blue.300")}
-                 // zIndex="docked"
                 />
               </Flex>
               <Text fontSize={"lg"} color={"gray.600"}>
@@ -103,14 +106,24 @@ export default function LoginPage() {
                   placeholder="Email Address"
                   isRequired
                 />
-                <Input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                  isRequired
-                />
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"} // Toggle password visibility
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    isRequired
+                  />
+                  <InputRightElement>
+                    <Button
+                      variant="ghost"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
                 <FormError error={error} />
                 <Button
                   bg={"blue.400"}

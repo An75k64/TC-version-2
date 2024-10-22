@@ -87,21 +87,32 @@ const DashboardCard = ({ title, icon, value, subheading, actionText, actionLink,
 const DashboardAffiliate = () => {
   const { affiliateId } = useContext(AuthContext); // Get affiliateId from AuthContext
   const [jobCount, setJobCount] = useState(0); // State to hold the job count
-  const apiurl = "http://localhost:5000/api/affiliatejob/count"; // Define the API URL
+  const [referralCount, setReferralCount] = useState(0); // State to hold the referral count
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   // Fetch the job count on component mount
   useEffect(() => {
     const fetchJobCount = async () => {
       try {
-        const response = await axios.get(`${apiurl}/${affiliateId}`); // Fetch job count
+        const response = await axios.get(`${apiUrl}/api/affiliatejob/count/${affiliateId}`); // Fetch job count
         setJobCount(response.data.count); // Set job count from the response
       } catch (error) {
         console.error("Error fetching job count:", error); // Handle errors
       }
     };
 
+    const fetchReferralCount = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/referredcount/${affiliateId}`); // Fetch referral count
+        setReferralCount(response.data.referredCount); // Set referral count from the response
+      } catch (error) {
+        console.error("Error fetching referral count:", error); // Handle errors
+      }
+    };
+
     if (affiliateId) {
       fetchJobCount(); // Only fetch if affiliateId is present
+      fetchReferralCount(); // Fetch referral count for the affiliate
     }
   }, [affiliateId]);
 
@@ -122,22 +133,13 @@ const DashboardAffiliate = () => {
           <DashboardCard
             title="Referrals"
             icon={FaUserFriends}
-            value="87"
+            value={referralCount} // Display fetched referral count
             subheading="Track your student referrals"
             actionText="Manage Referrals"
             actionLink="/affiliate-dashboard/referrals"
             viewAllText="View All"
             viewAllLink="/affiliate-dashboard/referrals"
           />
-        {/* <DashboardCard
-            title="Earnings"
-            icon={FaMoneyBillWave}
-            value="₹1,245"
-            subheading="View your total rewards"
-           // actionText="Request Payout"
-           // actionLink="/request-payout"
-            viewAllLink="/earnings-details"
-          />  */} 
         </SimpleGrid>
       </Flex>
     </Box>

@@ -42,6 +42,7 @@ import ContactPanel from "./Admin/AdminPages/ContactPanel.jsx";
 import PostJob from "./Admin/AdminPages/PostJob.jsx";
 import StudentApplied from "./Admin/AdminComponents/Job Panel/StudentApplied.jsx";
 import Dashboard from "./Admin/AdminPages/Dashboard.jsx";
+import ViewPost from './Admin/AdminComponents/Affiliate/ViewJob'; 
 
 // Import new pages for admin authentication
 import AdminLogin from "./pages/AdminLogin.jsx";
@@ -52,6 +53,7 @@ import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import NotificationPanel from "./Admin/AdminPages/NotificationPanel.jsx";
 import Referrals from "./components/AffiliateDashboard/Referrals.jsx";
 import AffiliateProfile from "./components/AffiliateDashboard/AffiliateProfile.jsx";
+import AffiliatePanel from "./Admin/AdminPages/AffiliatePanel.jsx";
 
 const NotFound = () => <div>Page Not Found</div>;
 
@@ -166,6 +168,8 @@ const App = () => {
                       <Route path="StudentApplied" element={<StudentApplied />} />
                       <Route path="dashboard" element={<Dashboard />} />
                       <Route path="notification" element={<NotificationPanel />} />
+                      <Route path="affiliate" element={<AffiliatePanel />} />
+                       <Route path="view-post/:affiliateId" element={<ViewPost />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Layout>

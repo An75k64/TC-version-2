@@ -17,6 +17,7 @@ const loginRoutes = require("./routes/admin");
 const notificationRoutes = require("./routes/notificationRoutes");
 const affiliateRoutes = require("./routes/affiliateRoutes");
 const affiliateJobRoutes = require("./routes/affiliateJobRoutes");
+const referredStudentRoutes = require("./routes/referredStudentRoutes");
 
 
 const app = express();
@@ -65,6 +66,8 @@ app.use("/api", loginRoutes);
 
 // Use routes
 app.use('/api/notifications', notificationRoutes);
+
+app.use('/api', referredStudentRoutes); // Add the route for referred students
 
 // Default route for the root URL
 app.get("/", (req, res) => {

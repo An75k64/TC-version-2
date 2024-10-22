@@ -6,7 +6,9 @@ const {
   loginAffiliate,
   getAffiliateProfile,
   changePassword,
-  
+  getAffiliateCount,
+  deleteAffiliates,
+  getAllAffiliates,
 } = require("../controllers/affiliateController");
 
 const router = express.Router();
@@ -22,5 +24,14 @@ router.get("/profile/:id", getAffiliateProfile);
 
 // Add route for changing password
 router.post("/change-password", changePassword);
+
+// Route to get the total count of affiliates
+router.get('/count', getAffiliateCount);
+
+//Route to get all affiliate data
+router.get('/', getAllAffiliates);
+
+//Route to delete one or multiple affiliate 
+router.delete('/delete', deleteAffiliates);
 
 module.exports = router;
