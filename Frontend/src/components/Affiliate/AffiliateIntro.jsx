@@ -1,30 +1,34 @@
 import React from 'react';
-import { Box, Heading, Text, VStack, Container, Flex, Icon } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, Container, Flex, Icon, Badge } from '@chakra-ui/react';
 import { FaUserPlus, FaDollarSign, FaHandshake, FaChartLine } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { chakra } from '@chakra-ui/react';
+
+const MotionBox = chakra(motion.div); 
 
 const steps = [
   {
     number: "1",
     title: "Sign Up",
-    description: "Fill out the registration form to join the TalentConnect Affiliate Program.",
+    description: "Join TalentConnect's Affiliate Program by completing the registration.",
     icon: FaUserPlus,
   },
   {
     number: "2",
     title: "Start Referring",
-    description: "Begin referring candidates and earn rewards for successful placements.",
+    description: "Refer candidates to start earning rewards for successful placements.",
     icon: FaHandshake,
   },
   {
     number: "3",
     title: "Earn Commission",
-    description: "Earn up to 20% commission on every successful job placement facilitated.",
+    description: "Get up to 20% commission on each successful placement you facilitate.",
     icon: FaDollarSign,
   },
   {
     number: "4",
-    title: "Track Your Progress",
-    description: "Use our dashboard to track your referrals and manage your earnings.",
+    title: "Track Progress",
+    description: "Track your referrals and commissions in your personal dashboard.",
     icon: FaChartLine,
   },
 ];
@@ -32,53 +36,89 @@ const steps = [
 const AffiliateIntro = () => {
   return (
     <Box
-      bg="yellow.100"
+      bg="white"
       py={{ base: 10, md: 20 }}
       px={{ base: 5, md: 10 }}
       position="relative"
       overflow="hidden"
     >
       <Container maxW="container.xl">
-        <VStack spacing={8} align="center">
-          <Heading
-            as="h1"
-            size={{ base: "xl", md: 'xl', xl:"2xl" }}
-            textAlign="center"
-            fontFamily="ClashDisplay"
-            color="blue.400"
-          >
-            Why Join TalentConnect's Affiliate Program?
-          </Heading>
-          <Text
-            fontSize={{ base: "md", md: "md", lg: 'lg', xl: 'xl' }}
-            textAlign="center"
-            maxW="800px"
-          >
-            Discover the advantages of becoming a TalentConnect affiliate. Our program offers you the chance to leverage your professional network, access exclusive tools, and earn rewards by connecting top-tier talent with the right opportunities.
-          </Text>
+        {/* Split Layout */}
+        <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
+          {/* Left Side: Heading and Description */}
+          <VStack spacing={6} align={{ base: 'center', md: 'flex-start' }} w={{ base: '100%', md: '45%' }}>
+            <Heading
+              as="h1"
+              size={{ base: "2xl", md: '3xl' }}
+              fontFamily="ClashDisplay"
+              bgGradient="linear(to-r, purple.500, blue.500)"
+              bgClip="text"
+              textAlign={{ base: 'center', md: 'left' }}
+            >
+              Why Join TalentConnect's Affiliate Program?
+            </Heading>
+            <Text
+              fontSize={{ base: "lg", md: "xl" }}
+              textAlign={{ base: 'center', md: 'left' }}
+              color="gray.700"
+            >
+              Leverage your network, access exclusive tools, and earn rewards by connecting top-tier talent with the right opportunities.
+            </Text>
+          </VStack>
 
-          <Box width="100%" maxW="full">
-            <Flex justify="space-between" wrap="wrap">
-              {steps.map((step) => (
-                <Box
-                  key={step.number}
-                  textAlign="center"
-                  width={{ base: "100%", md: "45%",lg: '45%', xl: "24%" }}
-                  mb={{ base: 8, md: 8, lg: 10 }}
+          {/* Right Side: Step Cards */}
+          <Flex direction={{ base: 'column', md: 'row' }} wrap="wrap" justify="space-between" w={{ base: '100%', md: '50%' }} mt={{ base: 8, md: 0 }}>
+            {steps.map((step) => (
+              <MotionBox
+                key={step.number}
+                bg="gray.50"
+                p={8}
+                borderRadius="lg"
+                boxShadow="lg"
+                mb={8}
+                w={{ base: '100%', md: '48%' }}
+                whileHover={{ scale: 1.05, boxShadow: 'xl' }}
+                transition="0.3s"
+                position="relative"
+                cursor={'pointer'}
+              >
+                {/* Large Step Number in Background */}
+                <Text
+                  position="absolute"
+                  top="-20px"
+                  left="-20px"
+                  fontSize="6xl"
+                  color="purple.100"
+                  fontWeight="bold"
+                  zIndex={-1}
                 >
-                  <Icon as={step.icon} color="blue.400" w={{ base: 8, md: 10 }} h={{ base: 8, md: 10 }} mb={4} mx="auto" />
-                  <Heading as="h3" size="md" mb={2}>
-                    <Text as="span" fontSize="lg" fontWeight="bold" color="blue.500">
-                      {step.number}.
-                    </Text>{" "}
-                    {step.title}
-                  </Heading>
-                  <Text fontSize={{ base: "sm", md: "md" }}>{step.description}</Text>
-                </Box>
-              ))}
-            </Flex>
-          </Box>
-        </VStack>
+                  {step.number}
+                </Text>
+
+                {/* Icon Badge */}
+                <Badge
+                  borderRadius="full"
+                  p={4}
+                  mb={4}
+                  bgGradient="linear(to-r, blue.500, purple.500)"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Icon as={step.icon} w={8} h={8} color="white" />
+                </Badge>
+
+                {/* Step Title and Description */}
+                <Heading as="h3" size="md" mb={2} color="purple.700">
+                  {step.title}
+                </Heading>
+                <Text fontSize="md" color="gray.600">
+                  {step.description}
+                </Text>
+              </MotionBox>
+            ))}
+          </Flex>
+        </Flex>
       </Container>
     </Box>
   );
