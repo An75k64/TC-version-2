@@ -133,7 +133,7 @@ export default function OpeningForm({ jobId, affiliateJobId, affiliateId }) {
             <Stack spacing={4} bg={'white'} rounded={'xl'} p={{ base: 4, sm: 6, md: 8 }}>
               {!isAffiliate &&(
                 <>
-                  <Heading fontSize="2xl" mb={4}>Job Description</Heading>
+                  <Heading fontSize="2xl" mb={4} textColor={"black"}>Job Description</Heading>
                    <Text fontSize="lg" mb={6}>{jobDetails.jobDescription}</Text>
                 </>
               )}
@@ -144,28 +144,28 @@ export default function OpeningForm({ jobId, affiliateJobId, affiliateId }) {
               {!isAffiliate && (
                 <>
                   <Heading fontSize="2xl" mb={4}>Job Role</Heading>
-                  <VStack align="start" spacing={2} mb={6}>
-                    <HStack spacing={2}>
-                      <Icon as={FaLocationDot} boxSize={5} />
-                      <Text color="gray.500">Work Location:</Text>
-                      <Text>{jobDetails.location}</Text>
-                    </HStack>
-                    <HStack spacing={2}>
-                      <Icon as={FaBuilding} boxSize={5} />
-                      <Text color="gray.500">Department:</Text>
-                      <Text>{jobDetails.department}</Text>
-                    </HStack>
-                    <HStack spacing={2}>
-                      <Icon as={FaTags} boxSize={5} />
-                      <Text width="120px" color="gray.500">Role / Category:</Text>
-                      <Text width="auto">{jobDetails.jobRole} & {jobDetails.roleCategory}</Text>
-                    </HStack>
-                    <HStack spacing={2}>
-                      <Icon as={FaClock} boxSize={5} />
-                      <Text color="gray.500">Employment type:</Text>
-                      <Text>{jobDetails.employmentType}</Text>
-                    </HStack>
-                  </VStack>
+                      <VStack align="start" spacing={2} mb={6}>
+                        <HStack spacing={2}>
+                          <Icon as={FaLocationDot} boxSize={5} color="purple.500" />
+                          <Text color="gray.500">Work Location:</Text>
+                          <Text>{jobDetails.location}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                          <Icon as={FaBuilding} boxSize={5} color="blue.500" />
+                          <Text color="gray.500">Department:</Text>
+                          <Text>{jobDetails.department}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                          <Icon as={FaTags} boxSize={5} color="green.500" />
+                          <Text width="120px" color="gray.500">Role / Category:</Text>
+                          <Text width="auto">{jobDetails.jobRole} & {jobDetails.roleCategory}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                          <Icon as={FaClock} boxSize={5} color="orange.500" />
+                          <Text color="gray.500">Employment type:</Text>
+                          <Text>{jobDetails.employmentType}</Text>
+                        </HStack>
+                      </VStack>
                 </>
               )}
 
@@ -173,29 +173,29 @@ export default function OpeningForm({ jobId, affiliateJobId, affiliateId }) {
                {isAffiliate && (
                       <>
                         <Heading fontSize="2xl" mb={4}>Job Role</Heading>
-                        <VStack align="start" spacing={2} mb={6}>
+                       <VStack align="start" spacing={2} mb={6}>
                           <HStack spacing={2}>
-                            <Icon as={FaTools} boxSize={5} />
+                            <Icon as={FaTools} boxSize={5} color="teal.500" />
                             <Text color="gray.500">Skillset:</Text>
                             <Text>{jobDetails.skillset}</Text>
                           </HStack>
                           <HStack spacing={2}>
-                            <Icon as={FaBriefcase} boxSize={5} />
+                            <Icon as={FaBriefcase} boxSize={5} color="red.500" />
                             <Text color="gray.500">Experience:</Text>
                             <Text>{jobDetails.experience}</Text>
                           </HStack>
                           <HStack spacing={2}>
-                            <Icon as={FaLocationDot} boxSize={5} />
+                            <Icon as={FaLocationDot} boxSize={5} color="purple.500" />
                             <Text color="gray.500">Work Location:</Text>
                             <Text>{jobDetails.location}</Text>
                           </HStack>
                           <HStack spacing={2}>
-                            <Icon as={FaProjectDiagram} boxSize={5} />
+                            <Icon as={FaProjectDiagram} boxSize={5} color="cyan.500" />
                             <Text color="gray.500">Domain:</Text>
                             <Text>{jobDetails.domain}</Text>
                           </HStack>
                           <HStack spacing={2}>
-                            <Icon as={FaMoneyBillWave} boxSize={5} />
+                            <Icon as={FaMoneyBillWave} boxSize={5} color="yellow.500" />
                             <Text color="gray.500">Salary:</Text>
                             <Text>{jobDetails.salary}</Text>
                           </HStack>
@@ -207,28 +207,28 @@ export default function OpeningForm({ jobId, affiliateJobId, affiliateId }) {
                 <>
                   <hr />
                   <Heading fontSize="2xl" mb={4}>Job Requirements</Heading>
-                  <VStack align="start" spacing={2} mb={6}>
-                    <HStack spacing={2}>
-                      <Icon as={FaBriefcase} boxSize={5} />
-                      <Text color="gray.500">Experience:</Text>
-                      <Text>{jobDetails.experience}</Text>
-                    </HStack>
-                    <HStack spacing={2}>
-                      <Icon as={FaGraduationCap} boxSize={5} />
-                      <Text color="gray.500">Education:</Text>
-                      <Text>{jobDetails.education}</Text>
-                    </HStack>
-                    <HStack spacing={2}>
-                      <Icon as={RiSpeakFill} boxSize={5} />
-                      <Text color="gray.500">English level:</Text>
-                      <Text>{jobDetails.englishLevel}</Text>
-                    </HStack>
-                    <HStack spacing={2}>
-                      <Icon as={IoPerson} boxSize={5} />
-                      <Text color="gray.500">Gender:</Text>
-                      <Text>{jobDetails.gender}</Text>
-                    </HStack>
-                  </VStack>
+                 <VStack align="start" spacing={2} mb={6}>
+                        <HStack spacing={2}>
+                          <Icon as={FaBriefcase} boxSize={5} color="red.500" />
+                          <Text color="gray.500">Experience:</Text>
+                          <Text>{jobDetails.experience}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                          <Icon as={FaGraduationCap} boxSize={5} color="blue.500" />
+                          <Text color="gray.500">Education:</Text>
+                          <Text>{jobDetails.education}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                          <Icon as={RiSpeakFill} boxSize={5} color="green.500" />
+                          <Text color="gray.500">English level:</Text>
+                          <Text>{jobDetails.englishLevel}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                          <Icon as={IoPerson} boxSize={5} color="purple.500" />
+                          <Text color="gray.500">Gender:</Text>
+                          <Text>{jobDetails.gender}</Text>
+                        </HStack>
+                      </VStack>
                 </>
               )}
 

@@ -130,7 +130,11 @@ function Card({ jobId, title, location, salary, experience, jobDescription,  aff
             <Modal isOpen={isOpen} onClose={onClose} size="xl">
                 <ModalOverlay bg="blackAlpha.600" />
                 <ModalContent>
-                    <ModalHeader>{title}</ModalHeader>
+                    <ModalHeader>
+                        <Text textAlign="center" width="100%" textColor={"blue.400"} fontWeight="bold">
+                            {title}
+                        </Text>
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <OpeningForm
@@ -142,6 +146,7 @@ function Card({ jobId, title, location, salary, experience, jobDescription,  aff
                     </ModalBody>
                 </ModalContent>
             </Modal>
+
         </Box>
     );
 }
