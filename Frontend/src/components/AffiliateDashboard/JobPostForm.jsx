@@ -100,7 +100,7 @@ const JobPostForm = () => {
 
         // Clear form fields
         formik.resetForm();
-      //  setPostedJobs([...postedJobs, response.data]);
+        //  setPostedJobs([...postedJobs, response.data]);
       } catch (error) {
         console.error(error);
         toast({
@@ -113,7 +113,7 @@ const JobPostForm = () => {
   });
 
   // Handle job delete
-  
+
   const handleDelete = async (jobId) => {
     try {
       await axios.delete(`http://localhost:5000/api/jobs/${jobId}`);
@@ -303,69 +303,89 @@ const JobPostForm = () => {
             </Stack>
           </form>
         </Box>
-        </Container>
-
-         {/* Posted Jobs Table */}
+      </Container>
+      {/* Posted Jobs Table */}
       <Container maxW="container.lg" mt={16}>
         <Heading as="h2" size="lg" mb={8} fontWeight="bold" color="blue.500">
           Posted Jobs
         </Heading>
-        <Table variant="simple" size="lg" bg="white" shadow="lg" borderRadius="md">
-          <Thead bg="gray.100">
-            <Tr>
-               <Th>S.No</Th>
-              <Th>Job Title</Th>
-              <Th>Skillset</Th>
-              <Th>Experience</Th>
-              <Th>Location</Th>
-              <Th>Domain</Th>
-              <Th>Salary</Th>
-              {/*<Th>Actions</Th> */} 
-            </Tr>
-          </Thead>
-          <Tbody>
-            {Array.isArray(postedJobs) && postedJobs.length > 0 ? (
-            postedJobs.map((job,index) => (
-              <Tr key={job._id}>
-                <Td>{index + 1}</Td>
-                <Td>{job.jobTitle}</Td>
-                <Td>{job.skillset}</Td>
-                <Td>{job.experience}</Td>
-                <Td>{job.location}</Td>
-                <Td>{job.domain}</Td>
-                <Td>{job.salary}</Td>
-                  {/* <Td>
-                    <Flex>
-                      <IconButton
-                        icon={<FaEdit />}
-                        colorScheme="yellow"
-                        mr={2}
-                        onClick={() => console.log('Edit job', job._id)}
-                      />
-                      <IconButton
-                        icon={<FaTrashAlt />}
-                        colorScheme="red"
-                        onClick={() => handleDelete(job._id)}
-                      />
-                    </Flex>
-                  </Td> */} 
-                    </Tr>
-                  ))
-                ) : (
-                  <Tr>
-                    <Td colSpan="7" textAlign="center" fontStyle="italic" color="gray.500">
-                      No jobs posted
-                    </Td>
-                  </Tr>
-                )}
 
-          </Tbody>
-        </Table>
-        
+        {/* for Laptop */}
+        <Box
+          display={{ base: "none", lg: "block" }} // Show table for medium and larger screens
+          overflowX="auto" // Enables horizontal scroll if needed
+        >
+          <Table variant="simple" size="lg" bg="white" shadow="lg" borderRadius="md">
+            <Thead bg="gray.100">
+              <Tr>
+                <Th>S.No</Th>
+                <Th>Job Title</Th>
+                <Th>Skillset</Th>
+                <Th>Experience</Th>
+                <Th>Location</Th>
+                <Th>Domain</Th>
+                <Th>Salary</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {Array.isArray(postedJobs) && postedJobs.length > 0 ? (
+                postedJobs.map((job, index) => (
+                  <Tr key={job._id}>
+                    <Td>{index + 1}</Td>
+                    <Td>{job.jobTitle}</Td>
+                    <Td>{job.skillset}</Td>
+                    <Td>{job.experience}</Td>
+                    <Td>{job.location}</Td>
+                    <Td>{job.domain}</Td>
+                    <Td>{job.salary}</Td>
+                  </Tr>
+                ))
+              ) : (
+                <Tr>
+                  <Td colSpan="7" textAlign="center" fontStyle="italic" color="gray.500">
+                    No jobs posted
+                  </Td>
+                </Tr>
+              )}
+            </Tbody>
+          </Table>
+        </Box>
+
+        {/* for Mobile */}
+        <Stack
+          display={{ base: "flex", lg: "none" }} // Show column format for small screens
+          spacing={6}
+          mt={8} // Add margin to separate the stack on mobile
+        >
+          {Array.isArray(postedJobs) && postedJobs.length > 0 ? (
+            postedJobs.map((job, index) => (
+              <Box
+                key={job._id}
+                bg="white"
+                p={4}
+                shadow="md"
+                borderRadius="md"
+                borderWidth="1px"
+              >
+                <Text fontWeight="bold" color="blue.500">Job {index + 1}</Text>
+                <Text><strong>Job Title:</strong> {job.jobTitle}</Text>
+                <Text><strong>Skillset:</strong> {job.skillset}</Text>
+                <Text><strong>Experience:</strong> {job.experience}</Text>
+                <Text><strong>Location:</strong> {job.location}</Text>
+                <Text><strong>Domain:</strong> {job.domain}</Text>
+                <Text><strong>Salary:</strong> {job.salary}</Text>
+              </Box>
+            ))
+          ) : (
+            <Box textAlign="center" fontStyle="italic" color="gray.500">
+              No jobs posted
+            </Box>
+          )}
+        </Stack>
       </Container>
     </Box>
+
   );
 };
 
 export default JobPostForm;
- 

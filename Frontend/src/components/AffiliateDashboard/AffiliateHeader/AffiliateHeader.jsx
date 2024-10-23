@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Box,
   Flex,
@@ -19,6 +19,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Header/Logo"; // Ensure you have a Logo component
+import { Link as RouterLink } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext"; // Import your AuthContext
 
 const AffiliateHeader = () => {
@@ -60,8 +61,9 @@ const AffiliateHeader = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", lg: "start" }} align="center">
-          <Logo />
-
+          <RouterLink to="/company">
+            <Logo />
+          </RouterLink>
           <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
