@@ -201,14 +201,14 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
   const activeTabBgColor = useColorModeValue("teal.50", "white.700");
   const isActive = pathname === href || (children && children.some(child => pathname === child.href));
 
-  const handleLinkClick = (e) => {
+  const handleLinkClick = () => {
     onClose(); // Close the mobile menu
   };
 
   return (
     <Stack spacing={4} onClick={children ? onToggle : undefined}>
       <Flex
-        as={NavLink} // Ensure you're using NavLink
+        as={NavLink}
         to={href ?? "#"}
         py={2}
         justify="space-between"
@@ -223,7 +223,7 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
         }}
         borderBottom={isActive ? "4px solid" : "none"}
         borderColor={hoverColor}
-        onClick={children ? onToggle : handleLinkClick}
+        onClick={children ? onToggle : handleLinkClick} // Close menu on main link click
       >
         <Text fontWeight={600}>{label}</Text>
         {children && (
@@ -269,7 +269,9 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
                 }}
                 borderBottom={pathname === child.href ? "2px solid" : "none"}
                 borderColor={hoverColor}
-                onClick={handleLinkClick} // Ensure menu closes after clicking a child link
+                onClick={() => {
+                  handleLinkClick(); // Close menu after clicking a child link
+                }} 
               >
                 {child.label}
               </Box>
@@ -279,7 +281,6 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
     </Stack>
   );
 };
-
 
 
 const Navigation = () => {

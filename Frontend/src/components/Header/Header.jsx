@@ -6,14 +6,14 @@ import {
   Collapse,
   useColorModeValue,
   useDisclosure,
-  useBreakpointValue
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { DesktopNav, MobileNav } from "./Navigation.jsx";
 import Logo from "./Logo.jsx"; // Import the Logo component
 
 const Header = () => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const [isVisible, setIsVisible] = useState(true);
   let lastScrollY = window.scrollY;
 
@@ -33,11 +33,8 @@ const Header = () => {
     };
   }, []);
 
-  
-
   return (
     <Box
-      
       position="fixed"
       top={0}
       left={0}
@@ -45,20 +42,15 @@ const Header = () => {
       zIndex={1000} // Ensure it's on top of all elements
       transition="transform 0.3s ease-in-out"
       transform={isVisible ? "translateY(0)" : "translateY(-100%)"}
-      // Glass effect styling
-     // bg="rgba(255, 255, 255, 0.2)" // Semi-transparent background
-     // backdropFilter="blur(5px)" // Blurs the background behind the header
-     // boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.37)" // Glassy shadow effect
-     // borderBottom="1px solid rgba(255, 255, 255, 0.18)" // Subtle border effect
     >
       <Flex
         bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}       
+        color={useColorModeValue("gray.600", "white")}
         minH={useBreakpointValue({ lg: "60px", "3xl": "80px" })}
-        py={{ base: 2, "lg":"0","3xl":"8" }}
-        px={{ base: 4,  }}
+        py={{ base: 2, lg: "0", "3xl": "8" }}
+        px={{ base: 4 }}
         align={"center"}
-        justify={useBreakpointValue({ base: "space-between", lg: "center" })} // Center on desktop, space between on mobile
+        justify={useBreakpointValue({ base: "space-between", lg: "center" })}
         position="relative"
       >
         {/* Hamburger Icon on mobile */}
@@ -101,7 +93,7 @@ const Header = () => {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav onClose={onClose} /> {/* Pass onClose here */}
       </Collapse>
     </Box>
   );
