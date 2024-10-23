@@ -139,37 +139,37 @@ export default function OurServices() {
           heading="OnCampus"
           icon={<Icon as={FcGraduationCap} w={10} h={10} />}
           description="Our OnCampus service brings career opportunities directly to students, connecting them with top employers through campus recruitment drives and job events."
-          link="/oncampus"
+          link="/services/oncampus"
         />
         <Card
           heading="OffCampus"
           icon={<Icon as={FcGlobe} w={10} h={10} />}
           description="TalentConnect's Off Campus service offers a platform for recent graduates to explore diverse career opportunities."
-          link="/offcampus"
+          link="/services/offcampus"
         />
         <Card
           heading="Workforce Provider"
           icon={<Icon as={FcBriefcase} w={10} h={10} />}
           description="Our Workforce Provider service offers tailored staffing solutions to connect employers with top talent."
-          link="/workforce"
+          link="/services/workforce"
         />
         <Card
           heading="Seminar"
           icon={<Icon as={FcCollaboration} w={10} h={10} />}
           description="Our seminars provide valuable insights on various career-related topics, led by industry experts."
-          link="/seminar"
+          link="/services/seminar"
         />
         <Card
           heading="Counselling"
           icon={<Icon as={FcAssistant} w={10} h={10} />}
           description="Personalized career counseling services to help you navigate your career path."
-          link="/counselling"
+          link="/services/counselling"
         />
         <Card
           heading="CareerCraft"
           icon={<Icon as={FcReading} w={10} h={10} />}
           description="CareerCraft is focused on skill development and career readiness through workshops and mentorship."
-          link="/careercraft"
+          link="/services/careercraft"
         />
       </SimpleGrid>
     </Box>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Flex, Text, Center } from '@chakra-ui/react';
-import { FaUserGraduate, FaUniversity, FaBuilding, FaBriefcase } from 'react-icons/fa';
+import { Box, Grid, Flex, Text, Progress, Center } from '@chakra-ui/react';
+import { FaUserGraduate, FaUniversity, FaBuilding, FaBriefcase , FaHandshake} from 'react-icons/fa';
 import { MdContactMail } from "react-icons/md";
 import CurrentDateTime from './CurrentDateTime';
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -12,88 +12,42 @@ const DashboardOverview = () => {
   const [contactCount, setContactCount] = useState(0);
   const [studentPostCount, setStudentPostCount] = useState(0);
   const [studentApplyCount, setStudentApplyCount] = useState(0);
-  
-  
+  const [affiliateCount, setAffiliateCount] = useState(0);
 
   useEffect(() => {
-    const fetchCollegeCount = async () => {
+    const fetchCounts = async () => {
       try {
-        //const response = await fetch('${apiUrl}/api/college/count');
+        const [collegeRes, companyRes, jobPostRes, contactRes, studentPostRes, studentApplyRes, affiliateRes] = await Promise.all([
+          fetch(`${apiUrl}/api/college/count`),
+          fetch(`${apiUrl}/api/company/count`),
+          fetch(`${apiUrl}/api/cards/count`),
+          fetch(`${apiUrl}/api/contact/count`),
+          fetch(`${apiUrl}/api/resumes/count`),
+          fetch(`${apiUrl}/api/job-Applications/count`),
+          fetch(`${apiUrl}/api/affiliate/count`) // Fetch affiliate count
+        ]);
 
-        const response = await fetch(`${apiUrl}/api/college/count`);
-        const data = await response.json();
-        setCollegeCount(data.count);
+        const collegeData = await collegeRes.json();
+        const companyData = await companyRes.json();
+        const jobPostData = await jobPostRes.json();
+        const contactData = await contactRes.json();
+        const studentPostData = await studentPostRes.json();
+        const studentApplyData = await studentApplyRes.json();
+        const affiliateData = await affiliateRes.json();
+
+        setCollegeCount(collegeData.count);
+        setCompanyCount(companyData.count);
+        setJobPostCount(jobPostData.count);
+        setContactCount(contactData.count);
+        setStudentPostCount(studentPostData.count);
+        setStudentApplyCount(studentApplyData.count);
+        setAffiliateCount(affiliateData.count); // Set affiliate count
       } catch (error) {
-        console.error('Error fetching college count:', error);
+        console.error('Error fetching counts:', error);
       }
     };
 
-    const fetchCompanyCount = async () => {
-      try {
-        //const response = await fetch('${apiUrl}/api/company/count');
-
-        const response = await fetch(`${apiUrl}/api/company/count`);
-        const data = await response.json();
-        setCompanyCount(data.count);
-      } catch (error) {
-        console.error('Error fetching company count:', error);
-      }
-    };
-
-    const fetchJobPostCount = async () => {
-      try {
-       // const response = await fetch('${apiUrl}/api/cards/count');
-
-        const response = await fetch(`${apiUrl}/api/cards/count`);
-        const data = await response.json();
-        setJobPostCount(data.count);
-      } catch (error) {
-        console.error('Error fetching job post count:', error);
-      }
-    };
-
-    const fetchContactCount = async () => {
-      try {
-        //const response = await fetch('${apiUrl}/api/contact/count');
-
-        const response = await fetch(`${apiUrl}/api/contact/count`);
-        const data = await response.json();
-        setContactCount(data.count);
-      } catch (error) {
-        console.error('Error fetching contact count:', error);
-      }
-    };
-
-    const fetchStudentPostCount = async () => {
-      try {
-       // const response = await fetch('${apiUrl}/api/resumes/count');
-
-         const response = await fetch(`${apiUrl}/api/resumes/count`);
-        const data = await response.json();
-        setStudentPostCount(data.count);
-      } catch (error) {
-        console.error('Error fetching student posted a resume count:', error);
-      }
-    };
-
-    const fetchStudentApplyCount = async () => {
-      try {
-        //const response = await fetch('${apiUrl}/api/job-Applications/count');
-
-        const response = await fetch(`${apiUrl}/api/job-Applications/count`);
-        const data = await response.json();
-        setStudentApplyCount(data.count);
-      } catch (error) {
-        console.error('Error fetching student applied count:', error);
-      }
-    };
-
-    fetchCollegeCount();
-    fetchCompanyCount();
-    fetchJobPostCount();
-    fetchContactCount();
-    fetchStudentApplyCount();
-    fetchStudentPostCount();
+    fetchCounts();
   }, []);
 
   const summaryCards = [
@@ -102,6 +56,7 @@ const DashboardOverview = () => {
     { title: 'Total Colleges', value: collegeCount, icon: <FaUniversity />, bgColor: 'purple.100' },
     { title: 'Total Companies', value: companyCount, icon: <FaBuilding />, bgColor: 'yellow.100' },
     { title: 'Jobs Posted', value: jobPostCount, icon: <FaBriefcase />, bgColor: 'orange.100' },
+    { title: 'Affiliate Register', value: affiliateCount, icon: <FaHandshake />, bgColor: 'blue.100' },
     { title: 'Contacted', value: contactCount, icon: <MdContactMail />, bgColor: 'red.100' },
   ];
 
@@ -132,7 +87,7 @@ const DashboardOverview = () => {
             </Flex>
           </Box>
         ))}
-      </Grid>
+       </Grid>
     </Box>
   );
 };

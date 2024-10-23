@@ -1,13 +1,36 @@
 import React from "react";
 import { Box, VStack, Text, Icon } from "@chakra-ui/react";
 import { NavLink } from 'react-router-dom';
-import { FaTachometerAlt, FaUser, FaSchool, FaBuilding, FaBriefcase, FaPhone } from 'react-icons/fa'; // Import icons from react-icons
+import { FaTachometerAlt, FaUser, FaSchool, FaBuilding, FaBriefcase, FaPhone,  FaHandshake } from 'react-icons/fa'; // Import icons from react-icons
 import { MdNotificationsActive } from "react-icons/md";
+import { css } from "@emotion/react";
+
 const Sidebar = ({ isOpen, onClose }) => {
   // Close sidebar when an item is clicked
   const handleClick = () => {
     onClose(); // Close sidebar
   };
+
+  // Custom scrollbar styles
+  const customScrollbar = css`
+    &::-webkit-scrollbar {
+      width: 8px; /* Width of the scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1; /* Track color */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #3182ce; /* Scrollbar thumb color */
+      border-radius: 10px; /* Rounded scrollbar thumb */
+      border: 3px solid #f1f1f1; /* Space around scrollbar thumb */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #2b6cb0; /* Scrollbar thumb color on hover */
+    }
+  `;
 
   return (
     <Box
@@ -22,6 +45,8 @@ const Sidebar = ({ isOpen, onClose }) => {
       transform={{ base: isOpen ? "translateX(0)" : "translateX(-100%)", md: "translateX(0)" }}
       transition="transform 0.3s ease-in-out"
       zIndex="1000"
+      overflowY="auto"
+      css={customScrollbar}
     >
       <VStack align="start" spacing={4} mt={6} px={4}>
         <NavLink 
@@ -138,6 +163,26 @@ const Sidebar = ({ isOpen, onClose }) => {
           <Icon as={FaBriefcase} mr={3} />
           <Text>Post a Job</Text>
         </NavLink>
+           <NavLink 
+          to="/admin/affiliate"  // New Affiliate route
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent',
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
+        >
+          <Icon as={FaHandshake} mr={3} />  {/* Icon for Affiliate tab */}
+          <Text>Affiliate</Text>
+        </NavLink>
+
         <NavLink 
           to="/admin/contact-support" 
           style={({ isActive }) => ({

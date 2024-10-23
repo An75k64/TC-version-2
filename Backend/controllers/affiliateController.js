@@ -144,4 +144,57 @@ exports.changePassword = async (req, res) => {
   }
 };
 
+// Function to get the total count of registered affiliates
+exports.getAffiliateCount = async (req, res) => {
+  try {
+    // Count the number of affiliates in the database
+    const count = await Affiliate.countDocuments();
+    
+    res.status(200).json({ count });
+  } catch (error) {
+    console.error('Error fetching affiliate count:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
+
+// Get all affiliates
+exports.getAllAffiliates = async (req, res) => {
+  try {
+    const affiliates = await Affiliate.find(); // Fetch all affiliate users
+
+    if (!affiliates || affiliates.length === 0) {
+      return res.status(404).json({ message: "No affiliates found" });
+    }
+
+    // Send the list of affiliates
+    res.status(200).json({ affiliates });
+  } catch (error) {
+    console.error("Error fetching affiliates:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+// Delete one or multiple affiliates
+exports.deleteAffiliates = async (req, res) => {
+  const { affiliateIds } = req.body; // Expect an array of affiliate _ids
+
+  if (!affiliateIds || affiliateIds.length === 0) {
+    return res.status(400).json({ message: "No affiliate IDs provided" });
+  }
+
+  try {
+    // Delete the affiliates whose _id is in the affiliateIds array
+    const result = await Affiliate.deleteMany({ _id: { $in: affiliateIds } });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "No affiliates found to delete" });
+    }
+
+    res.status(200).json({ message: `${result.deletedCount} affiliate(s) deleted successfully!` });
+  } catch (error) {
+    console.error("Error deleting affiliates:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
 

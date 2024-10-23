@@ -78,22 +78,22 @@ export default function Footer() {
               Services
             </Text>
             <Stack spacing={1}>
-              <Text as={Link} to="/oncampus">
+              <Text as={Link} to="/services/oncampus">
                 OnCampus
               </Text>
-              <Text as={Link} to="/offcampus">
+              <Text as={Link} to="/services/offcampus">
                 OffCampus
               </Text>
-              <Text as={Link} to="/seminar">
+              <Text as={Link} to="/services/seminar">
                 Seminar
               </Text>
-              <Text as={Link} to="/counselling">
+              <Text as={Link} to="/services/counselling">
                 Counselling
               </Text>
-              <Text as={Link} to="/careercraft">
+              <Text as={Link} to="/services/careercraft">
                 CareerCraft
               </Text>
-              <Text as={Link} to="/workforce">
+              <Text as={Link} to="/services/workforce">
                 Workforce Provider [Staffing Solution]
               </Text>
             </Stack>
@@ -128,6 +128,13 @@ export default function Footer() {
               
               <Text fontWeight="bold" as={Link} to="/contact">
                 Contact Us
+              </Text>
+               
+            </Stack>
+            <Stack spacing={4}>
+              
+              <Text fontWeight="bold" as={Link} to="/affiliate">
+                Affiliate
               </Text>
                
             </Stack>
