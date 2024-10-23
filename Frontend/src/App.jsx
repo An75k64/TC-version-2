@@ -119,13 +119,13 @@ const App = () => {
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/affiliate-login" element={<Login />} />
-                      <Route path="/services" element={<Services />} />
-                      <Route path="/oncampus" element={<OnCampus />} />
-                      <Route path="/offcampus" element={<OffCampus />} />
-                      <Route path="/seminar" element={<Seminar />} />
-                      <Route path="/counselling" element={<Counselling />} />
-                      <Route path="/careercraft" element={<CareerCraft />} />
-                      <Route path="/workforce" element={<Workforce />} />
+                     {/*<Route path="/services" element={<Services />} /> */} 
+                      <Route path="/services/oncampus" element={<OnCampus />} />
+                      <Route path="/services/offcampus" element={<OffCampus />} />
+                      <Route path="/services/seminar" element={<Seminar />} />
+                      <Route path="/services/counselling" element={<Counselling />} />
+                      <Route path="/services/careercraft" element={<CareerCraft />} />
+                      <Route path="/services/workforce" element={<Workforce />} />
                       <Route path="/jobs" element={<Jobs />} />
                       <Route path="/jobs/post-resume" element={<PostResume />} />
                       <Route path="/jobs/current-opening" element={<CurrentOpening />} />

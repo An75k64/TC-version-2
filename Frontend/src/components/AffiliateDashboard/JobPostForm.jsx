@@ -113,6 +113,7 @@ const JobPostForm = () => {
   });
 
   // Handle job delete
+  
   const handleDelete = async (jobId) => {
     try {
       await axios.delete(`http://localhost:5000/api/jobs/${jobId}`);
