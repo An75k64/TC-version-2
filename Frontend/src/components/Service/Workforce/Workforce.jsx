@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import Section3 from "./Section3";
 import Section4 from "./Section4";
-import workforceImage from "../../../assets/images/Workforce/wf.jpg";
+// import workforceImage from "../../../assets/images/Workforce/wf.jpg";
 import './globals.css';
 
 // Create motion components for animation
@@ -98,7 +98,7 @@ export default function OnCampus() {
           >
             <Image
               className="animated-image"
-              src={workforceImage}
+              src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/hero.jpg"
               alt="OnCampus"
               objectFit="cover"
               boxSize={{ base: "100%", md: "100%" }}
@@ -112,7 +112,7 @@ export default function OnCampus() {
            mt={{ base: 5, md: 10 }} // Responsive margin-top
           w="full"
           h={useBreakpointValue({ base: "66vh", md: "60vh", lg: "80vh", xl:"72vh", "2xl": "60vh", "3xl": "55vh" })}
-          backgroundImage="url(https://images.unsplash.com/photo-1686771416282-3888ddaf249b?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)"
+          backgroundImage="url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/sec2.jpeg)"
           backgroundSize="cover"
           backgroundPosition="center center"
           backgroundAttachment="fixed"

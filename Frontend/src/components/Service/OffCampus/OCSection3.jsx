@@ -6,7 +6,7 @@ const Section3 = () => {
     {
       title: "Recruitment Fairs",
       imageUrl:
-        "https://www.wbmdfc.org/public/images/Gallery/MEGA%20JOB%20FAIR/DSC_2127_1582189496.jpg",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/Fairs.jpeg",
       description:
         "We organize targeted job fairs in major cities, bringing together top employers and qualified candidates for face-to-face networking and interviews.",
     },
@@ -20,7 +20,7 @@ const Section3 = () => {
     {
       title: "Virtual Interviews",
       imageUrl:
-        "https://plus.unsplash.com/premium_photo-1666625102659-12565c311855?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTd8fFZJUlRVQUwlMjBJTlRFUlZJRVdTfGVufDB8fDB8fHww",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/interview.jpeg",
       description:
         "Talentconnect offers seamless virtual interview capabilities, allowing job seekers to connect with employers from the comfort of their own homes.",
     },

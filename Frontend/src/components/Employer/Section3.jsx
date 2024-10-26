@@ -1,34 +1,34 @@
 
 import React from "react";
-import { Container, Stack,Flex, Heading, Box, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Container, Stack, Flex, Heading, Box, Text, useBreakpointValue } from "@chakra-ui/react";
 
 const Section3 = () => {
   const cardData = [
     {
       title: "Diverse Talent Pool",
       imageUrl:
-      "https://img.freepik.com/free-photo/civil-engineer-construction-worker-architects-wearing-hardhats-safety-vests-are-working-together-construction-site-building-home-cooperation-teamwork-concept_640221-172.jpg?t=st=1721812038~exp=1721815638~hmac=215bde27aecb48dd9c015541011119d991e18f5420a4027e48f8e166b1ad703c&w=740",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/diverse-pool.jpeg",
       description:
-      "Access a broad range of qualified candidates.",
+        "Access a broad range of qualified candidates.",
     },
     {
       title: "Efficient Hiring:",
       imageUrl:
-      "https://images.unsplash.com/photo-1698047681452-08eba22d0c64?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGpvYiUyMGludGVydmlld3xlbnwwfHwwfHx8MA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/efficient.jpeg",
       description:
         "Leverage technology for quick and effective recruitment.",
     },
     {
       title: "On-Demand Training",
       imageUrl:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGpvYiUyMHRyYWluaW5nfGVufDB8fDB8fHww",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/training.jpeg",
       description:
         "Ensure new hires are job-ready from the start.",
     },
     {
       title: "Employer Branding",
       imageUrl:
-        "https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/branding.jpeg",
       description:
         "Highlight what makes your company a great place to work. Showcase your unique culture, values, and career opportunities to attract top talent and stand out in the job market.",
     },
@@ -36,23 +36,23 @@ const Section3 = () => {
 
   return (
     <Container maxW="100%" bg="gray.100" mt={0} minH={"80vh"}>
-       <Flex justifyContent="center" alignItems="center">
-                <Heading
-                  fontFamily="ClashDisplay"
-                  fontSize={{ base: "xl", md: "2xl", lg: "4xl" }} // Responsive font size
-                  fontWeight="bold"
-                  p="2"
-                  mt={6}
-                  mb={8}
-                >
-                  <Text as="span" color="black">
-                    Our Unique
-                  </Text>
-                  <Text as="span" color="blue.400">
-                    {' '}Offerings
-                  </Text>
-                </Heading>
-              </Flex>
+      <Flex justifyContent="center" alignItems="center">
+        <Heading
+          fontFamily="ClashDisplay"
+          fontSize={{ base: "xl", md: "2xl", lg: "4xl" }} // Responsive font size
+          fontWeight="bold"
+          p="2"
+          mt={6}
+          mb={8}
+        >
+          <Text as="span" color="black">
+            Our Unique
+          </Text>
+          <Text as="span" color="blue.400">
+            {' '}Offerings
+          </Text>
+        </Heading>
+      </Flex>
       <Stack
         direction={useBreakpointValue({ base: "column", md: "row" })}
         justify="space-around"
@@ -115,7 +115,7 @@ const Section3 = () => {
               <Heading fontFamily={"ClashDisplay"} textTransform={"uppercase"} color="blue.400" as="h3" size="md" mb={2}>
                 {card.title} <br /> <br />
               </Heading>
-              <Text text-align= {"justify"}>{card.description}</Text>
+              <Text text-align={"justify"}>{card.description}</Text>
             </Box>
             <Box
               position="relative"
@@ -128,9 +128,9 @@ const Section3 = () => {
               color="white"
               className="titleBox"
               textAlign="center"
-              
+
             >
-              <Heading fontFamily={"ClashDisplay"}  as="h3" size="md">
+              <Heading fontFamily={"ClashDisplay"} as="h3" size="md">
                 {card.title}
               </Heading>
             </Box>

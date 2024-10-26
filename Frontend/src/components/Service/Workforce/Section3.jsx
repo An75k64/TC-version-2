@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Recruitment",
       imageUrl:
-        "https://img.freepik.com/free-photo/brunette-businesswoman-posing_23-2148142728.jpg?t=st=1721811635~exp=1721815235~hmac=6234ed01de02cac969810fd72b664f9cb516ae8323ccb95612df5997be4c0130&w=740",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/Recruitment.jpeg",
       description:
         "Collaborate with companies and recruit qualified candidates for contract, RPO, and permanent positions",
     },
     {
       title: "Staffing",
       imageUrl:
-        "https://img.freepik.com/free-photo/civil-engineer-construction-worker-architects-wearing-hardhats-safety-vests-are-working-together-construction-site-building-home-cooperation-teamwork-concept_640221-172.jpg?t=st=1721812038~exp=1721815638~hmac=215bde27aecb48dd9c015541011119d991e18f5420a4027e48f8e166b1ad703c&w=740",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/staffing.jpeg",
       description:
         "Talent Connect is a staffing firm that provides a personalized, results-driven professional service. Its goal is to match job seekers with appropriate positions.",
     },
     {
       title: "Thorough Candidate Evaluation",
       imageUrl:
-        "https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/Evaluation.jpeg",
       description:
         "Our rigorous screening and evaluation processes are designed to identify candidates who possess the right skills, experience, and potential for your roles. This meticulous approach reduces hiring risks and increases the likelihood of successful long-term placements.",
     },

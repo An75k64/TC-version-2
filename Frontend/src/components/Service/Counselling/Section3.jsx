@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Personalized Guidance",
       imageUrl:
-        "https://images.unsplash.com/photo-1573497491208-6b1acb260507?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/guidance.jpeg",
       description:
         "Our counseling services provide tailored advice and support based on your individual career goals and challenges. By understanding your unique situation, our expert counselors offer personalized strategies that address your specific needs, helping you navigate your career path with clarity and confidence.",
     },
     {
       title: "Professional Development",
       imageUrl:
-        "https://img.freepik.com/free-photo/business-woman-with-tablet-standing-office_1303-25394.jpg?t=st=1721809669~exp=1721813269~hmac=b831ff69c36a9b5a5894c50e39921d1ebf44f2ca38deea0bd3ac784a33e2b73d&w=740",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/professional.jpeg",
       description:
         "Gain access to valuable resources and tools that can enhance your career development. From resume building and interview techniques to networking strategies and personal branding, our counseling sessions equip you with practical skills and knowledge to advance your career and achieve your professional aspirations.",
     },
     {
       title: "Supportive Environment",
       imageUrl:
-        "https://images.unsplash.com/photo-1572021335469-31706a17aaef?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/supportive.jpeg",
       description:
         "Experience a confidential and empathetic space where you can openly discuss your career concerns and ambitions. Our counselors are dedicated to providing a supportive environment that fosters growth and self-discovery, allowing you to explore your options and overcome obstacles with professional guidance.",
     },

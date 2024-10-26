@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 // Array of video URLs
 const videos = [
-  "https://static.vecteezy.com/system/resources/previews/043/623/224/mp4/two-successful-young-businesswoman-shaking-hands-business-meeting-in-office-job-interview-business-career-placement-concept-hr-holding-job-contract-hiring-female-applicant-human-resources-concept-free-video.mp4",
+  "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/hero.mp4",
 ];
 
 export default function Hero() {

@@ -14,7 +14,7 @@ import CCSection3 from "./CCSection3";
 import CCSection4 from "./CCSection4";
 import { motion } from "framer-motion";
 import './globals.css'
-import careerCraftImage from "../../../assets/images/CareerCraft/cc.jpg";
+// import careerCraftImage from "../../../assets/images/CareerCraft/cc.jpg";
 
 // Create motion components for animation
 const MotionBox = motion(Box);
@@ -105,7 +105,7 @@ export default function CareerCraft() {
             >
               <Image
                 className="animated-image"
-                src={careerCraftImage}
+                src='https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/hero.jpg'
                 alt="OnCampus"
                 objectFit="cover"
                 boxSize={{ base: "100%", md: "100%" }}
@@ -121,7 +121,7 @@ export default function CareerCraft() {
           w="full"
           h={useBreakpointValue({ base: "66vh", md: "60vh", lg: "80vh", xl:"74vh", "2xl": "60vh", "3xl": "55vh" })}
           backgroundImage={
-            'url(https://images.pexels.com/photos/3184290/pexels-photo-3184290.jpeg)'
+            'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/sec2.jpeg)'
           }
           backgroundSize="cover"
           backgroundPosition="center center"

@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Partnerships",
       imageUrl:
-        "https://images.unsplash.com/photo-1698047681820-f26b00b6c639?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/Partener.jpeg",
       description:
         "At TalentConnect, we offer seamless on-campus hiring solutions in partnership with universities and colleges, providing comprehensive end-to-end recruitment services. Our tailored approach ensures efficient hiring processes, connecting students directly with top employers. Let us enhance your campus recruitment with our expertise and extensive network.",
     },
     {
       title: "Talent Pipeline",
       imageUrl:
-        "https://images.unsplash.com/photo-1590402494587-44b71d7772f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/Pipeline.jpeg",
       description:
         "At TalentConnect, we provide access to a steady pipeline of pre-screened candidates, ensuring you have a continuous supply of qualified talent. Our rigorous screening process guarantees that only the best candidates are presented, streamlining your hiring process. Rely on our expertise to maintain a robust talent pipeline for your organization's needs.",
     },
     {
       title: "Campus Branding",
       imageUrl:
-        "https://images.unsplash.com/photo-1632988663082-4bac2c1847a0?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/campus.jpeg",
       description:
         "At TalentConnect, we develop detailed strategies to create a strong brand presence on campus, enhancing your visibility and reputation. Our expertise includes showcasing successful campus branding campaigns that have effectively engaged students. Let us help you build a compelling and memorable brand presence within academic communities.",
     },

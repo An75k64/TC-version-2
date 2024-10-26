@@ -14,7 +14,7 @@ import OCSection3 from "./OCSection3";
 import OCSection4 from "./OCSection4";
 import { motion } from "framer-motion";
 import './globals.css';
-import offcampusImage from "../../../assets/images/OffCampus/oc.png";
+// import offcampusImage from "../../../assets/images/OffCampus/oc.png";
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -100,7 +100,7 @@ export default function OffCampus() {
             >
               <Image
                 className="animated-image"
-                src={offcampusImage}
+                src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/hero.png"
                 alt="OffCampus"
                 objectFit="cover"
                 boxSize={{ base: "100%", md: "100%" }}
@@ -115,7 +115,7 @@ export default function OffCampus() {
           w="full"
           h={useBreakpointValue({ base: "66vh", md: "60vh", lg: "80vh", xl:"80vh", "2xl": "60vh", "3xl": "55vh" })}
           backgroundImage={
-            'url(https://images.pexels.com/photos/3184424/pexels-photo-3184424.jpeg)'
+            'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/section2.jpeg)'
           }
           backgroundSize="cover"
           backgroundPosition="center center"

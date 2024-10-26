@@ -47,7 +47,7 @@ export default function CollegeIntro() {
               objectFit={"cover"}
               height="100%"
               src={
-                "https://images.pexels.com/photos/3182762/pexels-photo-3182762.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/vision.jpeg"
               }
             />
           </Box>

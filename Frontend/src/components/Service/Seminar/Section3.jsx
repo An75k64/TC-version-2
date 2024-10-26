@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Resume Building",
       imageUrl:
-        "https://images.unsplash.com/photo-1698047681432-006d2449c631?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/resume.jpeg",
       description:
         "Learn how to optimize your resume to showcase your unique skills, experience, and accomplishments. Our experts will provide personalized feedback to help you stand out to potential employers.",
     },
     {
       title: "Interview Preparation",
       imageUrl:
-        "https://images.unsplash.com/photo-1690264645463-a0aabdad7ca1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/Interview.jpeg",
       description:
         "Master the art of interviewing through interactive mock sessions and coaching on proven techniques. Gain the confidence to articulate your value and make a lasting impression.",
     },
     {
       title: "Personal Branding",
       imageUrl:
-        "https://imageio.forbes.com/specials-images/imageserve/660449096/Build-Your-Personal-Brand/960x0.jpg?format=jpg&width=1440",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/personal-brand.jpeg",
       description:
         "Develop a compelling personal brand that highlights your strengths and differentiates you from the competition. Leverage digital tools and networking strategies to amplify your visibility.",
     },

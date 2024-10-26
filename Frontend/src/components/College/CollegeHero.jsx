@@ -22,7 +22,7 @@ export default function CollegeHero() {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundImage: 'url(https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)',
+          backgroundImage: 'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/College/hero.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           filter: isHovered ? 'none' : 'blur(10px)',

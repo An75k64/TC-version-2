@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Box, Flex, Heading, Text, Button, useColorModeValue, VStack, Container } from '@chakra-ui/react';
-import backgroundImage from '../../assets/images/8c0b275e-06cd-45f5-9ceb-0d58ace2fb1e.jpg'; // Adjust path as needed
+// import backgroundImage from '../../assets/images/8c0b275e-06cd-45f5-9ceb-0d58ace2fb1e.jpg'; // Adjust path as needed
 
 // Confetti function to trigger confetti on page load
 const triggerConfetti = () => {
@@ -42,7 +42,7 @@ const HeroAffiliate = () => {
   return (
     <Box
       position="relative"
-      bgImage={`url(${backgroundImage})`}
+      bgImage={`url(${"https://d24xhk2f9wq8ku.cloudfront.net/assets/Affiliate/affiliate-dashboard-hero.jpg"})`}
       bgSize="cover"  // Cover ensures the image covers the entire area
       bgPosition="center"
       bgRepeat="no-repeat"

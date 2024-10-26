@@ -163,7 +163,7 @@ export default function LoginPage() {
             <Heading fontSize={"4xl"} mb={4}>
               Affiliate Sign In
             </Heading>
-            <Image src={LoginImage} alt="Login Illustration" objectFit="cover" />
+            <Image src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Affiliate/login.svg"} alt="Login Illustration" objectFit="cover" />
           </Stack>
         </Box>
 
