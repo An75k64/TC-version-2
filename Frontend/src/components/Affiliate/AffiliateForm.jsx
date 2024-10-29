@@ -175,7 +175,7 @@ const AffiliateForm = () => {
           right: 0,
           bottom: 0,
           left: 0,
-          backgroundImage: `url('https://www.transparenttextures.com/patterns/white-diamond.png')`,
+         
           opacity: 0.2,
           zIndex: -1,
         }}
