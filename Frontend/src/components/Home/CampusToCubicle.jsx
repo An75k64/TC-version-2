@@ -184,7 +184,7 @@ export default function CampusToCubicle() {
         <Flex flex={1} align={"center"} justifyContent={"center"} p={10} position={"relative"}>
           <AnimatedBox imageSize={imageSize}>
             <AspectRatio ratio={3 / 1.9} width="100%">
-              <Image src={dimg} alt="Campus to Cubicle" objectFit="cover" />
+              <Image src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/cc.jpeg" alt="Campus to Cubicle" objectFit="cover" />
             </AspectRatio>
           </AnimatedBox>
         </Flex>

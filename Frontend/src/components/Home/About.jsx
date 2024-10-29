@@ -81,7 +81,7 @@ export default function About() {
                       border: "2px solid transparent",
                       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                     }}
-                    src={hVideo}
+                    src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/aboutUs.mp4"
                     aria-label="Promotional video for TalentConnect"
                   />
                 </Box>

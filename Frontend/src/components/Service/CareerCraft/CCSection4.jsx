@@ -11,7 +11,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import section4Image from "../../../assets/images/OnCampus/s4.png"; // Adjust the path as needed
+// import section4Image from "../../../assets/images/OnCampus/s4.png"; // Adjust the path as needed
 
 const Section4 = () => {
   return (
@@ -32,7 +32,7 @@ const Section4 = () => {
               alt={"Section 4 Image"}
               objectFit={"cover"}
               height="100%"
-              src={section4Image}
+              src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/s4.png"
             />
             
           </Box>

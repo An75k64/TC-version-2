@@ -7,7 +7,7 @@ const Section3 = () => {
 
       title: "1:1 Mentorship",
       imageUrl:
-        "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVudG9yc2hpcHxlbnwwfHwwfHx8MA%3D%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/mentorship.jpeg",
       description:
         "TalentConnect provides regular sessions, mentees can gain valuable insights, overcome challenges, and accelerate their progress in their personal or professional journey.",
 
@@ -15,14 +15,14 @@ const Section3 = () => {
     {
       title: "Skill Enhancement",
       imageUrl:
-        "https://images.unsplash.com/photo-1613347761513-0f37baebfd20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMxfHxlbmdpbm5lciUyMHdvcmtpbmd8ZW58MHx8MHx8fDA%3D",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/skills.jpeg",
       description:
         "TalentConnect provides courses and certifications in high-demand technical skills and offers advanced certification programs for career advancement and specialization.",
     },
     {
       title: "High-Skilled Mentor",
       imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7OAw1nW0KLSzM8b6otJgqEhxtFyhfWfBhYg&s",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/high-skilled.jpeg",
       description:
         "TalentConnect provides high-paid skilled professional panels which give end-to-end guidance to the candidates.",
     },

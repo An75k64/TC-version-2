@@ -3,35 +3,35 @@ import { Box, Flex, Heading, Text, Image, useBreakpointValue } from '@chakra-ui/
 import Marquee from 'react-marquee-slider';
 
 // Import logos from assets
-import arunEngLogo from '../../assets/images/company logo/arun.png';
-import arkaJainLogo from '../../assets/images/company logo/jgi.jpg';
-import jharkhandITLogo from '../../assets/images/company logo/jis.png';
-import hp from '../../assets/images/company logo/hp.jpg';
-import h from '../../assets/images/company logo/hitachi.jpeg';
-import emv from '../../assets/images/company logo/emversity.jpg';
-import winso from '../../assets/images/company logo/winso.png';
-import cms from '../../assets/images/company logo/cmss.jpg';
-import blue from '../../assets/images/company logo/bluecraft.jpg';
-import ak from '../../assets/images/company logo/ak.jpg';
-import jin from '../../assets/images/company logo/jindal.jpg';
+// import arunEngLogo from '../../assets/images/company logo/arun.png';
+// import arkaJainLogo from '../../assets/images/company logo/jgi.jpg';
+// import jharkhandITLogo from '../../assets/images/company logo/jis.png';
+// import hp from '../../assets/images/company logo/hp.jpg';
+// import h from '../../assets/images/company logo/hitachi.jpeg';
+// import emv from '../../assets/images/company logo/emversity.jpg';
+// import winso from '../../assets/images/company logo/winso.png';
+// import cms from '../../assets/images/company logo/cmss.jpg';
+// import blue from '../../assets/images/company logo/bluecraft.jpg';
+// import ak from '../../assets/images/company logo/ak.jpg';
+// import jin from '../../assets/images/company logo/jindal.jpg';
 
 // List of companies with logos
 const companiesList = [
-  { name: "ARUN ENG & CO", logo: arunEngLogo },
-   { name: "Hitachi Chennai", logo: h },
-  { name: "Arka Jain", logo: arkaJainLogo },
-  { name: "JINDAL ORRISA", logo: jin },
-  { name: "Hitachi Mumbai", logo: h },
-  { name: "Jharkhand IT Solutions", logo: jharkhandITLogo },
-  { name: "Hitachi Payment Services", logo: hp }, 
-  { name: "Emversity", logo: emv },
-  { name: "Blue Craft", logo: blue },
-  { name: "Hitachi North East", logo: h },
-  { name: "Winso Software Pvt Ltd", logo: winso },
-  { name: "Hitachi Jaipur", logo: h },
-  { name: "CMS", logo: cms }, 
-  { name: "A.K ENGINEERING CORPORATION", logo: ak },
-  { name: "Hitachi Assam", logo: h },  
+  { name: "ARUN ENG & CO", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/arun.jpeg" },
+   { name: "Hitachi Chennai", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/hitachi.jpeg" },
+  { name: "Arka Jain", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/jgi.jpeg" },
+  { name: "JINDAL ORRISA", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/jindal.jpeg" },
+  { name: "Hitachi Mumbai", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/hitachi.jpeg" },
+  { name: "Jharkhand IT Solutions", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/jis.jpeg" },
+  { name: "Hitachi Payment Services", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/hp.jpeg" }, 
+  { name: "Emversity", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/emversity.jpeg" },
+  { name: "Blue Craft", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/bluecraft.jpeg" },
+  { name: "Hitachi North East", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/hitachi.jpeg" },
+  { name: "Winso Software Pvt Ltd", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/winso.jpeg" },
+  { name: "Hitachi Jaipur", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/hitachi.jpeg" },
+  { name: "CMS", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/cmss.jpeg" }, 
+  { name: "A.K ENGINEERING CORPORATION", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/ak.jpeg" },
+  { name: "Hitachi Assam", logo: "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/company%20logo/hitachi.jpeg" },  
   { name: "M/s Unique Engineer's" }, // No logo for this company  
 
   

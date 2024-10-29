@@ -12,7 +12,7 @@ import Section3 from "./Section3";
 import Section4 from "./Section4";
 import { motion } from "framer-motion";
 import './globals.css';
-import oncampusImage from "../../../assets/images/OnCampus/oc.png";
+// import oncampusImage from "../../../assets/images/OnCampus/oc.png";
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -96,7 +96,7 @@ export default function OnCampus() {
           >
             <Image
               className="animated-image"
-              src={oncampusImage}
+              src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/hero.png"
               alt="OnCampus"
               objectFit="cover"
               boxSize={{ base: "100%", md: "100%" }}
@@ -111,7 +111,7 @@ export default function OnCampus() {
         w="full"
         h={useBreakpointValue({ base: "100%", md: "74vh", lg: "80vh", xl:"80vh", "2xl": "65vh", "3xl": "55vh" })}
         backgroundImage={
-          'url(https://images.unsplash.com/photo-1562564055-71e051d33c19?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)'
+          'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/sec2.jpeg)'
         }
         backgroundSize="cover"
         backgroundPosition="center center"

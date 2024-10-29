@@ -13,7 +13,7 @@ import Section3 from "./Section3";
 import Section4 from "./Section4";
 import { motion } from "framer-motion";
 import './globals.css';
-import seminarImage from "../../../assets/images/Seminar/s.jpg";
+// import seminarImage from "../../../assets/images/Seminar/s.jpg";
 
 // Create motion components for animation
 const MotionBox = motion(Box);
@@ -99,7 +99,7 @@ export default function OnCampus() {
             >
               <Image
                 className="animated-image"
-                src={seminarImage}
+                src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/hero.jpg"
                 alt="OnCampus"
                 objectFit="cover"
                 boxSize={{ base: "100%", md: "100%" }}
@@ -114,7 +114,7 @@ export default function OnCampus() {
           mt={{ base: 10}}
           w="full"
           h={useBreakpointValue({ base: "66vh", md: "60vh", lg: "80vh", xl:"68vh", "2xl": "60vh", "3xl": "55vh" })}
-          backgroundImage="url(https://images.unsplash.com/photo-1606761568499-6d2451b23c66?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)"
+          backgroundImage="url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/sec2.jpeg)"
           backgroundSize="cover"
           backgroundPosition="center center"
           backgroundAttachment="fixed"

@@ -6,22 +6,22 @@ const CollegeSolutions = () => {
     {
       title: "Expansive Network",
       imageUrl:
-        "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/Network.jpeg",
       description:
         "Connect with numerous top-tier employers seamlessly through our extensive network, bringing a wide range of opportunities directly to you.",
     },
     {
       title: "Comprehensive Training",
       imageUrl:
-        "https://images.pexels.com/photos/5904046/pexels-photo-5904046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      description:
+      "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/traning.jpeg",
+    description:
         "Offer targeted training programs to bridge skill gaps and ensure graduates are prepared with industry-specific skills necessary for their careers.",
     },
     {
       title: "Campus Branding",
       imageUrl:
-        "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      description:
+      "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/Branding.jpeg",
+    description:
         "Develop detailed strategies to create a strong brand presence on campus, enhancing visibility and reputation with successful campaigns.",
     },
   ];

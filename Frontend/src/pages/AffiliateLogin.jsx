@@ -50,11 +50,11 @@ export default function LoginPage() {
     try {
       const response = await axios.post(`${apiUrl}/api/affiliate/login`, formData);
       console.log("Login successful", response.data);
-      
+
       if (response.data.token && response.data.affiliate) {
         // Pass both the token and affiliateId
-        loginAffiliate(response.data.token, response.data.affiliate.id);  
-        
+        loginAffiliate(response.data.token, response.data.affiliate.id);
+
         navigate("/affiliate-dashboard");
       } else {
         setError("Login failed. No token or affiliate data received.");
@@ -77,9 +77,9 @@ export default function LoginPage() {
       bg={useColorModeValue("gray.50", "gray.800")}
       mt={"50"}
     >
-      <Flex w="full" maxW="1200px" mx="auto" direction={{ base: "column", md: "row" }}>
+      <Flex w="full" maxW="1200px" mx="auto" direction={{ base: "column", lg: "row" }}>
         <Box flex="1" p={10}>
-          <Stack spacing={8} mx={"auto"} maxW={"lg"}>
+          <Stack spacing={8} mx={"auto"} maxW={"lg"} >
             <Stack align={"center"} spacing={4}>
               <Flex justify="center" mb={4}>
                 <FaUserFriends
@@ -96,8 +96,9 @@ export default function LoginPage() {
               bg={useColorModeValue("white", "gray.700")}
               boxShadow={"lg"}
               p={8}
+              
             >
-              <Stack spacing={4}>
+              <Stack spacing={4} >
                 <Input
                   type="email"
                   name="email"
@@ -150,14 +151,22 @@ export default function LoginPage() {
             </Box>
           </Stack>
         </Box>
-        <Box flex="1" p={8} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+        <Box
+          flex="1"
+          p={8}
+          display={{ base: "none", lg: "flex" }}
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Stack spacing={4} textAlign="center">
             <Heading fontSize={"4xl"} mb={4}>
               Affiliate Sign In
             </Heading>
-            <Image src={LoginImage} alt="Login Illustration" objectFit="cover" />
+            <Image src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Affiliate/login.svg"} alt="Login Illustration" objectFit="cover" />
           </Stack>
         </Box>
+
       </Flex>
     </Flex>
   );

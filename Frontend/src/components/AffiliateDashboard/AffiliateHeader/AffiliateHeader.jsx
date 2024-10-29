@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Box,
   Flex,
@@ -60,8 +60,9 @@ const AffiliateHeader = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", lg: "start" }} align="center">
-          <Logo />
-
+          <Link to="/company">
+            <Logo />
+          </Link>
           <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>

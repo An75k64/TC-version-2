@@ -12,7 +12,7 @@ import {
   useBreakpointValue
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import affiliateImage from "../../assets/images/1688543157326.png";
+// import affiliateImage from "../../assets/images/1688543157326.png";
 
 const AffiliateHero = () => {
   const navigate = useNavigate();
@@ -124,7 +124,7 @@ const AffiliateHero = () => {
               zIndex="1"
             />
             <Image
-              src={affiliateImage}
+              src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Affiliate/hero.png"}
               alt="Affiliate Marketing"
               borderRadius="20px"
               boxShadow="lg"

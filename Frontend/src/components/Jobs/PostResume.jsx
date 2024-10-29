@@ -23,18 +23,18 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-import AnjaliImage from '../../assets/images/postResume/g1.jpeg';
-import RohitImage from '../../assets/images/postResume/b1.jpeg';
-import PriyaImage from '../../assets/images/postResume/g2.jpeg';
-import AmitImage from '../../assets/images/postResume/b2.jpeg';
-import NehaImage from '../../assets/images/postResume/g3.jpeg';
+// import AnjaliImage from '../../assets/images/postResume/g1.jpeg';
+// import RohitImage from '../../assets/images/postResume/b1.jpeg';
+// import PriyaImage from '../../assets/images/postResume/g2.jpeg';
+// import AmitImage from '../../assets/images/postResume/b2.jpeg';
+// import NehaImage from '../../assets/images/postResume/g3.jpeg';
 
 const avatars = [
-  { name: "Anjali Sharma", url: AnjaliImage },
-  { name: "Rohit Verma", url: RohitImage },
-  { name: "Priya Singh", url: PriyaImage },
-  { name: "Amit Patel", url: AmitImage },
-  { name: "Neha Desai", url: NehaImage },
+  { name: "Anjali Sharma", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/g1.jpeg" },
+  { name: "Rohit Verma", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/b1.jpeg" },
+  { name: "Priya Singh", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/g2.jpeg" },
+  { name: "Amit Patel", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/b2.jpeg" },
+  { name: "Neha Desai", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/g3.jpeg" },
 ];
 
 

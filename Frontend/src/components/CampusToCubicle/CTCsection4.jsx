@@ -41,7 +41,7 @@ const CTCSection4 = () => {
             _hover={{ opacity: 1 }}  // Show overlay on hover
           />
           <Image
-            src="https://media.istockphoto.com/id/1367843837/photo/contemporary-art-collage-group-of-employees-business-people-celebrating-successful-deal.jpg?s=612x612&w=0&k=20&c=W3IxXPuFBlNoVhxdVNcBy0xyFL9wxWT_bzEgRJ8B8JM="
+            src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/bridge.jpeg"
             alt="Section 4 Image"
             objectFit="cover"
             width="100%"

@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Image, Text, useBreakpointValue } from '@ch
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import backgroundImg from '../../assets/images/campustocubicle/col.png'; // Import background image
-import collegeImg from '../../assets/images/campustocubicle/college.jpeg'; // Import right section image
+// import collegeImg from '../../assets/images/campustocubicle/college.jpeg'; // Import right section image
 
 // Motion component for animation
 const MotionBox = motion(Box);
@@ -75,7 +75,7 @@ function OnlineLearningPage() {
                     p={{ base: 6, md: 10 }} // Adjusted padding for responsiveness
                 >
                     <Image
-                        src={collegeImg}  // Use imported right section image
+                        src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/college.jpeg"}  // Use imported right section image
                         alt="College"
                         objectFit="cover"
                         borderRadius={20}

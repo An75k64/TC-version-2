@@ -69,7 +69,7 @@ function OnlineLearningPage() {
                 p={10}
             >
                 <Image
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODJ8fENvbXBhbnklMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                    src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/Company.jpeg"}
                     alt="Company building"
                     objectFit="cover"
                     w="100%"
