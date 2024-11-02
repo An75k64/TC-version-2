@@ -18,8 +18,8 @@ var _require = __webpack_require__(/*! googleapis */ "googleapis"),
 // OAuth2 Client setup
 var CLIENT_ID = "30860311309-06oj8343luvomfv11m8j1q7rtin6j69d.apps.googleusercontent.com";
 var CLIENT_SECRET = "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";
-var REDIRECT_URI = "https://developers.google.com/oauthplayground";
-var REFRESH_TOKEN = "1//04ejCox7epND7CgYIARAAGAQSNwF-L9Irz5IlMl8ZBSJtVl4jP4LUH9OZmHQA_M-9M8EkLW41fOSD2Oqhi3CHIjau5C4EZRPRA5E";
+var REDIRECT_URI = "http://localhost:5000/auth/google/callback";
+var REFRESH_TOKEN = "1//0grm_3tYt-B_bCgYIARAAGBASNwF-L9Irh6w6SjBvpUK12apaVTIRyO1INyJiIoM_WiIGvUQeXIEuTKeL_qojJmej2RzF7_97K-8";
 var oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 oAuth2Client.setCredentials({
   refresh_token: REFRESH_TOKEN
@@ -40,13 +40,18 @@ function _sendMail() {
           return oAuth2Client.getAccessToken();
         case 3:
           accessToken = _context.sent;
-          // Get a new access token
+          if (!(accessToken.token === null)) {
+            _context.next = 7;
+            break;
+          }
+          console.log("Failed to retrieve access token. Reauthorization might be needed.");
+          throw new Error("Failed to retrieve access token.");
+        case 7:
           transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
               type: "OAuth2",
               user: "hr.talentconnect111@gmail.com",
-              // Replace with your Gmail address
               clientId: CLIENT_ID,
               clientSecret: CLIENT_SECRET,
               refreshToken: REFRESH_TOKEN,
@@ -55,27 +60,30 @@ function _sendMail() {
           });
           mailOptions = {
             from: "Admin <hr.talentconnect111@gmail.com>",
-            // Change as needed
             to: to,
             subject: subject,
-            html: htmlContent // Email content
+            html: htmlContent
           };
-          _context.next = 8;
+          _context.next = 11;
           return transporter.sendMail(mailOptions);
-        case 8:
+        case 11:
           result = _context.sent;
           console.log("Email sent: ", result);
           return _context.abrupt("return", result);
-        case 13:
-          _context.prev = 13;
+        case 16:
+          _context.prev = 16;
           _context.t0 = _context["catch"](0);
-          console.error("Error sending email: ", _context.t0);
+          if (_context.t0.code === 401 || _context.t0.response && _context.t0.response.status === 401) {
+            console.error("Access token expired or invalid. Reauthorization may be needed.");
+          } else {
+            console.error("Error sending email: ", _context.t0);
+          }
           throw _context.t0;
-        case 17:
+        case 20:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 13]]);
+    }, _callee, null, [[0, 16]]);
   }));
   return _sendMail.apply(this, arguments);
 }
@@ -677,6 +685,128 @@ exports.deleteAffiliates = /*#__PURE__*/function () {
   }));
   return function (_x13, _x14) {
     return _ref7.apply(this, arguments);
+  };
+}();
+var sendMail = __webpack_require__(/*! ../config/email */ "./config/email.js");
+
+// Forgot Password Function
+exports.forgotPassword = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
+    var email, affiliate, otp, htmlContent;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          email = req.body.email;
+          _context8.prev = 1;
+          _context8.next = 4;
+          return Affiliate.findOne({
+            email: email
+          });
+        case 4:
+          affiliate = _context8.sent;
+          if (affiliate) {
+            _context8.next = 7;
+            break;
+          }
+          return _context8.abrupt("return", res.status(404).json({
+            message: "Email not found"
+          }));
+        case 7:
+          // Generate a 6-digit OTP
+          otp = Math.floor(100000 + Math.random() * 900000).toString();
+          affiliate.otp = otp;
+          affiliate.otpExpiration = Date.now() + 600000; // 10 minutes expiration
+          _context8.next = 12;
+          return affiliate.save();
+        case 12:
+          // Construct the email content
+          htmlContent = "<p>Your OTP for password reset is: <strong>".concat(otp, "</strong>. It will expire in 10 minutes.</p>"); // Send email
+          _context8.next = 15;
+          return sendMail(affiliate.email, "Password Reset OTP", htmlContent);
+        case 15:
+          res.status(200).json({
+            message: "OTP sent to your email"
+          });
+          _context8.next = 22;
+          break;
+        case 18:
+          _context8.prev = 18;
+          _context8.t0 = _context8["catch"](1);
+          console.error(_context8.t0);
+          res.status(500).json({
+            message: "Server error"
+          });
+        case 22:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8, null, [[1, 18]]);
+  }));
+  return function (_x15, _x16) {
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+// Verify OTP and Reset Password Function
+exports.resetPassword = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
+    var _req$body4, email, otp, newPassword, affiliate;
+    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          _req$body4 = req.body, email = _req$body4.email, otp = _req$body4.otp, newPassword = _req$body4.newPassword;
+          _context9.prev = 1;
+          _context9.next = 4;
+          return Affiliate.findOne({
+            email: email
+          });
+        case 4:
+          affiliate = _context9.sent;
+          if (affiliate) {
+            _context9.next = 7;
+            break;
+          }
+          return _context9.abrupt("return", res.status(404).json({
+            message: "Email not found"
+          }));
+        case 7:
+          if (!(affiliate.otp !== otp || affiliate.otpExpiration < Date.now())) {
+            _context9.next = 9;
+            break;
+          }
+          return _context9.abrupt("return", res.status(400).json({
+            message: "Invalid or expired OTP"
+          }));
+        case 9:
+          _context9.next = 11;
+          return bcrypt.hash(newPassword, 10);
+        case 11:
+          affiliate.password = _context9.sent;
+          affiliate.otp = undefined;
+          affiliate.otpExpiration = undefined;
+          _context9.next = 16;
+          return affiliate.save();
+        case 16:
+          res.status(200).json({
+            message: "Password reset successfully"
+          });
+          _context9.next = 23;
+          break;
+        case 19:
+          _context9.prev = 19;
+          _context9.t0 = _context9["catch"](1);
+          console.error(_context9.t0);
+          res.status(500).json({
+            message: "Server error"
+          });
+        case 23:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9, null, [[1, 19]]);
+  }));
+  return function (_x17, _x18) {
+    return _ref9.apply(this, arguments);
   };
 }();
 
@@ -3566,6 +3696,12 @@ var affiliateSchema = new mongoose.Schema({
   designation: {
     type: String,
     required: true
+  },
+  otp: {
+    type: String
+  },
+  otpExpiration: {
+    type: Date
   }
 }, {
   timestamps: true
@@ -4243,7 +4379,9 @@ var _require = __webpack_require__(/*! ../controllers/affiliateController */ "./
   changePassword = _require.changePassword,
   getAffiliateCount = _require.getAffiliateCount,
   deleteAffiliates = _require.deleteAffiliates,
-  getAllAffiliates = _require.getAllAffiliates;
+  getAllAffiliates = _require.getAllAffiliates,
+  forgotPassword = _require.forgotPassword,
+  resetPassword = _require.resetPassword;
 var router = express.Router();
 
 // Route to create a new affiliate
@@ -4266,6 +4404,8 @@ router.get('/', getAllAffiliates);
 
 //Route to delete one or multiple affiliate 
 router["delete"]('/delete', deleteAffiliates);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
 module.exports = router;
 
 /***/ }),

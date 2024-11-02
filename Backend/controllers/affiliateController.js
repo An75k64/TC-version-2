@@ -198,3 +198,62 @@ exports.deleteAffiliates = async (req, res) => {
   }
 };
 
+
+const sendMail = require("../config/email");
+
+// Forgot Password Function
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const affiliate = await Affiliate.findOne({ email });
+    if (!affiliate) {
+      return res.status(404).json({ message: "Email not found" });
+    }
+
+    // Generate a 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    affiliate.otp = otp;
+    affiliate.otpExpiration = Date.now() + 600000; // 10 minutes expiration
+    await affiliate.save();
+
+    // Construct the email content
+    const htmlContent = `<p>Your OTP for password reset is: <strong>${otp}</strong>. It will expire in 10 minutes.</p>`;
+
+    // Send email
+    await sendMail(affiliate.email, "Password Reset OTP", htmlContent);
+
+    res.status(200).json({ message: "OTP sent to your email" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Verify OTP and Reset Password Function
+exports.resetPassword = async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+
+  try {
+    const affiliate = await Affiliate.findOne({ email });
+    if (!affiliate) {
+      return res.status(404).json({ message: "Email not found" });
+    }
+
+    // Verify OTP and check if it's expired
+    if (affiliate.otp !== otp || affiliate.otpExpiration < Date.now()) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    // Update password
+    affiliate.password = await bcrypt.hash(newPassword, 10);
+    affiliate.otp = undefined;
+    affiliate.otpExpiration = undefined;
+    await affiliate.save();
+
+    res.status(200).json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

@@ -9,6 +9,8 @@ const {
   getAffiliateCount,
   deleteAffiliates,
   getAllAffiliates,
+  forgotPassword,
+  resetPassword,
 } = require("../controllers/affiliateController");
 
 const router = express.Router();
@@ -33,5 +35,8 @@ router.get('/', getAllAffiliates);
 
 //Route to delete one or multiple affiliate 
 router.delete('/delete', deleteAffiliates);
+
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
 
 module.exports = router;

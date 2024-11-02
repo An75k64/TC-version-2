@@ -33,6 +33,8 @@ const affiliateSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    otp: { type: String },
+    otpExpiration: { type: Date },
   },
   { timestamps: true }
 );

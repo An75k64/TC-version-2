@@ -20,6 +20,7 @@ const AdminLogin = () => {
   const [message, setMessage] = useState('');
   const [timer, setTimer] = useState(90);
   const [canResend, setCanResend] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -41,47 +42,34 @@ const AdminLogin = () => {
     return () => clearInterval(interval);
   }, [canResend, isForgotPassword]);
 
-  //Handle login
   const handleLogin = async (e) => {
-    console.log(apiUrl);
     e.preventDefault();
     setError('');
+    setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.message || 'Login failed');
-        return;
-      }
-
-      const data = await response.json();
-      login(data.token);
+      const response = await axios.post(`${apiUrl}/api/login`, { username, password });
+      login(response.data.token);
       navigate('/admin/dashboard');
     } catch (error) {
-      console.error('Login error:', error);
-      setError('An unexpected error occurred. Please try again later.');
+      const errorMsg = error.response?.data?.message || 'Login failed';
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
-   // Handle forgot password submission
   const handleForgotPasswordSubmit = async () => {
-    console.log(apiUrl);
+    setLoading(true);
     try {
-      // Automatically send OTP when Forgot Password is clicked
       await axios.post(`${apiUrl}/api/forgot-password`, { username });
       setMessage('The OTP has been sent to the registered Gmail ID.');
       setIsForgotPassword(true);
       setCanResend(false);
-      setTimer(90); // Reset the timer
+      setTimer(90);
     } catch (err) {
       setMessage('Error sending password reset code.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,24 +79,30 @@ const AdminLogin = () => {
       setMessage('Passwords do not match.');
       return;
     }
+    setLoading(true);
     try {
       await axios.post(`${apiUrl}/api/reset-password`, { username, otp, newPassword });
       setMessage('Password has been reset successfully.');
       setIsForgotPassword(false);
     } catch (err) {
       setMessage('Error resetting password.');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleResendCode = async () => {
     if (canResend) {
+      setLoading(true);
       try {
-         await axios.post(`${apiUrl}/api/forgot-password`, { username });
+        await axios.post(`${apiUrl}/api/forgot-password`, { username });
         setMessage('Password reset code resent to your email.');
         setCanResend(false);
-        setTimer(90); // Reset the timer
+        setTimer(90);
       } catch (err) {
         setMessage('Error resending password reset code.');
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -146,6 +140,7 @@ const AdminLogin = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 mb="4"
                 size="lg"
+                isDisabled={loading}
               />
               <InputGroup size="lg">
                 <Input
@@ -154,6 +149,7 @@ const AdminLogin = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   mb="4"
+                  isDisabled={loading}
                 />
                 <InputRightElement>
                   <Button
@@ -170,6 +166,7 @@ const AdminLogin = () => {
                 width="full"
                 mb="4"
                 size="lg"
+                isLoading={loading}
               >
                 Login
               </Button>
@@ -179,13 +176,13 @@ const AdminLogin = () => {
                 size="sm"
                 colorScheme="teal"
                 width="full"
+                isDisabled={loading}
               >
                 Forgot Password?
               </Button>
             </>
           ) : (
             <>
-
               <Input
                 placeholder="Username"
                 type="text"
@@ -193,6 +190,7 @@ const AdminLogin = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 mb="4"
                 size="lg"
+                isDisabled={loading}
               />
               <Input
                 placeholder="Reset Code"
@@ -200,6 +198,7 @@ const AdminLogin = () => {
                 onChange={(e) => setResetCode(e.target.value)}
                 mb="4"
                 size="lg"
+                isDisabled={loading}
               />
               <InputGroup size="lg">
                 <Input
@@ -208,6 +207,7 @@ const AdminLogin = () => {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   mb="4"
+                  isDisabled={loading}
                 />
                 <InputRightElement>
                   <Button
@@ -225,6 +225,7 @@ const AdminLogin = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   mb="4"
+                  isDisabled={loading}
                 />
                 <InputRightElement>
                   <Button
@@ -244,6 +245,7 @@ const AdminLogin = () => {
                 width="full"
                 mb="4"
                 size="lg"
+                isLoading={loading}
               >
                 Reset Password
               </Button>
@@ -251,23 +253,13 @@ const AdminLogin = () => {
                 variant="link"
                 onClick={handleResendCode}
                 colorScheme="teal"
-                isDisabled={!canResend}
+                isDisabled={!canResend || loading}
               >
-                {canResend ? 'Resend Code' : `Resend Code (${Math.floor(timer / 60)}:${timer % 60})`}
+                {canResend ? 'Resend Code' : `Resend Code in ${timer}s`}
               </Button>
             </>
           )}
         </form>
-        {isForgotPassword && (
-          <Button
-            variant="link"
-            onClick={() => setIsForgotPassword(false)}
-            colorScheme="teal"
-            width="full"
-          >
-            Back to Login
-          </Button>
-        )}
       </Box>
     </Flex>
   );
