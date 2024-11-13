@@ -63,6 +63,7 @@ const HeroPage = () => {
             >
                 <video
                     src={videoSrc}  // Lazy-loaded src
+                    poster='https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/poster.webp'
                     muted
                     loop
                     autoPlay
