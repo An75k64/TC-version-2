@@ -96,7 +96,7 @@ export default function OnCampus() {
           >
             <Image
               className="animated-image"
-              src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/hero.png"
+              src="https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/oncampus/hero.webp"
               alt="OnCampus"
               objectFit="cover"
               boxSize={{ base: "100%", md: "100%" }}
@@ -111,7 +111,7 @@ export default function OnCampus() {
         w="full"
         h={useBreakpointValue({ base: "100%", md: "74vh", lg: "80vh", xl:"80vh", "2xl": "65vh", "3xl": "55vh" })}
         backgroundImage={
-          'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/sec2.jpeg)'
+          'url(https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/oncampus/sec2.webp)'
         }
         backgroundSize="cover"
         backgroundPosition="center center"

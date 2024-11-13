@@ -20,7 +20,7 @@ const HeroPage = () => {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setVideoSrc("https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/hero.mp4");  // Set the video src when in view
+                        setVideoSrc("https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/Merged.webm");  // Set the video src when in view
                         observer.unobserve(entry.target);  // Unobserve once loaded
                     }
                 });

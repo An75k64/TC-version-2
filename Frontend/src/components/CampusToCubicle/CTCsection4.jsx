@@ -41,7 +41,7 @@ const CTCSection4 = () => {
             _hover={{ opacity: 1 }}  // Show overlay on hover
           />
           <Image
-            src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/bridge.jpeg"
+            src="https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/bridge.webp"
             alt="Section 4 Image"
             objectFit="cover"
             width="100%"

@@ -6,21 +6,21 @@ const CTCSection3 = () => {
     {
       title: "Connecting Talent",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/talent.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/talent.webp",
       description:
         "Talentconnect is a tech company that bridges the gap between campus and the corporate world, helping job seekers find their dream roles.",
     },
     {
       title: "Empowering Job Seekers",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/empowering.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/empowering.webp",
       description:
         "Through comprehensive training and strategic hiring initiatives, Talent Connect equips candidates with the skills and opportunities to thrive in the job market.", 
     },
     {
       title: "Serving Employers",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/serving.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/serving.webp",
       description:
         "Talentconnect provides a platform for companies to access a diverse pool of talented candidates, streamlining the recruitment process.",
     },

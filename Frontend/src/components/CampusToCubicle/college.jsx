@@ -75,7 +75,7 @@ function OnlineLearningPage() {
                     p={{ base: 6, md: 10 }} // Adjusted padding for responsiveness
                 >
                     <Image
-                        src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/college.jpeg"}  // Use imported right section image
+                        src={"https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/Campus/college.webp"}  // Use imported right section image
                         alt="College"
                         objectFit="cover"
                         borderRadius={20}
