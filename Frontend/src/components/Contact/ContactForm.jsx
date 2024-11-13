@@ -116,7 +116,7 @@ export default function ContactForm() {
                       <HStack>
                         <Button
                           as="a"
-                          href="mailto:us@talentsconnectss.com"
+                          href="mailto:contact-us@talentsconnectss.com"
                           size="md"
                           height="48px"
                           width="300px"
@@ -125,7 +125,7 @@ export default function ContactForm() {
                           _hover={{ border: "2px solid #D5006D" }}
                           leftIcon={<MdEmail color="#D5006D" size="20px" />}
                         >
-                          us@talentsconnectss.com
+                          contact-us@talentsconnectss.com
                         </Button>
                       </HStack>
                       <HStack>
