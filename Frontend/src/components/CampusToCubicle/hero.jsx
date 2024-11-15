@@ -69,7 +69,6 @@ const HeroPage = () => {
                     autoPlay
                     playsInline
                     preload="auto"
-                  //  poster="https://d24xhk2f9wq8ku.cloudfront.net/assets/Campus/hero-poster.jpg"  // Poster image for perceived speed
                     style={{
                         width: '100%',
                         height: '100%',

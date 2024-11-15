@@ -2,7 +2,6 @@ import { Box, Button, Flex, Heading, Image, Text, useBreakpointValue } from '@ch
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import backgroundImg from '../../assets/images/campustocubicle/col.png'; // Import background image
-// import collegeImg from '../../assets/images/campustocubicle/college.jpeg'; // Import right section image
 
 // Motion component for animation
 const MotionBox = motion(Box);

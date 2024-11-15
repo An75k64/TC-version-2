@@ -42,7 +42,6 @@ const CTCSection3 = () => {
         {cardData.map((card, index) => (
           <Box
             key={index}
-            //maxW={{ base: "100%", md: "md" }}
             w={"full"}
             h={"50vh"}
             overflow="hidden"

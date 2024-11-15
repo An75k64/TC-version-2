@@ -13,8 +13,6 @@ export default function About() {
   const isMobile = useBreakpointValue({ base: true, xl: false });
 
   // Responsive sizes
- // const buttonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "md", xl: "md", "2xl": "xl", "3xl": "5xl" });
-  //const paddingX = useBreakpointValue({ base: 3, sm: 4, md: 5, lg: 6, xl: 4, "2xl": 7, "3xl": "14" });
   const paddingY = useBreakpointValue({ base: 3, sm: 4, md: 5, lg: 6, xl: 6, "2xl": 7, "3xl": "14" });
   const headingSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
   const textSize = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl" });
@@ -30,7 +28,6 @@ export default function About() {
 
   return (
     <Stack
-      //minH={"90vh"}
       direction={{ base: "column", lg: "row" }}
       spacing={4}
       maxW={{ base: "100%", lg: "1200px", xl: "1440px", "2xl": "2560px" }}
@@ -104,16 +101,6 @@ export default function About() {
             <Text
               as={"span"}
               position={"relative"}
-              // _after={{
-              //   content: "''",
-              //   width: "full",
-              //   height: useBreakpointValue({ base: "20%", md: "30%", }),
-              //   position: "absolute",
-              //   bottom: 1,
-              //   left: 0,
-              //   bg: "blue.400",
-              //   zIndex: -1,
-              // }}
             >
               About Us
             </Text>
