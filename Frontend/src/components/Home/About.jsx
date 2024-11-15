@@ -31,7 +31,7 @@ export default function About() {
   return (
     <Stack
       //minH={"90vh"}
-      direction={{ base: "column", md: "row" }}
+      direction={{ base: "column", lg: "row" }}
       spacing={4}
       maxW={{ base: "100%", lg: "1200px", xl: "1440px", "2xl": "2560px" }}
       mx={"auto"}
@@ -39,7 +39,10 @@ export default function About() {
       py={pscreenY}
       position={"relative"}
       overflow={"hidden"}
-      bgColor={"#BEE3F8"}
+      backgroundImage={"https://i.postimg.cc/PrnYZxm9/Component-3.png"}
+      bgSize={"125%"}
+      backgroundRepeat={"no-repeat"}
+      backgroundColor={"white"}
       zIndex={1}
     >
       {/* Video for Desktop and Larger Screens */}
@@ -101,16 +104,16 @@ export default function About() {
             <Text
               as={"span"}
               position={"relative"}
-              _after={{
-                content: "''",
-                width: "full",
-                height: useBreakpointValue({ base: "20%", md: "30%", }),
-                position: "absolute",
-                bottom: 1,
-                left: 0,
-                bg: "blue.400",
-                zIndex: -1,
-              }}
+              // _after={{
+              //   content: "''",
+              //   width: "full",
+              //   height: useBreakpointValue({ base: "20%", md: "30%", }),
+              //   position: "absolute",
+              //   bottom: 1,
+              //   left: 0,
+              //   bg: "blue.400",
+              //   zIndex: -1,
+              // }}
             >
               About Us
             </Text>

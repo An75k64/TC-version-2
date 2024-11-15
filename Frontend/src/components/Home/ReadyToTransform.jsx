@@ -23,7 +23,7 @@ export default function ReadyToTransform() {
   return (
     <Box
       id="ready-to-transform"
-      bg={"#BEE3F8"}
+      bg={"white"}
       p={pY}
       borderRadius="lg"
       boxShadow="lg"
@@ -65,8 +65,8 @@ export default function ReadyToTransform() {
             as={RouterLink}
             to="/jobs/post-resume"
             rounded={"full"}
-            color={"teal"}
-            bg={"white"}
+            color={"white"}
+            bg={"teal"}
             px={paddingX}
             py={paddingY}
             fontSize={buttonSizes}
@@ -79,7 +79,7 @@ export default function ReadyToTransform() {
             to="/jobs/current-opening"
             rounded={"full"}
             color={"teal"}
-            bg={"white"}
+            bg={"gray.200"}
             px={paddingX}
             py={paddingY} 
             fontSize={buttonSizes}

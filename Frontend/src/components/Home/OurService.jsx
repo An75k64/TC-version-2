@@ -61,8 +61,10 @@ const Card = ({ heading, description, icon, link }) => {
       _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      border="3px solid #95D6D0"
     >
-      <Flex direction="column" justify="space-between" h="100%">
+      <Flex direction="column" justify="space-between" h="100%" >
+          
         <Stack align="center" spacing={4}>
           <Flex
             w={20} h={20}
@@ -84,7 +86,7 @@ const Card = ({ heading, description, icon, link }) => {
             </Flex>
           </Flex>
           <Box textAlign="center">
-            <Heading size={headingSize} color="#7877e6ff">
+            <Heading size={headingSize} color="black">
               {heading}
             </Heading>
             <Text mt={2} fontSize={textSize} color="gray.700">
@@ -95,10 +97,12 @@ const Card = ({ heading, description, icon, link }) => {
         <Box textAlign="center" mt={4}>
           <Button 
             variant="link"
-            fontWeight={700}
+            fontWeight={500}
             size="md"
             fontSize={textSize}
-            color="blue.500"
+            color="teal"
+            border="2px solid #95D6D0"
+            padding="6px"
           >
             Learn more
           </Button>
@@ -114,7 +118,7 @@ export default function OurServices() {
   const pscreenY = useBreakpointValue({base: 10, sm: 10, md: 10, lg: 12, xl: 8, "2xl": 14, "3xl": 30}); 
 
   return (
-    <Box id="our-services" bgColor="#BEE3F8" py={pscreenY} px={pScreenX}>
+    <Box id="our-services" bgColor="white" py={pscreenY} px={pScreenX}>
       <Flex justifyContent="center" alignItems="center" mb={{base:10, xl:20}}>
         <Heading
           fontSize={headingFontSize}

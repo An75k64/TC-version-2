@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { Box, SimpleGrid, Icon, Text, Stack, Flex, keyframes, useBreakpointValue, } from "@chakra-ui/react";
+import { Box, SimpleGrid, Icon, Text, Stack, Flex, keyframes, useBreakpointValue } from "@chakra-ui/react";
 import { FcReadingEbook, FcIdea, FcGraduationCap } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const rotate = keyframes`
 `;
 
 // Array of colors excluding yellow
-const colors = [ "green.400", "red.400", "purple.400", "teal.400", "orange.400", "pink.400"];
+const colors = ["green.400", "red.400", "purple.400", "white", "orange.400", "pink.400"];
 
 const getRandomColor = () => {
   const randomIndex = Math.floor(Math.random() * colors.length);
@@ -25,29 +25,30 @@ const Feature = ({ title, text, icon, link }) => {
   const randomBgColor = getRandomColor(); // Generate random color for icon background
 
   const headingSize = useBreakpointValue({ base: "md", sm: "lg", md: "lg", lg: "xl", xl: "xl", "2xl": "2xl", "3xl": "5xl" });
-  const textSize = useBreakpointValue   ({ base: "sm", sm: "sm", md: "sm",   lg: "lg", xl: "lg", "2xl": "xl", "3xl": "4xl"  });
-
+  const textSize = useBreakpointValue({ base: "sm", sm: "sm", md: "sm", lg: "lg", xl: "lg", "2xl": "xl", "3xl": "4xl" });
 
   return (
     <Link to={link} style={{ textDecoration: 'none' }}>
       <Stack
         align="center"
-        bg="white"
+        bg="#95D6D0"
         boxShadow="md"
         borderRadius="xl"
         p={6}
         w="100%"
         h="100%"
+        border="2px solid white"
         transition="transform 0.3s, box-shadow 0.3s"
         _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        position="relative"
       >
-        {/* Rotating circle around the icon */}
         <Flex
           w={20} h={20}
           align="center" justify="center"
-          mb={4}
+          position="absolute"
+          top="-10" 
           borderRadius="full"
           borderWidth="4px"
           borderColor={isHovered ? "blue.400" : "transparent"}
@@ -63,10 +64,10 @@ const Feature = ({ title, text, icon, link }) => {
             {icon}
           </Flex>
         </Flex>
-        <Text fontWeight={700} textAlign="center" fontSize={headingSize}>
+        <Text fontWeight={700} textAlign="center" fontSize={headingSize} mt={12} mb={8}>
           {title}
         </Text>
-        <Text color={"black"} textAlign="center" fontSize={textSize}>
+        <Text color={"white"} textAlign="center" fontWeight={400} fontSize={textSize}>
           {text}
         </Text>
       </Stack>
@@ -75,43 +76,39 @@ const Feature = ({ title, text, icon, link }) => {
 };
 
 export default function WhyChooseTalentConnect() {
-  
   const headingFontSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
-  const textFontSize = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl"  });
-  const pScreenX = useBreakpointValue({base: 3, sm: 4, md: 4, lg: 12, xl: 6, "2xl": 7, "3xl": 14}); 
-  const pscreenY = useBreakpointValue({base: 10, sm: 10, md: 12, lg: 12, xl: 12, "2xl": 14, "3xl": 40}); 
+  const textFontSize = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl" });
+  const pScreenX = useBreakpointValue({ base: 3, sm: 4, md: 4, lg: 12, xl: 6, "2xl": 7, "3xl": 14 });
+  const pscreenY = useBreakpointValue({ base: 10, sm: 10, md: 12, lg: 12, xl: 12, "2xl": 14, "3xl": 40 });
 
   return (
-    <Box p={pscreenY} bg="blue.100" px={pScreenX} >
-       <Flex justifyContent="center" alignItems="center"  direction={{base:"column", lg:"row"}} >
-          <Text
-            fontSize={headingFontSize}
-            fontWeight={700}
-           
-            mb={{lg:"6"}}
-            color="black"
-            
-          >
-            Why Choose
-          </Text>
-          <Text
-            fontSize={headingFontSize}
-            fontWeight={700}
-            
-            mb={6}
-            color="blue.400"
-            ml={{base:"2","3xl":"8"}}  
-          >
-            TalentConnect?
-          </Text>
-        </Flex>
+    <Box p={pscreenY} bg="#95D6D0" px={pScreenX}>
+      <Flex justifyContent="center" alignItems="center" direction={{ base: "column", lg: "row" }}>
+        <Text
+          fontSize={headingFontSize}
+          fontWeight={700}
+          mb={{ lg: "6" }}
+          color="black"
+        >
+          Why Choose
+        </Text>
+        <Text
+          fontSize={headingFontSize}
+          fontWeight={700}
+          mb={6}
+          color="white"
+          ml={{ base: "2", "3xl": "8" }}
+        >
+          TalentConnect?
+        </Text>
+      </Flex>
       <Text
         fontSize={textFontSize}
         color={"black"}
         mb={10}
         textAlign="center"
       >
-        We offer seamless campus-to-cubicle programs, innovative recruitment solutions and personalized career services 
+        We offer seamless campus-to-cubicle programs, innovative recruitment solutions, and personalized career services
         to meet your unique needs.
       </Text>
       <SimpleGrid columns={{ base: 1, xl: 3 }} spacing={8}>

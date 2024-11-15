@@ -43,7 +43,7 @@ const Companies = () => {
   const pscreenY = useBreakpointValue({ base: 5, sm: 10, md: 10, lg: 10, xl: 12, "2xl": 14, "3xl": 40 });
 
   return (
-    <Box textAlign="center" py={pscreenY}>
+    <Box textAlign="center" py={pscreenY} bgColor={"white"}>
       <Flex justifyContent="center" alignItems="center" direction={{ base: "column", xl: "row" }}>
         <Heading as="h4" size="xl" p={{ base: "2", lg: "4", "3xl": "8" }}
           fontSize={headingFontSize}
