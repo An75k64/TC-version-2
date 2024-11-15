@@ -24,10 +24,11 @@ const HeroPage = () => {
             position="relative"
             height="90vh"
             color="white"
+            bg={"black"}
             py={{ base: 32, md: 20, lg: 28 }}
             px={paddingX}
         >
-            <MotionBox position="absolute" top={0} left={0} width="100%" height="100%" zIndex={-1}>
+            <MotionBox position="absolute" top={0} left={0} width="100%" height="100%" zIndex={0}>
                 <video
                     ref={videoRef}
                     muted
@@ -43,7 +44,7 @@ const HeroPage = () => {
                 />
             </MotionBox>
 
-            <VStack spacing={{ base: 6, lg: 8 }} textAlign="center" zIndex={1}>
+            <VStack spacing={{ base: 6, lg: 8 }} textAlign="center">
                 <MotionHeading
                     as="h1"
                     size={useBreakpointValue({ base: "2xl", lg: "3xl" })}
@@ -53,6 +54,7 @@ const HeroPage = () => {
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
+                    zIndex={10}
                 >
                     CampusToCubicle:
                     <Text color="blue.200">Partnering for Future Success</Text>
@@ -62,6 +64,7 @@ const HeroPage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1.2 }}
+                    zIndex={10}
                 >
                    TalentConnect bridges the campus-to-cubicle gap by aligning company needs with college engagement for efficient recruitment and tailored training for new hires..
                 </MotionText>
