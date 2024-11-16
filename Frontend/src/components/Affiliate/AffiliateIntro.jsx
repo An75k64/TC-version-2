@@ -29,11 +29,11 @@ const AffiliateIntro = () => {
     <Box
       as="section"
       w="full"
-      h={useBreakpointValue({base:"250vh", lg:"100vh"})}
+      h={useBreakpointValue({base:"280vh", lg:"120vh", xl:"100vh"})}
       position="relative"
       overflow="hidden"
       zIndex={2}
-      mt={useBreakpointValue({base:'-10', xl: '-25vh' })}
+      mt={{ base: '-10vh', lg: '-20vh', xl:"-25vh" }}
     >
       {/* Background Image */}
       <Box
@@ -41,11 +41,11 @@ const AffiliateIntro = () => {
         top="0"
         left="0"
         w="full"
-        h={useBreakpointValue({base:'100%', lg:'100%'})}
+        h="full"
         bgImage="url('https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/why.webp')"
-        bgSize={useBreakpointValue({ base: 'contain', xl: 'cover' })}
+        bgSize="cover"
         bgRepeat="no-repeat"
-        //bgPosition="center"
+        bgPosition={useBreakpointValue({base:"center", xl:"undefined"})}
         zIndex={1}
       />
 
@@ -57,19 +57,15 @@ const AffiliateIntro = () => {
         justifyContent="center"
         w="full"
         h="full"
-        p={useBreakpointValue({ base: 5, md: 10 })}
+        p={useBreakpointValue({ base: 4, md: 10 })}
         zIndex={2}
         position="relative"
-        mt={useBreakpointValue({ '2xl': '-20', '3xl': '-40' })}
       >
-        <Box textAlign="center" maxW={{ base: '90%', lg: '70%', '3xl': '90%' }} mx="auto">
+        {/* Title */}
+        <Box textAlign="center" maxW="80%" mx="auto">
           <Heading
             fontSize={useBreakpointValue({
-              base: '3xl',
-              md: '4xl',
-              lg: '5xl',
-              xl: '6xl',
-              '3xl': '7xl',
+               base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "6xl", "2xl": "6xl", "3xl": "9xl"
             })}
             fontWeight="bold"
             color="white"
@@ -83,8 +79,8 @@ const AffiliateIntro = () => {
             </Text>
           </Heading>
           <Text
-            mt={useBreakpointValue({ base: '4', '2xl': '8', '3xl': '10' })}
-            fontSize={useBreakpointValue({ base: 'md', lg: 'lg', '3xl': '5xl' })}
+            mt={4}
+            fontSize={useBreakpointValue({ base: "sm", sm: "sm", md: "sm", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "6xl" })}
             color="black"
             fontWeight="medium"
             textAlign="center"
@@ -98,15 +94,14 @@ const AffiliateIntro = () => {
           display="grid"
           gridTemplateColumns={{
             base: '1fr',
-            md: '1fr',
             lg: 'repeat(2, 1fr)',
-            xl: 'repeat(4,1fr)',
+            xl: 'repeat(4, 1fr)',
           }}
-          gap={6}
-          mt={useBreakpointValue({ base: '10', '2xl': '20', '3xl': '40' })}
+          gap={useBreakpointValue({base:"12", md:"12", lg:"12", xl:"6"})}
+          mt={useBreakpointValue({base:"20", xl:"10" , "3xl":"40"})}
           w="full"
           maxW="90%"
-          px={useBreakpointValue({ base: 4, lg: 8 })}
+          px={4}
         >
           {cards.map((card, index) => (
             <Box
@@ -115,13 +110,12 @@ const AffiliateIntro = () => {
               borderWidth="2px"
               borderColor="white"
               borderRadius="lg"
-              p={useBreakpointValue({ base: 4, lg: 6 })}
+              p={6}
               pt={14}
               display="flex"
               flexDirection="column"
               alignItems="center"
               textAlign="center"
-              h={useBreakpointValue({ base: 'auto', '3xl': '15vh' })}
               zIndex={3}
             >
               <Box
@@ -136,14 +130,14 @@ const AffiliateIntro = () => {
                 <Image src={card.icon} alt={card.heading} boxSize="50px" />
               </Box>
               <Heading
-                fontSize={useBreakpointValue({ base: 'lg', lg: 'xl' })}
+                fontSize={useBreakpointValue({ base: 'lg', md: 'xl' })}
                 color="black"
                 mb={2}
               >
                 {card.heading}
               </Heading>
               <Text
-                fontSize={useBreakpointValue({ base: 'sm', lg: 'md' })}
+                fontSize={useBreakpointValue({ base: 'sm', md: 'md' })}
                 color="white"
                 fontWeight="bold"
               >
