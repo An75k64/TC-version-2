@@ -1,150 +1,94 @@
-import React from "react";
-import {
-  Box,
-  Heading,
-  Text,
-  Button,
-  VStack,
-  Container,
-  HStack,
-  Image,
-  Stack,
-  useBreakpointValue
-} from "@chakra-ui/react";
+import React from 'react';
+import { Box, Flex, Heading, Text, Button, Image, useBreakpointValue } from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
-// import affiliateImage from "../../assets/images/1688543157326.png";
 
 const AffiliateHero = () => {
   const navigate = useNavigate();
 
   const handleSignInRedirect = () => {
-    navigate("/affiliate-login"); // Change this path to match your Affiliate Sign In route
+    navigate("/affiliate-login");
   };
 
-  return (
-    <Box
-      color="blue.400"
-      py={useBreakpointValue({ base: 20, md: 20, lg: 20 })}
-      px={useBreakpointValue({ base: 5, md: 5, lg: 10 })}
-      position="relative"
-      overflow="hidden"
-    >
-      <Container maxW="container.xl">
-        <Stack
-          direction={{ base: "column", lg: "row" }}
-          spacing={10}
-          align="center"
-        >
-          <VStack spacing={8} align="start" maxW="lg">
-            <Heading
-              as="h1"
-              size={{ base: "xl", lg: 'xl', xl: "2xl" }}
-              fontFamily={"ClashDisplay"}
-              textAlign={{ base: "center", lg: "left" }}
-            >
-              Empower Careers Together
-            </Heading>
-            <Text
-              fontSize={{ base: "md", md: "lg", lg: "lg", xl: 'xl' }}
-              textColor="black"
-              textAlign={{ base: "center", lg: "left" }}
-            >
-              Join our affiliate program and become a part of the TalentConnect
-              network. As an affiliate, you can help us reach more job seekers
-              and employers, expanding our impact and creating more
-              opportunities for success.
-            </Text>
-            <HStack
-              spacing={4}
-              pl={useBreakpointValue({ base: 5, sm: 24, lg: 0 })}
-              justifyContent={{ base: "center", lg: "flex-start" }}
-            >
-              <Button
-                size={useBreakpointValue({ base: "md", lg: "md", xl: "lg" })}
-                bg="blue.400"
-                rounded="full"
-                color="white"
-                _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
-                onClick={handleSignInRedirect}
-              >
-                Post a Job
-              </Button>
-              {/* <Button
-                size={{ base: "md", lg: "lg" }}
-                bg="gray.300"
-                rounded="full"
-                _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
-                onClick={handleSignInRedirect}
-              >
-                Login
-              </Button> */}
-            </HStack>
-          </VStack>
+  // Use different background images based on the screen size
+  const bgImage = useBreakpointValue({
+    base: "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/HeroSection-Mobile.webp",
+    lg: "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/HeroSection-Tab.webp",
+  });
 
-          <Box
-            position="relative"
-            w={{ base: "100%", lg: "100%", xl: "100%" }}
-            mt={{ base: 10, lg: 0 }}
-            ml={{ base: 0, lg: 20, xl: 40 }}
-            display="flex"
-            justifyContent={{ base: "center", lg: "flex-end" }}
+  // Responsive font sizes
+  const headingSize = useBreakpointValue({
+    base: "2xl", sm: "3xl", md: "4xl", lg: "4xl", xl: "6xl", "2xl": "6xl", "3xl": "9xl"
+  });
+
+  const textSize = useBreakpointValue({
+    base: "sm", sm: "sm", md: "sm", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "6xl"
+  });
+
+  return (
+    <Box as="header" w="full" h={useBreakpointValue({ base: "150vh", lg: "100vh", xl:"125vh" })} position="relative" zIndex={1}>
+      {/* Background Image */}
+      <Image
+        loading="lazy"
+        src={bgImage}
+        alt="Illustration of people working together"
+        objectFit={useBreakpointValue({ base: "cover", lg: "fit", xl:"cover" })}
+        w="100%"
+        h="100%"
+        position="absolute"
+        top="0"
+        left="0"
+        zIndex={1} // Ensure it's behind content in AffiliateIntro
+      />
+
+      {/* Content */}
+      <Flex
+        direction="column"
+        align={useBreakpointValue({ base: "center", lg: "flex-start" })}
+        justify="center"
+        zIndex={2}
+        position="relative"
+        p={useBreakpointValue({ base: 4, md: 8 })}
+        color="white"
+        height="100%"
+        textAlign={useBreakpointValue({ base: "center", lg: "left" })}
+      >
+        <Box w="full" maxW={{ base: "90%", md: "90%", lg: "50%" }} mt={useBreakpointValue({ base: -80, md: -60 , lg:0,xl:-40 , "3xl": -80})}
+            paddingLeft={useBreakpointValue({"2xl":10 , "3xl":20})}
+        >
+          <Heading
+            as="h1"
+            fontSize={headingSize}
+            fontWeight="bold"
+            lineHeight="1.2"
+            color="blue.500"
+            mb={4}
           >
-            {/* Bubble animation */}
-            <Box
-              position="absolute"
-              top="-10px"
-              right="-10px"
-              w="60px"
-              h="50px"
-              bg="green.300"
-              borderRadius="full"
-              animation="bubble 5s infinite"
-              zIndex="1"
-            />
-            <Box
-              position="absolute"
-              top="50%"
-              left="-20px"
-              w="60px"
-              h="60px"
-              bg="yellow.400"
-              borderRadius="full"
-              animation="bubble 7s infinite"
-              zIndex="1"
-            />
-            <Box
-              position="absolute"
-              bottom="-30px"
-              right="30%"
-              w="90px"
-              h="90px"
-              bg="blue.300"
-              borderRadius="full"
-              animation="bubble 9s infinite"
-              zIndex="1"
-            />
-            <Image
-              src={"https://d24xhk2f9wq8ku.cloudfront.net/assets/Affiliate/hero.png"}
-              alt="Affiliate Marketing"
-              borderRadius="20px"
-              boxShadow="lg"
-              zIndex="2"
-              position="relative"
-              w={{ base: "90%", md: "80%", lg: "100%", xl: "100%" }} // Responsive width for image
-            />
-          </Box>
-        </Stack>
-      </Container>
-      {/* Keyframes for bubble animation */}
-      <style>
-        {`
-          @keyframes bubble {
-            0% { transform: scale(1) translateY(0); opacity: 1; }
-            50% { transform: scale(1.5) translateY(-10px); opacity: 0.7; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-          }
-        `}
-      </style>
+            <Box as="span" color="black" display="block">
+              Empower
+            </Box>
+            Careers Together
+          </Heading>
+          <Text fontSize={textSize} lineHeight="1.5" color="black" mb={6}>
+            Join our affiliate program and become a part of the TalentConnect
+            network. As an affiliate, you can help us reach more job seekers
+            and employers, expanding our impact and creating more
+            opportunities for success.
+          </Text>
+          <Button
+            px={useBreakpointValue({base:"8", "3xl": "16"})}
+            py={useBreakpointValue({base:"6","3xl":"16"})}
+            fontSize={useBreakpointValue({base:"xl","3xl":"5xl"})}
+            colorScheme="blue"
+            bg="blue.500"
+            color="white"
+            rounded="full"
+            _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
+            onClick={handleSignInRedirect}
+          >
+            Post a Job
+          </Button>
+        </Box>
+      </Flex>
     </Box>
   );
 };

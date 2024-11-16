@@ -83,7 +83,7 @@ export default function CampusToCubicle() {
   return (
     <Stack
       //minH={"90vh"}
-      direction={{ base: "column", md: "row" }}
+      direction={{ base: "column", lg: "row" }}
       spacing={4}
       maxW={{ base: "100%", lg: "1200px", xl: "1440px", "2xl": "2560px", "3xl": "100%" }}
       mx={"auto"}
@@ -105,18 +105,9 @@ export default function CampusToCubicle() {
             fontSize={headingSize}
             mb={10}
             display={"flex"}
+            textAlign={{ base: "center", lg: "left" }} // Center for mobile
           >
             <Text as={"span"} position={"relative"}
-              // _after={{
-              //   content: "''",
-              //   width: "full",
-              //   height: useBreakpointValue({ base: "20%", md: "30%" }),
-              //   position: "absolute",
-              //   bottom: 1,
-              //   left: 0,
-              //   bg: "blue.400",
-              //   zIndex: -1,
-              // }}
               color={"white"}
             >
               Campus To

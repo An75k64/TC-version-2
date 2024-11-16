@@ -1,125 +1,158 @@
 import React from 'react';
-import { Box, Heading, Text, VStack, Container, Flex, Icon, Badge } from '@chakra-ui/react';
-import { FaUserPlus, FaDollarSign, FaHandshake, FaChartLine } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-import { chakra } from '@chakra-ui/react';
-
-const MotionBox = chakra(motion.div); 
-
-const steps = [
-  {
-    number: "1",
-    title: "Sign Up",
-    description: "Join TalentConnect's Affiliate Program by completing the registration.",
-    icon: FaUserPlus,
-  },
-  {
-    number: "2",
-    title: "Start Referring",
-    description: "Refer candidates to start earning rewards for successful placements.",
-    icon: FaHandshake,
-  },
-  {
-    number: "3",
-    title: "Earn Commission",
-    description: "Get up to 20% commission on each successful placement you facilitate.",
-    icon: FaDollarSign,
-  },
-  {
-    number: "4",
-    title: "Track Progress",
-    description: "Track your referrals and commissions in your personal dashboard.",
-    icon: FaChartLine,
-  },
-];
+import { Box, Heading, Text, Image, useBreakpointValue } from '@chakra-ui/react';
 
 const AffiliateIntro = () => {
+  const cards = [
+    {
+      icon: 'https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/sign.webp',
+      heading: 'Sign Up',
+      subtext: 'Join TalentConnect’s Affiliate Program by completing the registration.',
+    },
+    {
+      icon: 'https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/ref.webp',
+      heading: 'Start Referring',
+      subtext: 'Refer candidates to start earning rewards for successful placements.',
+    },
+    {
+      icon: 'https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/er.webp',
+      heading: 'Earn Commission',
+      subtext: 'Get up to 20% commission on each successful placement you facilitate.',
+    },
+    {
+      icon: 'https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/tr.webp',
+      heading: 'Track Progress',
+      subtext: 'Track your referrals and commissions in your personal dashboard.',
+    },
+  ];
+
   return (
     <Box
-      bg="white"
-      py={{ base: 10, md: 20 }}
-      px={{ base: 5, md: 10 }}
+      as="section"
+      w="full"
+      h={useBreakpointValue({base:"250vh", lg:"100vh"})}
       position="relative"
       overflow="hidden"
+      zIndex={2}
+      mt={useBreakpointValue({base:'-10', xl: '-25vh' })}
     >
-      <Container maxW="container.xl">
-        {/* Split Layout */}
-        <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
-          {/* Left Side: Heading and Description */}
-          <VStack spacing={6} align={{ base: 'center', md: 'flex-start' }} w={{ base: '100%', md: '45%' }}>
-            <Heading
-              as="h1"
-              size={{ base: "2xl", md: '3xl' }}
-              fontFamily="ClashDisplay"
-              bgGradient="linear(to-r, purple.500, blue.500)"
-              bgClip="text"
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              Why Join TalentConnect's Affiliate Program?
-            </Heading>
-            <Text
-              fontSize={{ base: "lg", md: "xl" }}
-              textAlign={{ base: 'center', md: 'left' }}
-              color="gray.700"
-            >
-              Leverage your network, access exclusive tools, and earn rewards by connecting top-tier talent with the right opportunities.
+      {/* Background Image */}
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        w="full"
+        h={useBreakpointValue({base:'100%', lg:'100%'})}
+        bgImage="url('https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/newAffiliate/why.webp')"
+        bgSize={useBreakpointValue({ base: 'contain', xl: 'cover' })}
+        bgRepeat="no-repeat"
+        //bgPosition="center"
+        zIndex={1}
+      />
+
+      {/* Content */}
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        w="full"
+        h="full"
+        p={useBreakpointValue({ base: 5, md: 10 })}
+        zIndex={2}
+        position="relative"
+        mt={useBreakpointValue({ '2xl': '-20', '3xl': '-40' })}
+      >
+        <Box textAlign="center" maxW={{ base: '90%', lg: '70%', '3xl': '90%' }} mx="auto">
+          <Heading
+            fontSize={useBreakpointValue({
+              base: '3xl',
+              md: '4xl',
+              lg: '5xl',
+              xl: '6xl',
+              '3xl': '7xl',
+            })}
+            fontWeight="bold"
+            color="white"
+          >
+            <Text as="span" color="black">
+              Why Join TalentConnect’s
             </Text>
-          </VStack>
+            <br />
+            <Text as="span" color="white">
+              Affiliate Program?
+            </Text>
+          </Heading>
+          <Text
+            mt={useBreakpointValue({ base: '4', '2xl': '8', '3xl': '10' })}
+            fontSize={useBreakpointValue({ base: 'md', lg: 'lg', '3xl': '5xl' })}
+            color="black"
+            fontWeight="medium"
+            textAlign="center"
+          >
+            Leverage your network, access exclusive tools, and earn rewards by connecting top-tier talent with the right opportunities.
+          </Text>
+        </Box>
 
-          {/* Right Side: Step Cards */}
-          <Flex direction={{ base: 'column', md: 'row' }} wrap="wrap" justify="space-between" w={{ base: '100%', md: '50%' }} mt={{ base: 8, md: 0 }}>
-            {steps.map((step) => (
-              <MotionBox
-                key={step.number}
-                bg="gray.50"
-                p={8}
-                borderRadius="lg"
-                boxShadow="lg"
-                mb={8}
-                w={{ base: '100%', md: '48%' }}
-                whileHover={{ scale: 1.05, boxShadow: 'xl' }}
-                transition="0.3s"
-                position="relative"
-                cursor={'pointer'}
+        {/* Cards Section */}
+        <Box
+          display="grid"
+          gridTemplateColumns={{
+            base: '1fr',
+            md: '1fr',
+            lg: 'repeat(2, 1fr)',
+            xl: 'repeat(4,1fr)',
+          }}
+          gap={6}
+          mt={useBreakpointValue({ base: '10', '2xl': '20', '3xl': '40' })}
+          w="full"
+          maxW="90%"
+          px={useBreakpointValue({ base: 4, lg: 8 })}
+        >
+          {cards.map((card, index) => (
+            <Box
+              key={index}
+              position="relative"
+              borderWidth="2px"
+              borderColor="white"
+              borderRadius="lg"
+              p={useBreakpointValue({ base: 4, lg: 6 })}
+              pt={14}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              textAlign="center"
+              h={useBreakpointValue({ base: 'auto', '3xl': '15vh' })}
+              zIndex={3}
+            >
+              <Box
+                position="absolute"
+                top="-40px"
+                left="50%"
+                transform="translateX(-50%)"
+                bg="white"
+                borderRadius="full"
+                p={2}
               >
-                {/* Large Step Number in Background */}
-                <Text
-                  position="absolute"
-                  top="-20px"
-                  left="-20px"
-                  fontSize="6xl"
-                  color="purple.100"
-                  fontWeight="bold"
-                  zIndex={-1}
-                >
-                  {step.number}
-                </Text>
-
-                {/* Icon Badge */}
-                <Badge
-                  borderRadius="full"
-                  p={4}
-                  mb={4}
-                  bgGradient="linear(to-r, blue.500, purple.500)"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Icon as={step.icon} w={8} h={8} color="white" />
-                </Badge>
-
-                {/* Step Title and Description */}
-                <Heading as="h3" size="md" mb={2} color="purple.700">
-                  {step.title}
-                </Heading>
-                <Text fontSize="md" color="gray.600">
-                  {step.description}
-                </Text>
-              </MotionBox>
-            ))}
-          </Flex>
-        </Flex>
-      </Container>
+                <Image src={card.icon} alt={card.heading} boxSize="50px" />
+              </Box>
+              <Heading
+                fontSize={useBreakpointValue({ base: 'lg', lg: 'xl' })}
+                color="black"
+                mb={2}
+              >
+                {card.heading}
+              </Heading>
+              <Text
+                fontSize={useBreakpointValue({ base: 'sm', lg: 'md' })}
+                color="white"
+                fontWeight="bold"
+              >
+                {card.subtext}
+              </Text>
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };
