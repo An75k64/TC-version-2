@@ -32,7 +32,7 @@ const Section4 = () => {
               alt={"Section 4 Image"}
               objectFit={"cover"}
               height="100%"
-              src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/s4.png"
+              src="https://d3g8ff7g609hps.cloudfront.net/assets/Services/s4.webp"
             />
             
           </Box>
