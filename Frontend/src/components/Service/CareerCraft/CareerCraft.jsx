@@ -105,7 +105,7 @@ export default function CareerCraft() {
             >
               <Image
                 className="animated-image"
-                src='https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/hero.jpg'
+                src='https://d3g8ff7g609hps.cloudfront.net/assets/Services/careercraft/hero.webp'
                 alt="OnCampus"
                 objectFit="cover"
                 boxSize={{ base: "100%", md: "100%" }}
@@ -121,7 +121,7 @@ export default function CareerCraft() {
           w="full"
           h={useBreakpointValue({ base: "66vh", md: "60vh", lg: "80vh", xl:"74vh", "2xl": "60vh", "3xl": "55vh" })}
           backgroundImage={
-            'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/sec2.jpeg)'
+            'url(https://d3g8ff7g609hps.cloudfront.net/assets/Services/careercraft/sec2.webp)'
           }
           backgroundSize="cover"
           backgroundPosition="center center"
