@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Personalized Guidance",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/guidance.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Counselling/guidance.webp",
       description:
         "Our counseling services provide tailored advice and support based on your individual career goals and challenges. By understanding your unique situation, our expert counselors offer personalized strategies that address your specific needs, helping you navigate your career path with clarity and confidence.",
     },
     {
       title: "Professional Development",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/professional.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Counselling/professional.webp",
       description:
         "Gain access to valuable resources and tools that can enhance your career development. From resume building and interview techniques to networking strategies and personal branding, our counseling sessions equip you with practical skills and knowledge to advance your career and achieve your professional aspirations.",
     },
     {
       title: "Supportive Environment",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/supportive.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Counselling/supportive.webp",
       description:
         "Experience a confidential and empathetic space where you can openly discuss your career concerns and ambitions. Our counselors are dedicated to providing a supportive environment that fosters growth and self-discovery, allowing you to explore your options and overcome obstacles with professional guidance.",
     },
