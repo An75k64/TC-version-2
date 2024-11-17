@@ -77,7 +77,7 @@ const AnimatedFuturePoints = () => {
       {/* Main character */}
       <Box
         as="img"
-        src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Counselling/vector.png"
+        src="https://d3g8ff7g609hps.cloudfront.net/assets/Services/Counselling/vector.webp"
         alt="Thinking character"
         boxSize={useBreakpointValue({base: "130px",sm: '130px',md: "140px",lg:"150px", xl: "250px"})} // More refined sizes for responsiveness
         objectFit="cover"
