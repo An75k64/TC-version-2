@@ -64,6 +64,7 @@ export default function CollegeIntro() {
               fontSize={"28px"}
               _after={{
                 content: "''",
+                
                 width: "full",
                 height: useBreakpointValue({ base: "20%", md: "15%" }),
                 position: "absolute",

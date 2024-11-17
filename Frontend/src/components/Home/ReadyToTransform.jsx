@@ -6,15 +6,14 @@ import {
   Stack,
   Text,
   Flex,
-  useColorModeValue,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 export default function ReadyToTransform() {
   // Responsive values
-  const headingFontSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
-  const textFontSize = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl"  });
+  const headingFontSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl"  });
+  const textFontSize = useBreakpointValue({ base: "md", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl"  });
   const buttonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "sm", lg: "md", xl: "md", "2xl": "xl", "3xl": "4xl" });
   const pY = useBreakpointValue({base: 10, sm: 10, md: 10, lg: 10, xl: 6, "2xl": 7, "3xl": "10"});
   const paddingX = useBreakpointValue({base: 3, sm: 4, md: 12, lg: 6, xl: 6, "2xl": 7, "3xl": "30"});

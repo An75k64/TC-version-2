@@ -14,8 +14,8 @@ export default function About() {
 
   // Responsive sizes and styles
   const paddingY = useBreakpointValue({ base: 3, sm: 4, md: 5, lg: 6, xl: 6, "2xl": 7, "3xl": "14" });
-  const headingSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
-  const textSize = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl" });
+  const headingSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
+  const textSize = useBreakpointValue({ base: "md", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl" });
   const videoSize = useBreakpointValue({ base: "100%", sm: "100%", md: "100%", lg: "90%", xl: "100%", "2xl": "100%", "3xl": "100%" });
   const pScreenX = useBreakpointValue({ base: 3, sm: 4, md: 4, lg: 10, xl: 6, "2xl": 7, "3xl": 14 });
   const pscreenY = useBreakpointValue({ base: 10, sm: 10, md: 10, lg: 20, xl: 2, "2xl": 0, "3xl": 7 });

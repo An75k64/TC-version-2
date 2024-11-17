@@ -75,9 +75,9 @@ export default function CampusToCubicle() {
   const paddingY = useBreakpointValue({ base: 2, sm: 4, md: 5, lg: 6, xl: 6, "2xl": 7, "3xl": "14" });
   const pY = useBreakpointValue({ base: 10, sm: 10, md: 10, lg: 10, xl: 20, "2xl": 20, "3xl": "40" });
   const imageSize = useBreakpointValue({ base: "90%", sm: "90%", md: "90%", lg: "60%", xl: "100%", "2xl": "100%", "3xl": "100%" });
-  const headingSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
+  const headingSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
   const textSize = useBreakpointValue({
-    base: "sm", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl"
+     base: "md", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl"
   });
 
   return (

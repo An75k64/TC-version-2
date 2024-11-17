@@ -21,8 +21,8 @@ export default function Hero() {
   const px = useBreakpointValue({ base: 2, sm: 2, md: 2, lg: 4, xl: 6, "2xl": 8, "3xl": 12 });
   const py = useBreakpointValue({ base: 2, sm: 2, md: 2, lg: 4, xl: 6, "2xl": 8, "3xl": 12 });
   const spacing = useBreakpointValue({ base: 2, sm: 3, md: 3, lg: 5, xl: 6, "2xl": 7, "3xl": 10 });
-  const sizeHeading = useBreakpointValue({ base: "4xl", sm: "4xl", md: "4xl", lg: "5xl", xl: "7xl", "2xl": "8xl", "3xl": "9xl" });
-  const sizeText = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "lg", xl: "xl", "2xl": "3xl", "3xl": "5xl" });
+  const sizeHeading = useBreakpointValue({ base: "3xl", sm: "4xl", md: "5xl", lg: "6xl", xl: "7xl", "2xl": "8xl", "3xl": "9xl" });
+  const sizeText = useBreakpointValue({ base: 'md', sm: 'lg', md: 'lg', lg: "lg", xl: "xl", "2xl": "3xl", "3xl": "5xl" });
 
   // Change video at intervals
   useEffect(() => {
@@ -123,6 +123,7 @@ export default function Hero() {
             direction={"row"}
             spacing={spacing} // Responsive spacing between buttons
             justify={"center"}
+            mt={6}
           >
             <Link to="/#our-services">
               <Button

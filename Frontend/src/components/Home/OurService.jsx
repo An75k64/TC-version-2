@@ -113,7 +113,7 @@ const Card = ({ heading, description, icon, link }) => {
 };
 
 export default function OurServices() {
-  const headingFontSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
+  const headingFontSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
   const pScreenX = useBreakpointValue({base: 3, sm: 4, md: 4, lg: 12, xl: 40, "2xl": 60, "3xl": 80}); 
   const pscreenY = useBreakpointValue({base: 10, sm: 10, md: 10, lg: 12, xl: 8, "2xl": 14, "3xl": 30}); 
 

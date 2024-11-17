@@ -38,8 +38,8 @@ const companiesList = [
 ];
 
 const Companies = () => {
-  const headingFontSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "3xl", lg: "4xl", xl: "4xl", "2xl": "6xl", "3xl": "8xl" });
-  const textFontSize = useBreakpointValue({ base: "10px", sm: "11px", md: "sm", lg: "md", xl: "sm", "2xl": "2xl", "3xl": "2xl" });
+  const headingFontSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl"  });
+  const textFontSize = useBreakpointValue({ base: "md", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl" });
   const pscreenY = useBreakpointValue({ base: 5, sm: 10, md: 10, lg: 10, xl: 12, "2xl": 14, "3xl": 40 });
 
   return (
