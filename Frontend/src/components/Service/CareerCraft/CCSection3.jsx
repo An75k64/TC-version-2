@@ -7,7 +7,7 @@ const Section3 = () => {
 
       title: "1:1 Mentorship",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/mentorship.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/careercraft/mentorship.webp",
       description:
         "TalentConnect provides regular sessions, mentees can gain valuable insights, overcome challenges, and accelerate their progress in their personal or professional journey.",
 
@@ -15,14 +15,14 @@ const Section3 = () => {
     {
       title: "Skill Enhancement",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/skills.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/careercraft/skills.webp",
       description:
         "TalentConnect provides courses and certifications in high-demand technical skills and offers advanced certification programs for career advancement and specialization.",
     },
     {
       title: "High-Skilled Mentor",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/careercraft/high-skilled.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/careercraft/high-skilled.webp",
       description:
         "TalentConnect provides high-paid skilled professional panels which give end-to-end guidance to the candidates.",
     },
