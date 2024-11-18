@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Partnerships",
       imageUrl:
-        "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/oncampus/Partener.webp",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Oncampus/Partener.webp",
       description:
         "At TalentConnect, we offer seamless on-campus hiring solutions in partnership with universities and colleges, providing comprehensive end-to-end recruitment services. Our tailored approach ensures efficient hiring processes, connecting students directly with top employers. Let us enhance your campus recruitment with our expertise and extensive network.",
     },
     {
       title: "Talent Pipeline",
       imageUrl:
-        "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/oncampus/Pipeline.webp",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Oncampus/Pipeline.webp",
       description:
         "At TalentConnect, we provide access to a steady pipeline of pre-screened candidates, ensuring you have a continuous supply of qualified talent. Our rigorous screening process guarantees that only the best candidates are presented, streamlining your hiring process. Rely on our expertise to maintain a robust talent pipeline for your organization's needs.",
     },
     {
       title: "Campus Branding",
       imageUrl:
-        "https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/oncampus/campus.webp",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Oncampus/campus.webp",
       description:
         "At TalentConnect, we develop detailed strategies to create a strong brand presence on campus, enhancing your visibility and reputation. Our expertise includes showcasing successful campus branding campaigns that have effectively engaged students. Let us help you build a compelling and memorable brand presence within academic communities.",
     },

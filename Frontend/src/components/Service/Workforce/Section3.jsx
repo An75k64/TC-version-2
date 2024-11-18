@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Recruitment",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/Recruitment.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Workforce/Recruitment.webp",
       description:
         "Collaborate with companies and recruit qualified candidates for contract, RPO, and permanent positions",
     },
     {
       title: "Staffing",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/staffing.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Workforce/staffing.webp",
       description:
         "Talent Connect is a staffing firm that provides a personalized, results-driven professional service. Its goal is to match job seekers with appropriate positions.",
     },
     {
       title: "Thorough Candidate Evaluation",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Workforce/Evaluation.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Workforce/Evaluation.webp",
       description:
         "Our rigorous screening and evaluation processes are designed to identify candidates who possess the right skills, experience, and potential for your roles. This meticulous approach reduces hiring risks and increases the likelihood of successful long-term placements.",
     },

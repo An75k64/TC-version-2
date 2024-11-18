@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import dimg from "../../assets/images/ud.jpg";
 
 // Define the keyframes for the rectangular moving animation
 const movingAnimation = keyframes`
@@ -92,7 +91,7 @@ export default function CampusToCubicle() {
       position={"relative"}
       overflow={"hidden"}
       zIndex={1}
-      backgroundImage={"https://i.postimg.cc/GpHzV4M0/cc.png"}
+      backgroundImage={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp"}
       bgSize={"100%"}
     >
       <Flex p={0} flex={1} align={"center"} justify={"center"} position={"relative"}>
@@ -127,7 +126,7 @@ export default function CampusToCubicle() {
             <Flex flex={1} align={"center"} justifyContent={"center"} mt={5} position={"relative"}>
               <AnimatedBox imageSize={imageSize}>
                 <AspectRatio ratio={3 / 1.9} >
-                  <Image src={dimg} alt="Campus to Cubicle" objectFit="cover" />
+                  <Image src={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp"} alt="Campus to Cubicle" objectFit="cover" />
                 </AspectRatio>
               </AnimatedBox>
             </Flex>
@@ -166,7 +165,7 @@ export default function CampusToCubicle() {
         <Flex flex={1} align={"center"} justifyContent={"center"} p={10} position={"relative"}>
           <AnimatedBox imageSize={imageSize}>
             <AspectRatio ratio={3 / 1.9} width="100%">
-              <Image src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/cc.jpeg" alt="Campus to Cubicle" objectFit="cover" />
+              <Image src="https://d3g8ff7g609hps.cloudfront.net/assets/Home/cc.webp" alt="Campus to Cubicle" objectFit="cover" />
             </AspectRatio>
           </AnimatedBox>
         </Flex>
@@ -205,7 +204,7 @@ export default function CampusToCubicle() {
             <Flex flex={1} align={"center"} justifyContent={"center"} mt={5} position={"relative"}>
               <AnimatedBox imageSize={imageSize}>
                 <AspectRatio ratio={3 / 1.9} >
-                  <Image src={dimg} alt="Campus to Cubicle" objectFit="cover" />
+                  <Image src={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp"} alt="Campus to Cubicle" objectFit="cover" />
                 </AspectRatio>
               </AnimatedBox>
             </Flex>

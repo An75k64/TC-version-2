@@ -96,7 +96,7 @@ export default function OnCampus() {
           >
             <Image
               className="animated-image"
-              src="https://d3g8ff7g609hps.cloudfront.net/assets2/assets2/oncampus/hero.webp"
+              src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Oncampus/hero.png"
               alt="OnCampus"
               objectFit="cover"
               boxSize={{ base: "100%", md: "100%" }}

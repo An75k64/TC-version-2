@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 // Array of video URLs
 const videos = [
-  "https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/hero.mp4",
+  "https://d3g8ff7g609hps.cloudfront.net/assets/Home/hero.webm",
 ];
 
 export default function Hero() {
@@ -116,7 +116,7 @@ export default function Hero() {
             transition={{ type: "tween", duration: 1, delay: 0.7 }} // Delayed transition
           >
             Your premier destination for comprehensive career solutions. Whether
-            you're a job seeker, an employer, or an academic institution, we
+            you're a job seeker, an employer or an academic institution, we
             connect talent with opportunity.
           </Text>
           <Stack

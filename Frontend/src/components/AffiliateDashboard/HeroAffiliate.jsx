@@ -42,7 +42,7 @@ const HeroAffiliate = () => {
   return (
     <Box
       position="relative"
-      bgImage={`url(${"https://d24xhk2f9wq8ku.cloudfront.net/assets/Affiliate/affiliate-dashboard-hero.jpg"})`}
+      bgImage={`url(${"https://d3g8ff7g609hps.cloudfront.net/assets/Affiliate/affiliate-dashboard-hero.webp"})`}
       bgSize="cover"  // Cover ensures the image covers the entire area
       bgPosition="center"
       bgRepeat="no-repeat"

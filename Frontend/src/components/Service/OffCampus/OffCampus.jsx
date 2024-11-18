@@ -115,7 +115,7 @@ export default function OffCampus() {
           w="full"
           h={useBreakpointValue({ base: "66vh", md: "60vh", lg: "80vh", xl:"80vh", "2xl": "60vh", "3xl": "55vh" })}
           backgroundImage={
-            'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/section2.jpeg)'
+            'url(https://d3g8ff7g609hps.cloudfront.net/assets/Services/Offcampus/section2.webp)'
           }
           backgroundSize="cover"
           backgroundPosition="center center"

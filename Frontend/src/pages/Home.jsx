@@ -6,7 +6,6 @@ import WhyChooseTalentConnect from "../components/Home/WhyChooseTalentConnect.js
 import OurServices from "../components/Home/OurService.jsx";
 //import SuccessStories from "../components/Home/SuccessStories.jsx";
 import ReadyToTransform from "../components/Home/ReadyToTransform.jsx";
-import Placed from "../components/Home/Placed.jsx";
 import Companies from "../components/Home/Companies.jsx";
 
 import {Flex} from "@chakra-ui/react";

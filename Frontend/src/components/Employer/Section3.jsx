@@ -7,28 +7,28 @@ const Section3 = () => {
     {
       title: "Diverse Talent Pool",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/diverse-pool.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Employer/diverse-pool.webp",
       description:
         "Access a broad range of qualified candidates.",
     },
     {
       title: "Efficient Hiring:",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/efficient.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Employer/efficient.webp",
       description:
         "Leverage technology for quick and effective recruitment.",
     },
     {
       title: "On-Demand Training",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/training.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Employer/training.webp",
       description:
         "Ensure new hires are job-ready from the start.",
     },
     {
       title: "Employer Branding",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/branding.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Employer/branding.webp",
       description:
         "Highlight what makes your company a great place to work. Showcase your unique culture, values, and career opportunities to attract top talent and stand out in the job market.",
     },

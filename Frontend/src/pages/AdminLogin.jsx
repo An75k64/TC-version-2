@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 
-const backgroundImage = 'url(https://4kwallpapers.com/images/walls/thumbs_3t/18274.png)';
+const backgroundImage = 'url(https://d3g8ff7g609hps.cloudfront.net/assets/Admin/login.webp)';
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 const AdminLogin = () => {

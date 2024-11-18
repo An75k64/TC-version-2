@@ -13,7 +13,7 @@ function Section1() {
         w={'full'}
         h={'full'}
         backgroundImage={
-          'url(https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/hero.jpeg)'
+          'url(https://d3g8ff7g609hps.cloudfront.net/assets/Employer/hero.webp)'
         }
         backgroundSize={'cover'}
         backgroundPosition={'center center'}

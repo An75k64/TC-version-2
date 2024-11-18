@@ -47,7 +47,7 @@ export default function CollegeIntro() {
               objectFit={"cover"}
               height="100%"
               src={
-                "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/vision.jpeg"
+                "https://d3g8ff7g609hps.cloudfront.net/assets/College/vision.webp"
               }
             />
           </Box>
@@ -64,7 +64,7 @@ export default function CollegeIntro() {
               fontSize={"28px"}
               _after={{
                 content: "''",
-                
+
                 width: "full",
                 height: useBreakpointValue({ base: "20%", md: "15%" }),
                 position: "absolute",

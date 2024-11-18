@@ -6,21 +6,21 @@ const CollegeSolutions = () => {
     {
       title: "Expansive Network",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/Network.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/College/Network.webp",
       description:
         "Connect with numerous top-tier employers seamlessly through our extensive network, bringing a wide range of opportunities directly to you.",
     },
     {
       title: "Comprehensive Training",
       imageUrl:
-      "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/traning.jpeg",
+      "https://d3g8ff7g609hps.cloudfront.net/assets/College/traning.webp",
     description:
         "Offer targeted training programs to bridge skill gaps and ensure graduates are prepared with industry-specific skills necessary for their careers.",
     },
     {
       title: "Campus Branding",
       imageUrl:
-      "https://d24xhk2f9wq8ku.cloudfront.net/assets/College/Branding.jpeg",
+      "https://d3g8ff7g609hps.cloudfront.net/assets/College/Branding.webp",
     description:
         "Develop detailed strategies to create a strong brand presence on campus, enhancing visibility and reputation with successful campaigns.",
     },

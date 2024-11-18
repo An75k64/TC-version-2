@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Resume Building",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/resume.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Seminar/resume.webp",
       description:
         "Learn how to optimize your resume to showcase your unique skills, experience, and accomplishments. Our experts will provide personalized feedback to help you stand out to potential employers.",
     },
     {
       title: "Interview Preparation",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/Interview.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Seminar/Interview.webp",
       description:
         "Master the art of interviewing through interactive mock sessions and coaching on proven techniques. Gain the confidence to articulate your value and make a lasting impression.",
     },
     {
       title: "Personal Branding",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Seminar/personal-brand.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Seminar/personal-brand.webp",
       description:
         "Develop a compelling personal brand that highlights your strengths and differentiates you from the competition. Leverage digital tools and networking strategies to amplify your visibility.",
     },

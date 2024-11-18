@@ -30,11 +30,11 @@ import axios from "axios";
 // import NehaImage from '../../assets/images/postResume/g3.jpeg';
 
 const avatars = [
-  { name: "Anjali Sharma", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/g1.jpeg" },
-  { name: "Rohit Verma", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/b1.jpeg" },
-  { name: "Priya Singh", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/g2.jpeg" },
-  { name: "Amit Patel", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/b2.jpeg" },
-  { name: "Neha Desai", url: "https://d24xhk2f9wq8ku.cloudfront.net/assets/post%20your%20resume/g3.jpeg" },
+  { name: "Anjali Sharma", url: "https://d3g8ff7g609hps.cloudfront.net/assets/post%20your%20resume/g1.webp" },
+  { name: "Rohit Verma", url: "https://d3g8ff7g609hps.cloudfront.net/assets/post%20your%20resume/b1.webp" },
+  { name: "Priya Singh", url: "https://d3g8ff7g609hps.cloudfront.net/assets/post%20your%20resume/g2.webp" },
+  { name: "Amit Patel", url: "https://d3g8ff7g609hps.cloudfront.net/assets/post%20your%20resume/b2.webp" },
+  { name: "Neha Desai", url: "https://d3g8ff7g609hps.cloudfront.net/assets/post%20your%20resume/g3.webp" },
 ];
 
 

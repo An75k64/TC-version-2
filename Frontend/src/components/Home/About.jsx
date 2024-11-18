@@ -7,7 +7,6 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import hVideo from "../../assets/videos/aboutUss.mp4";
 
 export default function About() {
   const isMobile = useBreakpointValue({ base: true, xl: false });
@@ -39,7 +38,7 @@ export default function About() {
       py={pscreenY}
       position={"relative"}
       overflow={"hidden"}
-      backgroundImage={"https://i.postimg.cc/PrnYZxm9/Component-3.png"}
+      backgroundImage={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/aboutbg.webp"}
       bgSize={"125%"}
       backgroundRepeat={"no-repeat"}
       backgroundColor={"white"}
@@ -81,7 +80,7 @@ export default function About() {
                   border: "2px solid transparent",
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 }}
-                src="https://d24xhk2f9wq8ku.cloudfront.net/assets/Home/aboutUs.mp4"
+                src="https://d3g8ff7g609hps.cloudfront.net/assets/Home/aboutUs.webm"
                 aria-label="Promotional video for TalentConnect"
               />
             </Box>
@@ -161,7 +160,7 @@ export default function About() {
                       border: "2px solid transparent",
                       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                     }}
-                    src={hVideo}
+                    src={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/aboutUs.webm"}
                     aria-label="Promotional video for TalentConnect"
                   />
                 </Box>

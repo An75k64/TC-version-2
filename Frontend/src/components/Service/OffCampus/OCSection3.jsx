@@ -6,21 +6,21 @@ const Section3 = () => {
     {
       title: "Recruitment Fairs",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/Fairs.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Offcampus/Fairs.webp",
       description:
         "We organize targeted job fairs in major cities, bringing together top employers and qualified candidates for face-to-face networking and interviews.",
     },
     {
       title: "Online Job Boards",
       imageUrl:
-        "https://resumegenius.com/wp-content/uploads/best-job-boards.png",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Offcampus/best-job-boards.webp",
       description:
         "Talentconnect’s comprehensive job portal connects employers with a vast pool of skilled candidates, enabling efficient off-campus hiring and matching.",
     },
     {
       title: "Virtual Interviews",
       imageUrl:
-        "https://d24xhk2f9wq8ku.cloudfront.net/assets/Services/Offcampus/interview.jpeg",
+        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Offcampus/interview.webp",
       description:
         "Talentconnect offers seamless virtual interview capabilities, allowing job seekers to connect with employers from the comfort of their own homes.",
     },

@@ -43,7 +43,7 @@ export default function CollegeIntro() {
               borderRadius='10px'
               height="100%"
               src={
-                "https://d24xhk2f9wq8ku.cloudfront.net/assets/Employer/partner.jpeg"
+                "https://d3g8ff7g609hps.cloudfront.net/assets/Employer/partner.webp"
               }
             />
           </Box>
