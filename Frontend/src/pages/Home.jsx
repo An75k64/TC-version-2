@@ -4,8 +4,9 @@ import CampusToCubicle from "../components/Home/CampusToCubicle.jsx";
 import About from "../components/Home/About.jsx";
 import WhyChooseTalentConnect from "../components/Home/WhyChooseTalentConnect.jsx";
 import OurServices from "../components/Home/OurService.jsx";
-//import SuccessStories from "../components/Home/SuccessStories.jsx";
+
 import ReadyToTransform from "../components/Home/ReadyToTransform.jsx";
+
 import Companies from "../components/Home/Companies.jsx";
 
 import {Flex} from "@chakra-ui/react";
@@ -24,8 +25,7 @@ const Home = () => {
       <About />
       <WhyChooseTalentConnect />
       <OurServices />
-     {/* <SuccessStories /> 
-      <Placed/> */}
+    
 
       <Companies />
 
