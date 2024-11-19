@@ -6,7 +6,13 @@ const mongoose = require("mongoose");
 const companySchema = new mongoose.Schema({
   companyName: { type: String, required: true },
   industry: { type: String, required: true },
-  location: { type: String, required: true },
+  location: {
+    street: { type: String, required: true },
+    landmark: { type: String },
+    state: { type: String, required: true },
+    city: { type: String, required: true },
+    pincode: { type: String, required: true },
+  },
   companySize: { type: Number, required: true },
   contactPerson: { type: String, required: true },
   contactEmail: { type: String, required: true },
