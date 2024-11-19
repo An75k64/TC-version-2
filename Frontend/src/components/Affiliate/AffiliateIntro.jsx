@@ -85,7 +85,7 @@ const AffiliateIntro = () => {
             fontWeight="medium"
             textAlign="center"
           >
-            Leverage your network, access exclusive tools, and earn rewards by connecting top-tier talent with the right opportunities.
+            Leverage your network, access exclusive tools and earn rewards by connecting top-tier talent with the right opportunities.
           </Text>
         </Box>
 
