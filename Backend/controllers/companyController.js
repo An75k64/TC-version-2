@@ -16,7 +16,13 @@ const submitCompanyForm = async (req, res) => {
     const newCompany = new Company({
       companyName: req.body.companyName,
       industry: req.body.industry,
-      location: req.body.location,
+      location: {
+        street: req.body.location.street,
+        landmark: req.body.location.landmark,
+        state: req.body.location.state,
+        city: req.body.location.city,
+        pincode: req.body.location.pincode,
+      },
       companySize: req.body.companySize,
       contactPerson: req.body.contactPerson,
       contactEmail: req.body.contactEmail,
