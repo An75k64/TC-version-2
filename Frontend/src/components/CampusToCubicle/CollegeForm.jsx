@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import * as Yup from 'yup';
 import {
   Box,
   Button,
+  Flex,
+  Select,
   Checkbox,
   CheckboxGroup,
   Container,
@@ -18,13 +22,13 @@ import {
   useTheme,
   useToast,
   CloseButton,
+  VStack
 } from '@chakra-ui/react';
 
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 
-
-// Validation schema
+// validation schema
 const validationSchema = Yup.object({
   polytechnicCourses: Yup.array()
     .required('At least one Polytechnic/ITI/Diploma course must be selected'),
@@ -37,7 +41,15 @@ const validationSchema = Yup.object({
     .required('College/Institution Name is required')
     .matches(/^[a-zA-Z\s]*$/, 'College name can only contain alphabets'),
 
-  location: Yup.string().required('Location is required'),
+  location: Yup.object({
+    street: Yup.string().required('Street is required'),
+    landmark: Yup.string().optional(), // Landmark can be optional
+    state: Yup.string().required('State is required'),
+    city: Yup.string().required('City is required'),
+    pincode: Yup.string()
+      .required('Pincode is required')
+      .matches(/^\d{6}$/, 'Pincode must be a 6-digit number'),
+  }).required('Location is required'),
 
   studentsStrengthPolytechnic: Yup.number()
     .nullable()
@@ -72,14 +84,18 @@ const validationSchema = Yup.object({
     .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Invalid email format')
     .required('College Email is required'),
 
-
   mobileNumber: Yup.string()
     .required('Mobile Number is required')
     .matches(/^[6-9]\d{9}$/, 'Mobile Number must be valid'),
 
-  placementSeason: Yup.string()
-    .required('Placement Season Duration is required')
-    .matches(/^(0?[1-9]|1[0-2])\/\d{4}$/, 'Placement Season must be in MM/YYYY format'),
+  placementSeasonDuration: Yup.object({
+    startDate: Yup.string()
+      .required('Start Date is required'),
+      
+    endDate: Yup.string()
+      .required('End Date is required'),
+      
+  }).required('Placement Season Duration is required'),
 
   upcomingEvents: Yup.string().required('Upcoming Student Engagements are required'),
 
@@ -87,30 +103,51 @@ const validationSchema = Yup.object({
     .min(1, 'At least one Partnership Interest must be selected'),
 });
 
+const indianStates = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+  "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya",
+  "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim",
+  "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
+  "West Bengal", "Delhi"
+];
 
 const CollegeForm = () => {
   const theme = useTheme();
   const toast = useToast();
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState(null); // 'success' or 'error'
+  const [filteredStates, setFilteredStates] = useState(indianStates); // Define filteredStates
 
-  const formik = useFormik({
-    initialValues: {
-      polytechnicCourses: [],
-      ugCourses: [],
-      pgCourses: [],
-      collegeName: '',
-      location: '',
-      studentsStrengthPolytechnic: '',
-      studentsStrengthUG: '',
-      studentsStrengthPG: '',
-      collegeEmail: '',
-      mobileNumber: '',
-      placementSeason: '',
-      upcomingEvents: '',
-      partnershipInterests: []
+ const formik = useFormik({
+  initialValues: {
+    polytechnicCourses: [],
+    ugCourses: [],
+    pgCourses: [],
+    collegeName: '',
+    location: {
+      street: '',
+      landmark: '',
+      state: '',
+      city: '',
+      pincode: '',
     },
-    validationSchema: validationSchema,
+    studentsStrengthPolytechnic: '',
+    studentsStrengthUG: '',
+    studentsStrengthPG: '',
+    collegeEmail: '',
+    mobileNumber: '',
+    placementSeasonDuration: {
+      startDate: '',
+      endDate: '',
+    },
+    upcomingEvents: '',
+    partnershipInterests: []
+  },
+  validationSchema: validationSchema,
+  validateOnChange: false,    // Disable validation on change
+  validateOnBlur: false,      // Disable validation on blur
+  validateOnMount: false,     // Disable validation on mount
 
  onSubmit: async (values) => {
   // Check if all courses are 'No Courses Offered'
@@ -214,7 +251,6 @@ const isNoCourseOffered = (courseType) => {
   return formik.values[courseType].includes('No Courses Offered');
 };
 
-  
 
   return (
     <Box>
@@ -352,6 +388,7 @@ const isNoCourseOffered = (courseType) => {
                  
                   </Stack>
                 </CheckboxGroup>
+                
                 <Text color="red.500" fontSize="sm">{formik.errors.polytechnicCourses}</Text>
               </FormControl>
 
@@ -415,20 +452,122 @@ const isNoCourseOffered = (courseType) => {
                 onChange={formik.handleChange}
                 placeholder="Enter name"
               />
-              <Text color="red.500" fontSize="sm">{formik.errors.collegeName}</Text>
+             {formik.submitCount > 0 && formik.errors.collegeName && (
+                <Text color="red.500" fontSize="sm">
+                  {formik.errors.collegeName}
+                </Text>
+              )}
             </FormControl>
 
-            {/* Location */}
-            <FormControl isInvalid={formik.touched.location && formik.errors.location}>
-              <FormLabel fontWeight="bold">Location</FormLabel>
-              <Input
-                name="location"
-                value={formik.values.location}
-                onChange={formik.handleChange}
-                placeholder="Enter location"
-              />
-              <Text color="red.500" fontSize="sm">{formik.errors.location}</Text>
-            </FormControl>
+         {/* Location Details */}
+<FormControl>
+  <FormLabel fontWeight="bold">Location Details</FormLabel>
+  <Flex direction="column" gap={4}>
+    {/* Street */}
+    <Box>
+      <FormLabel fontWeight="bold" htmlFor="street">Street</FormLabel>
+      <Input
+        name="location.street"
+        id="street"
+        value={formik.values.location.street}
+        onChange={formik.handleChange}
+        placeholder="Enter street"
+      />
+      <Text color="red.500" fontSize="sm">{formik.errors.location?.street}</Text>
+    </Box>
+
+    {/* Landmark */}
+    <Box>
+      <FormLabel fontWeight="bold" htmlFor="landmark">Landmark</FormLabel>
+      <Input
+        name="location.landmark"
+        id="landmark"
+        value={formik.values.location.landmark}
+        onChange={formik.handleChange}
+        placeholder="Enter landmark"
+      />
+      <Text color="red.500" fontSize="sm">{formik.errors.location?.landmark}</Text>
+    </Box>
+
+    {/* State with Searchable Dropdown */}
+    <Box>
+      <FormLabel fontWeight="bold" htmlFor="state">State</FormLabel>
+      <Input
+        id="state"
+        placeholder="Type to search state"
+        value={formik.values.location.state}
+        onChange={(e) => {
+          const value = e.target.value;
+          formik.setFieldValue("location.state", value);
+          setFilteredStates(
+            indianStates.filter((state) =>
+              state.toLowerCase().startsWith(value.toLowerCase())
+            )
+          );
+        }}
+      />
+      {filteredStates.length > 0 && (
+        <VStack
+          spacing={1}
+          mt={2}
+          maxH="150px"
+          overflowY="auto"
+          border="1px solid"
+          borderColor="gray.300"
+          borderRadius="md"
+          boxShadow="sm"
+          bg="white"
+        >
+          {filteredStates.map((state) => (
+            <Box
+              key={state}
+              w="100%"
+              px={2}
+              py={1}
+              _hover={{ bg: "gray.100", cursor: "pointer" }}
+              onClick={() => {
+                formik.setFieldValue("location.state", state);
+                setFilteredStates([]); // Clear the dropdown after selection
+              }}
+            >
+              {state}
+            </Box>
+          ))}
+        </VStack>
+      )}
+      <Text color="red.500" fontSize="sm">{formik.errors.location?.state}</Text>
+    </Box>
+
+    {/* City */}
+    <Box>
+      <FormLabel fontWeight="bold" htmlFor="city">City</FormLabel>
+      <Input
+        name="location.city"
+        id="city"
+        value={formik.values.location.city}
+        onChange={formik.handleChange}
+        placeholder="Enter city"
+      />
+      <Text color="red.500" fontSize="sm">{formik.errors.location?.city}</Text>
+    </Box>
+
+    {/* Pincode */}
+    <Box>
+      <FormLabel fontWeight="bold" htmlFor="pincode">Pincode</FormLabel>
+      <Input
+        name="location.pincode"
+        id="pincode"
+        type="number"
+        value={formik.values.location.pincode}
+        onChange={formik.handleChange}
+        placeholder="Enter pincode"
+       
+      />
+      <Text color="red.500" fontSize="sm">{formik.errors.location?.pincode}</Text>
+    </Box>
+  </Flex>
+</FormControl>
+
 
             {/* Students Strength (Polytechnic/ITI/Diploma) */}
             <FormControl isDisabled={isNoCourseOffered('polytechnicCourses')} isInvalid={formik.touched.studentsStrengthPolytechnic && formik.errors.studentsStrengthPolytechnic}>
@@ -491,18 +630,47 @@ const isNoCourseOffered = (courseType) => {
               <Text color="red.500" fontSize="sm">{formik.errors.mobileNumber}</Text>
             </FormControl>
 
-            {/* Placement Season Duration */}
-            <FormControl isInvalid={formik.touched.placementSeason && formik.errors.placementSeason}>
-              <FormLabel fontWeight="bold">Placement Season Duration (Month and Year)</FormLabel>
-              <Input
-                name="placementSeason"
-                value={formik.values.placementSeason}
-                onChange={formik.handleChange}
-                placeholder="E.g: 04/2025"
-              />
-              <Text color="red.500" fontSize="sm">{formik.errors.placementSeason}</Text>
-            </FormControl>
+           {/* Placement Season Duration */}
+<FormControl isInvalid={formik.touched.placementSeasonDuration?.startDate && formik.errors.placementSeasonDuration?.startDate || formik.touched.placementSeasonDuration?.endDate && formik.errors.placementSeasonDuration?.endDate}>
+  <FormLabel fontWeight="bold">Placement Season Duration</FormLabel>
+  <Flex align="center" gap={4}>
+    {/* Start Date */}
+    <Box flex="1">
+      <ReactDatePicker
+        selected={formik.values.placementSeasonDuration.startDate ? new Date(formik.values.placementSeasonDuration.startDate) : null}
+        onChange={(date) =>
+          formik.setFieldValue('placementSeasonDuration.startDate', date ? date.toISOString().split('T')[0] : '')
+        }
+        dateFormat="MM/dd/yyyy"
+        className="chakra-input__field"
+        placeholderText="Select Start Date"
+      />
+      <Text color="red.500" fontSize="sm">{formik.errors.placementSeasonDuration?.startDate}</Text>
+    </Box>
+    
+    {/* "To" Text */}
+    <Text fontWeight="bold" color="gray.500" textAlign="center" flex="0 0 auto" mr={"4"}>
+      To
+    </Text>
+    
+    {/* End Date */}
+    <Box flex="1">
+      <ReactDatePicker
+        selected={formik.values.placementSeasonDuration.endDate ? new Date(formik.values.placementSeasonDuration.endDate) : null}
+        onChange={(date) =>
+          formik.setFieldValue('placementSeasonDuration.endDate', date ? date.toISOString().split('T')[0] : '')
+        }
+        dateFormat="MM/dd/yyyy"
+        className="chakra-input__field"
+        placeholderText="Select End Date"
+        minDate={formik.values.placementSeasonDuration.startDate ? new Date(formik.values.placementSeasonDuration.startDate) : null}
+      />
+      <Text color="red.500" fontSize="sm">{formik.errors.placementSeasonDuration?.endDate}</Text>
+    </Box>
+  </Flex>
+</FormControl>
 
+            
             {/* Upcoming Student Engagements */}
             <FormControl isInvalid={formik.touched.upcomingEvents && formik.errors.upcomingEvents}>
               <FormLabel fontWeight="bold">Upcoming Student Engagements</FormLabel>
@@ -537,7 +705,7 @@ const isNoCourseOffered = (courseType) => {
 
             {/* Consent Notice */}
             <Text mt={4} fontSize="sm" color="gray.600">
-              Note: By applying here you provide consent to share your personal data with TalentConnect. The personal data would be processed for employment purposes and would be within TalentConnect data protection notice. Read our Privacy Statement and Website Terms and Conditions for more information.
+            Note: By applying here you provide consent to share your personal data with TalentConnect. The personal data will be processed for employment purposes in line with TalentConnect's data protection practices.
             </Text>
 
             {/* Submit Button */}
