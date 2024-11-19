@@ -13,9 +13,11 @@ import {
   Heading,
   Input,
   Stack,
+  Flex,
   Text,
   Textarea,
   useTheme,
+  VStack,
   CloseButton
 } from '@chakra-ui/react';
 
@@ -25,7 +27,15 @@ const apiUrl = import.meta.env.VITE_API_BASE_URL;
 const validationSchema = Yup.object({  
   companyName: Yup.string().required('Company Name is required'),
   industry: Yup.string().required('Industry Name is required'),
-  location: Yup.string().required('Location is required'),
+  location: Yup.object({
+    street: Yup.string().required('Street is required'),
+    landmark: Yup.string().optional(), // Landmark can be optional
+    state: Yup.string().required('State is required'),
+    city: Yup.string().required('City is required'),
+    pincode: Yup.string()
+      .required('Pincode is required')
+      .matches(/^\d{6}$/, 'Pincode must be a 6-digit number'),
+  }).required('Location is required'),
   companySize: Yup.number().required('Company Size is required').positive().integer(),
   contactPerson:  Yup.string()
     .required('Person Name is required')
@@ -41,17 +51,32 @@ const validationSchema = Yup.object({
     
 });
 
+const indianStates = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+  "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya",
+  "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim",
+  "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
+  "West Bengal", "Delhi"
+];
 
 const CompanyForm = () => {
   const theme = useTheme();
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState(null); // 'success' or 'error'
+  const [filteredStates, setFilteredStates] = useState(indianStates); // Define filteredStates
 
   const formik = useFormik({
     initialValues: {
       companyName: '',
       industry: '',
-      location: '',
+      location: {
+      street: '',
+      landmark: '',
+      state: '',
+      city: '',
+      pincode: '',
+    },
       companySize: '',
       contactPerson: '',
       contactEmail: '',
@@ -226,18 +251,114 @@ const CompanyForm = () => {
             </FormControl>
 
             {/* Location */}
-            <FormControl isInvalid={formik.touched.location && formik.errors.location}>
-              <FormLabel fontWeight="bold">Location</FormLabel>
-              <Input
-                name="location"
-                value={formik.values.location}
-                onChange={formik.handleChange}
-                placeholder="Enter location"
-              />
-              <Text color="red.500" fontSize="sm">
-                {formik.errors.location}
-              </Text>
-            </FormControl>
+                          <FormControl>
+                <FormLabel fontWeight="bold">Location Details</FormLabel>
+                <Flex direction="column" gap={4}>
+                  {/* Street */}
+                  <Box>
+                    <FormLabel fontWeight="bold" htmlFor="street">Street</FormLabel>
+                    <Input
+                      name="location.street"
+                      id="street"
+                      value={formik.values.location.street}
+                      onChange={formik.handleChange}
+                      placeholder="Enter street"
+                    />
+                    <Text color="red.500" fontSize="sm">{formik.errors.location?.street}</Text>
+                  </Box>
+
+                  {/* Landmark */}
+                  <Box>
+                    <FormLabel fontWeight="bold" htmlFor="landmark">Landmark</FormLabel>
+                    <Input
+                      name="location.landmark"
+                      id="landmark"
+                      value={formik.values.location.landmark}
+                      onChange={formik.handleChange}
+                      placeholder="Enter landmark"
+                    />
+                    <Text color="red.500" fontSize="sm">{formik.errors.location?.landmark}</Text>
+                  </Box>
+
+                  {/* State with Searchable Dropdown */}
+                  <Box>
+                    <FormLabel fontWeight="bold" htmlFor="state">State</FormLabel>
+                    <Input
+                      id="state"
+                      placeholder="Type to search state"
+                      value={formik.values.location.state}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        formik.setFieldValue("location.state", value);
+                        setFilteredStates(
+                          indianStates.filter((state) =>
+                            state.toLowerCase().startsWith(value.toLowerCase())
+                          )
+                        );
+                      }}
+                    />
+                    {filteredStates.length > 0 && (
+                      <VStack
+                        spacing={1}
+                        mt={2}
+                        maxH="150px"
+                        overflowY="auto"
+                        border="1px solid"
+                        borderColor="gray.300"
+                        borderRadius="md"
+                        boxShadow="sm"
+                        bg="white"
+                      >
+                        {filteredStates.map((state) => (
+                          <Box
+                            key={state}
+                            w="100%"
+                            px={2}
+                            py={1}
+                            _hover={{ bg: "gray.100", cursor: "pointer" }}
+                            onClick={() => {
+                              formik.setFieldValue("location.state", state);
+                              setFilteredStates([]); // Clear the dropdown after selection
+                            }}
+                          >
+                            {state}
+                          </Box>
+                        ))}
+                      </VStack>
+                    )}
+                    <Text color="red.500" fontSize="sm">{formik.errors.location?.state}</Text>
+                  </Box>
+
+                  {/* City */}
+                  <Box>
+                    <FormLabel fontWeight="bold" htmlFor="city">City</FormLabel>
+                    <Input
+                      name="location.city"
+                      id="city"
+                      value={formik.values.location.city}
+                      onChange={formik.handleChange}
+                      placeholder="Enter city"
+                    />
+                    <Text color="red.500" fontSize="sm">{formik.errors.location?.city}</Text>
+                  </Box>
+
+                  {/* Pincode */}
+                  <Box>
+                    <FormLabel fontWeight="bold" htmlFor="pincode">Pincode</FormLabel>
+                    <Input
+                      name="location.pincode"
+                      id="pincode"
+                      type="number"
+                      value={formik.values.location.pincode}
+                      onChange={formik.handleChange}
+                      placeholder="Enter pincode"
+                    
+                    />
+                    <Text color="red.500" fontSize="sm">{formik.errors.location?.pincode}</Text>
+                  </Box>
+                </Flex>
+              </FormControl>
+
 
             {/* Company Size */}
             <FormControl isInvalid={formik.touched.companySize && formik.errors.companySize}>
@@ -334,7 +455,7 @@ const CompanyForm = () => {
 
             {/* Consent Notice */}
             <Text mt={4} fontSize="sm" color="gray.600">
-              Note: By applying here you provide consent to share your personal data with TalentConnect. The personal data would be processed for partnership purposes and would be within TalentConnect data protection notice. Read our Privacy Statement and Website Terms and Conditions for more information.
+              Note: By applying here you provide consent to share your personal data with TalentConnect. The personal data will be processed for employment purposes in line with TalentConnect's data protection practices.
             </Text>
 
             {/* Submit Button */}
