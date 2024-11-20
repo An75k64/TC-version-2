@@ -65,6 +65,11 @@ export default function CampusToCubicle() {
     }, 10);
   };
 
+  const backgroundImage = useBreakpointValue({
+    base: "https://i.postimg.cc/nLXHZ1Rf/ccbg.jpg", // Desktop-specific background
+    lg: "https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp", // Mobile-specific background
+  });
+
   const isMobile = useBreakpointValue({ base: true, xl: false });
 
   // Responsive sizes
@@ -91,8 +96,10 @@ export default function CampusToCubicle() {
       position={"relative"}
       overflow={"hidden"}
       zIndex={1}
-      backgroundImage={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp"}
-      bgSize={"100%"}
+      backgroundImage={`url(${backgroundImage})`} 
+      bgRepeat={"no-repeat"}
+      // bgPosition={"center"}
+      bgSize={"cover"}
     >
       <Flex p={0} flex={1} align={"center"} justify={"center"} position={"relative"}>
         <Stack spacing={6} w={"full"} maxW={{ base: "320px", sm: "375px", md: "425px", lg: "768px", xl: "1024px", "2xl": "1440px", "3xl": "2560px" }}>
@@ -103,6 +110,7 @@ export default function CampusToCubicle() {
             whileInView="visible"
             fontSize={headingSize}
             mb={10}
+            ml={useBreakpointValue({base: "60px",sm: "80px", lg: 0})}
             display={"flex"}
             textAlign={{ base: "center", lg: "left" }} // Center for mobile
           >
@@ -114,25 +122,7 @@ export default function CampusToCubicle() {
             <br />
           </Heading>
 
-          {/* <MotionText fontSize={textSize} color={"#000000"}>
-            TalentConnect, the trailblazing tech startup redefining the campus-to-cubicle journey. We transform campus hiring by integrating company requirements into our tech platform to engage with colleges.
-          </MotionText> */}
-
-          {/* <Heading flex={1} align={"center"} justifyContent={"center"} mt={-36} marginLeft={20}  position={"relative"}>
-            <Text color={"white"} >To</Text>
-          </Heading> */}
-          {/* Image for Mobile */}
-          {isMobile && (
-            <Flex flex={1} align={"center"} justifyContent={"center"} mt={5} position={"relative"}>
-              <AnimatedBox imageSize={imageSize}>
-                <AspectRatio ratio={3 / 1.9} >
-                  <Image src={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp"} alt="Campus to Cubicle" objectFit="cover" />
-                </AspectRatio>
-              </AnimatedBox>
-            </Flex>
-          )}
-
-          <MotionText fontSize={textSize} color={"white"}>
+          <MotionText fontSize={textSize} color={"white"} display={"flex"} textAlign={{base: "center", lg: "undefined"}}>
             TalentConnect collaborates with campuses nationwide, integrating companies’ hiring needs directly into college recruitment. We support students’ career journeys by aligning academic skills with real-world demands. Through targeted sessions, we prepare students for job roles even before they graduate.
           </MotionText>
 
@@ -173,6 +163,17 @@ export default function CampusToCubicle() {
 
       <Flex p={0} flex={1} align={"center"} justify={"center"} position={"relative"}>
         <Stack spacing={6} w={"full"} maxW={{ base: "320px", sm: "375px", md: "425px", lg: "768px", xl: "1024px", "2xl": "1440px", "3xl": "2560px" }}>
+
+          {/* Image for Mobile */}
+          {isMobile && (
+            <Flex flex={1} align={"center"} justifyContent={"center"} mt={5} position={"relative"}>
+              <AnimatedBox imageSize={imageSize}>
+                <AspectRatio ratio={3 / 1.9} >
+                  <Image src={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/cc.webp"} alt="Campus to Cubicle" objectFit="cover" />
+                </AspectRatio>
+              </AnimatedBox>
+            </Flex>
+          )}
           <Heading
             as={motion.div}
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 1 } } }}
@@ -180,35 +181,17 @@ export default function CampusToCubicle() {
             whileInView="visible"
             fontSize={headingSize}
             mb={4}
+            ml={useBreakpointValue({base: "90px", sm: "110px" ,lg: 0})}
+            display={"flex"}
+            textAlign={{ base: "center", lg: "left" }}
           >
             <Text as={"span"} position={"relative"}
-            // _after={{
-            //   content: "''",
-            //   width: "full",
-            //   height: useBreakpointValue({ base: "20%", md: "30%" }),
-            //   position: "absolute",
-            //   bottom: 1,
-            //   left: 0,
-            //   bg: "blue.400",
-            //   zIndex: -1,
-            // }}
             >
               Cubicle
             </Text>
             <br />
             {/* <Text color={"blue.400"} as={"span"}>Transforming Recruitment</Text> */}
           </Heading>
-
-          {/* Image for Mobile */}
-          {isMobile && (
-            <Flex flex={1} align={"center"} justifyContent={"center"} mt={5} position={"relative"}>
-              <AnimatedBox imageSize={imageSize}>
-                <AspectRatio ratio={3 / 1.9} >
-                  <Image src={"https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp"} alt="Campus to Cubicle" objectFit="cover" />
-                </AspectRatio>
-              </AnimatedBox>
-            </Flex>
-          )}
 
           <MotionText fontSize={textSize} color={"#000000"}>
             TalentConnect ensures that fresh graduates step confidently into their new roles. We offer skill-boosting training and onboarding programs to empower candidates for immediate impact in the workforce. By taking full ownership of the recruitment process, we provide companies with prepared, adaptable talent, creating a seamless transition from academic life to professional excellence.
