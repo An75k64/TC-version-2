@@ -88,7 +88,7 @@ export default function ContactForm() {
           <Box p={4}>
             <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
               <WrapItem>
-                <Box>
+                <Box display={"grid"} textAlign={"center"}>
                   <Heading>Contact Us</Heading>
                   <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.100">
                     Have questions or need assistance?
@@ -177,7 +177,7 @@ export default function ContactForm() {
                   <Box m={8} color="#0B0E3F">
                     <VStack spacing={5}>
                       <FormControl id="userType" isInvalid={formik.touched.userType && formik.errors.userType}>
-                        <FormLabel>Are you a student, campus, or company?</FormLabel>
+                        <FormLabel>Are you a student, campus representative, or company representative?</FormLabel>
                         <Select
                           name="userType"
                           placeholder="Select option"
