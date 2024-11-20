@@ -22,6 +22,11 @@ import { NavLink, useLocation } from "react-router-dom"; // Use NavLink to preve
 
 const NAV_ITEMS = [
   {
+    label: "Home",
+    href:"/",
+
+  },
+  {
     label: "Service",
     href: "/#our-services",
     children: [
