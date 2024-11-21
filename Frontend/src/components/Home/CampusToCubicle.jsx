@@ -67,27 +67,27 @@ export default function CampusToCubicle() {
 
   const backgroundImage = useBreakpointValue({
     base: "https://i.postimg.cc/nLXHZ1Rf/ccbg.jpg", // Desktop-specific background
-    lg: "https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp", // Mobile-specific background
+    xl: "https://d3g8ff7g609hps.cloudfront.net/assets/Home/ccbg.webp", // Mobile-specific background
   });
 
   const isMobile = useBreakpointValue({ base: true, xl: false });
 
   // Responsive sizes
-  const buttonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "md", xl: "md", "2xl": "xl", "3xl": "5xl" });
+  const buttonSizes = useBreakpointValue({ base: "sm", sm: "md", md: "md", lg: "sm", xl: "md", "2xl": "xl", "3xl": "5xl" });
   const paddingX = useBreakpointValue({ base: 3, sm: 4, md: 5, lg: 6, xl: 6, "2xl": 7, "3xl": "14" });
   const pX = useBreakpointValue({ base: 3, sm: 4, md: 5, lg: 10, xl: 20, "2xl": 7, "3xl": "14" });
   const paddingY = useBreakpointValue({ base: 2, sm: 4, md: 5, lg: 6, xl: 6, "2xl": 7, "3xl": "14" });
   const pY = useBreakpointValue({ base: 10, sm: 10, md: 10, lg: 10, xl: 20, "2xl": 20, "3xl": "40" });
   const imageSize = useBreakpointValue({ base: "90%", sm: "90%", md: "90%", lg: "60%", xl: "100%", "2xl": "100%", "3xl": "100%" });
-  const headingSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "5xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
+  const headingSize = useBreakpointValue({ base: "3xl", md: "4xl", lg: "4xl" , xl: "5xl", "2xl": "6xl", "3xl": "8xl" });
   const textSize = useBreakpointValue({
-     base: "md", sm: "md", md: "md", lg: "lg", xl: "lg", "2xl": "2xl", "3xl": "5xl"
+     base: "md", sm: "md", md: "md", lg: "md", xl: "lg", "2xl": "2xl", "3xl": "5xl"
   });
 
   return (
     <Stack
       //minH={"90vh"}
-      direction={{ base: "column", lg: "row" }}
+      direction={{ base: "column", xl: "row" }}
       spacing={4}
       maxW={{ base: "100%", lg: "1200px", xl: "1440px", "2xl": "2560px", "3xl": "100%" }}
       mx={"auto"}
@@ -98,7 +98,7 @@ export default function CampusToCubicle() {
       zIndex={1}
       backgroundImage={`url(${backgroundImage})`} 
       bgRepeat={"no-repeat"}
-      // bgPosition={"center"}
+      bgPosition={"center"}
       bgSize={"cover"}
     >
       <Flex p={0} flex={1} align={"center"} justify={"center"} position={"relative"}>
@@ -110,9 +110,9 @@ export default function CampusToCubicle() {
             whileInView="visible"
             fontSize={headingSize}
             mb={10}
-            ml={useBreakpointValue({base: "60px",sm: "80px", lg: 0})}
+            ml={useBreakpointValue({base: "60px",sm: "80px", lg: "240px",xl: 0})}
             display={"flex"}
-            textAlign={{ base: "center", lg: "left" }} // Center for mobile
+            textAlign={{ base: "center", xl: "left" }}// Center for mobile
           >
             <Text as={"span"} position={"relative"}
               color={"white"}
@@ -180,8 +180,9 @@ export default function CampusToCubicle() {
             initial="hidden"
             whileInView="visible"
             fontSize={headingSize}
+            mt={useBreakpointValue({lg:10})}
             mb={4}
-            ml={useBreakpointValue({base: "90px", sm: "110px" ,lg: 0})}
+            ml={useBreakpointValue({base: "90px", sm: "110px" ,lg: "270px",xl: 0})}
             display={"flex"}
             textAlign={{ base: "center", lg: "left" }}
           >
