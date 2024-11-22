@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 
 // Keyframes for rotating and changing color
 const rotate = keyframes`
-  0% { transform: rotate(0deg); border-color: #63b3ed; }
+  // 0% { transform: rotate(0deg); border-color: #63b3ed; }
   25% { border-color: #f56565; }
   50% { border-color: #48bb78; }
   75% { border-color: #d69e2e; }
-  100% { transform: rotate(360deg); border-color: #63b3ed; }
+  // 100% { transform: rotate(360deg); border-color: #63b3ed; }
+`;
+
+const bounceAnimation = keyframes`
+  0%, 100% { transform: scale(0.8); } 
+  50% { transform: scale(1); }
 `;
 
 // Array of colors excluding yellow
@@ -38,7 +43,7 @@ const Feature = ({ title, text, icon, link }) => {
         w="100%"
         h="100%"
         border="2px solid white"
-        transition="transform 0.3s, box-shadow 0.3s"
+        transition="transform 0.3s ease-in-out, box-shadow 0.3s"
         _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -48,7 +53,7 @@ const Feature = ({ title, text, icon, link }) => {
           w={20} h={20}
           align="center" justify="center"
           position="absolute"
-          top="-10" 
+          top="-10"
           borderRadius="full"
           borderWidth="4px"
           borderColor={isHovered ? "blue.400" : "transparent"}
@@ -60,8 +65,16 @@ const Feature = ({ title, text, icon, link }) => {
             color={"white"}
             rounded={"full"}
             bg={randomBgColor} // Use random background color
-          >
+            transform={isHovered ? "scale(1.10)" : "scale(1)"}
+            transition="transform 0.5s ease-in-out"
+            >
+            <Flex
+            animation={isHovered ? `${bounceAnimation} 3s infinite` : "none"}
+            
+            >
+
             {icon}
+            </Flex>
           </Flex>
         </Flex>
         <Text fontWeight={700} textAlign="center" fontSize={headingSize} mt={12} mb={8}>
@@ -113,7 +126,7 @@ export default function WhyChooseTalentConnect() {
       </Text>
       <SimpleGrid columns={{ base: 1, xl: 3 }} spacing={8}>
         <Feature
-          icon={<Icon as={FcReadingEbook} w={10} h={10} />}
+          icon={<Icon as={FcReadingEbook} w={10} h={10}  />}
           title={"Seamless Campus-to-Cubicle Programs"}
           text={"Transition smoothly from academia to the professional world."}
           link="/campus-to-cubicle"
