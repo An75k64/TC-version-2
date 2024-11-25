@@ -11,6 +11,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { DesktopNav, MobileNav } from "./Navigation.jsx";
 import Logo from "./Logo.jsx"; // Import the Logo component
+import LogoMobile from "./LogoMobile.jsx"
 
 const Header = () => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
@@ -78,7 +79,8 @@ const Header = () => {
           left={{ base: "60%", lg: "0" }}
           transform={{ base: "translateX(-50%)", lg: "none" }} // Center the logo with transform
         >
-          <Logo />
+           {/* Render Logomobile for mobile view and Logo for desktop */}
+          {useBreakpointValue({ base: <LogoMobile />, lg: <Logo /> })}
         </Flex>
 
         {/* Navbar in the center on desktop view */}
