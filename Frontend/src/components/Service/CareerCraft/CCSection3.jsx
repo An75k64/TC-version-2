@@ -9,7 +9,7 @@ const Section3 = () => {
       imageUrl:
         "https://d3g8ff7g609hps.cloudfront.net/assets/Services/careercraft/mentorship.webp",
       description:
-        "TalentConnect provides regular sessions. Mentees can gain valuable insights, overcome challenges, and accelerate their progress in their personal or professional journey.",
+        "TalentConnect provides regular sessions, mentees can gain valuable insights, overcome challenges, and accelerate their progress in their personal or professional journey.",
 
     },
     {
