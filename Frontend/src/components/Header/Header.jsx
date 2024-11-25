@@ -75,7 +75,7 @@ const Header = () => {
           flex={{ base: 1, lg: "none" }}
           justify={{ base: "center", lg: "center" }} // Center on both mobile and desktop
           position={{ base: "absolute", lg: "relative" }} // Position absolute to center the logo
-          left={{ base: "50%", lg: "0" }}
+          left={{ base: "60%", lg: "0" }}
           transform={{ base: "translateX(-50%)", lg: "none" }} // Center the logo with transform
         >
           <Logo />
