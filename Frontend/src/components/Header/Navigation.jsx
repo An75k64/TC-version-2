@@ -31,12 +31,12 @@ const NAV_ITEMS = [
     href: "/#our-services",
     children: [
       { label: "OnCampus", href: "/services/oncampus" },
-      { label: "Offcampus", href: "/services/offcampus" },
+      { label: "OffCampus", href: "/services/offcampus" },
       { label: "Seminar", href: "/services/seminar" },
       { label: "Counselling", href: "/services/counselling" },
       { label: "CareerCraft", href: "/services/careercraft" },
       {
-        label: "Workforce provider",
+        label: "Workforce Provider",
         subLabel: "Staffing solution",
         href: "/services/workforce",
       },
@@ -186,25 +186,13 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 };
  
 
-const MobileNav = ({ onClose }) => {
-  const bg = useColorModeValue("white", "gray.800");
-
-  return (
-    <Stack bg={bg} p={4} display={{ lg: "none" }}>
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} onClose={onClose} />
-      ))}
-    </Stack>
-  );
-};
-
 const MobileNavItem = ({ label, children, href, onClose }) => {
   const { isOpen, onToggle } = useDisclosure();
   const textColor = useColorModeValue("gray.600", "gray.200");
   const hoverColor = useColorModeValue("blue.400", "blue.300");
   const { pathname } = useLocation();
   const activeTabBgColor = useColorModeValue("teal.50", "white.700");
-  const isActive = pathname === href || (children && children.some(child => pathname === child.href));
+  const isActive = pathname === href || (children && children.some((child) => pathname === child.href));
 
   const handleLinkClick = () => {
     onClose(); // Close the mobile menu
@@ -213,9 +201,10 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
   return (
     <Stack spacing={4} onClick={children ? onToggle : undefined}>
       <Flex
-        as={NavLink}
-        to={href ?? "#"}
-        py={2}
+        as={children && label === "Jobs" ? "div" : NavLink}
+        to={children && label === "Jobs" ? undefined : href ?? "#"}
+        py={4} // Larger clickable area for "Jobs"
+        px={4}
         justify="space-between"
         align="center"
         color={isActive ? hoverColor : textColor}
@@ -239,7 +228,7 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
             w={6}
             h={6}
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation(); // Prevent parent click from toggling
               onToggle();
             }}
           />
@@ -276,7 +265,7 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
                 borderColor={hoverColor}
                 onClick={() => {
                   handleLinkClick(); // Close menu after clicking a child link
-                }} 
+                }}
               >
                 {child.label}
               </Box>
@@ -287,6 +276,26 @@ const MobileNavItem = ({ label, children, href, onClose }) => {
   );
 };
 
+// Removing `href` for "Service" in MobileNav
+const MobileNav = ({ onClose }) => {
+  const bg = useColorModeValue("white", "gray.800");
+
+  return (
+    <Stack bg={bg} p={4} display={{ lg: "none" }}>
+      {NAV_ITEMS.map((navItem) => {
+        const isService = navItem.label === "Service";
+        return (
+          <MobileNavItem
+            key={navItem.label}
+            {...navItem}
+            href={isService ? undefined : navItem.href} // Remove href for "Service"
+            onClose={onClose}
+          />
+        );
+      })}
+    </Stack>
+  );
+};
 
 const Navigation = () => {
   return (
