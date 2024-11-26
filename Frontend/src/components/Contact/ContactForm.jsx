@@ -23,6 +23,7 @@ import {
   Select,
   useToast,
   useTheme,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { MdPhone, MdEmail, MdLocationOn, MdOutlineEmail } from 'react-icons/md';
 import { BsPerson, BsInstagram, BsLinkedin } from 'react-icons/bs';
@@ -76,7 +77,7 @@ export default function ContactForm() {
   });
 
   return (
-    <Container bg="#F7FAFC" maxW="full" mt={0} centerContent overflow="hidden">
+    <Container bg="#F7FAFC" maxW="full" mt={useBreakpointValue({ base: 14, md: 8 })} centerContent overflow="hidden">
       <Flex>
         <Box
           bg="gray.600"
