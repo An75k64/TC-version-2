@@ -1,23 +1,56 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-// Optional: Import the visualizer plugin for analyzing bundle size
-//import { visualizer } from "rollup-plugin-visualizer";
+import { visualizer } from "rollup-plugin-visualizer";
+import imageminPlugin from "vite-plugin-imagemin";
+import { VitePWA } from "vite-plugin-pwa";
+
+// Import PostCSS plugins using ES Module syntax
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
 
 export default defineConfig({
   plugins: [
     react(),
-    // Optional: Use this plugin to generate a visualization of your bundle size
-    //visualizer({ open: true }), // Will automatically open the stats page after build
+    visualizer({ open: true }),
+    imageminPlugin({
+      gifsicle: { interlaced: true },
+      optipng: { optimizationLevel: 7 },
+      mozjpeg: { quality: 85 },
+      pngquant: { quality: [0.6, 0.8] },
+      svgo: {
+        plugins: [{ removeViewBox: false }],
+      },
+    }),
+    VitePWA({
+      manifest: {
+        name: "My App",
+        short_name: "App",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#ffffff",
+        theme_color: "#ffffff",
+      },
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/cdn\.example\.com/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "cdn-cache",
+              expiration: {
+                maxEntries: 50,
+              },
+            },
+          },
+        ],
+      },
+    }),
   ],
   build: {
-    // Set the warning limit for chunk size (in KB)
-    chunkSizeWarningLimit: 2000, // Adjust this as needed (e.g., 2000KB)
-
-    // Rollup options for manual chunking
+    chunkSizeWarningLimit: 2000,
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Dynamically split vendor (node_modules) code into separate chunks
           if (id.includes("node_modules")) {
             return id
               .toString()
@@ -28,6 +61,11 @@ export default defineConfig({
         },
       },
     },
-    sourcemap: false, // Disable sourcemaps for production builds to prevent errors
+    sourcemap: false,
+  },
+  css: {
+    postcss: {
+      plugins: [autoprefixer, cssnano],
+    },
   },
 });

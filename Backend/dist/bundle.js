@@ -1641,13 +1641,22 @@ var submitCollegeForm = /*#__PURE__*/function () {
             ugCourses: req.body.ugCourses,
             pgCourses: req.body.pgCourses,
             collegeName: req.body.collegeName,
-            location: req.body.location,
+            location: {
+              street: req.body.location.street,
+              landmark: req.body.location.landmark,
+              state: req.body.location.state,
+              city: req.body.location.city,
+              pincode: req.body.location.pincode
+            },
             studentsStrengthPolytechnic: req.body.studentsStrengthPolytechnic,
             studentsStrengthUG: req.body.studentsStrengthUG,
             studentsStrengthPG: req.body.studentsStrengthPG,
             collegeEmail: req.body.collegeEmail,
             mobileNumber: req.body.mobileNumber,
-            placementSeason: req.body.placementSeason,
+            placementSeasonDuration: {
+              startDate: req.body.placementSeasonDuration.startDate,
+              endDate: req.body.placementSeasonDuration.endDate
+            },
             upcomingEvents: req.body.upcomingEvents,
             partnershipInterests: req.body.partnershipInterests
           });
@@ -1891,7 +1900,13 @@ var submitCompanyForm = /*#__PURE__*/function () {
           newCompany = new Company({
             companyName: req.body.companyName,
             industry: req.body.industry,
-            location: req.body.location,
+            location: {
+              street: req.body.location.street,
+              landmark: req.body.location.landmark,
+              state: req.body.location.state,
+              city: req.body.location.city,
+              pincode: req.body.location.pincode
+            },
             companySize: req.body.companySize,
             contactPerson: req.body.contactPerson,
             contactEmail: req.body.contactEmail,
@@ -3795,28 +3810,46 @@ module.exports = mongoose.model("Card", cardSchema);
   \***************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-// College.js
-
 var mongoose = __webpack_require__(/*! mongoose */ "mongoose");
 
 // Define College schema
 var collegeSchema = new mongoose.Schema({
   polytechnicCourses: [{
-    type: String
+    type: String,
+    required: true
   }],
   ugCourses: [{
-    type: String
+    type: String,
+    required: true
   }],
   pgCourses: [{
-    type: String
+    type: String,
+    required: true
   }],
   collegeName: {
     type: String,
     required: true
   },
   location: {
-    type: String,
-    required: true
+    street: {
+      type: String,
+      required: true
+    },
+    landmark: {
+      type: String
+    },
+    state: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    pincode: {
+      type: String,
+      required: true
+    }
   },
   studentsStrengthPolytechnic: {
     type: Number
@@ -3835,9 +3868,15 @@ var collegeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  placementSeason: {
-    type: String,
-    required: true
+  placementSeasonDuration: {
+    startDate: {
+      type: Date,
+      required: true
+    },
+    endDate: {
+      type: Date,
+      required: true
+    }
   },
   upcomingEvents: {
     type: String
@@ -3878,8 +3917,25 @@ var companySchema = new mongoose.Schema({
     required: true
   },
   location: {
-    type: String,
-    required: true
+    street: {
+      type: String,
+      required: true
+    },
+    landmark: {
+      type: String
+    },
+    state: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    pincode: {
+      type: String,
+      required: true
+    }
   },
   companySize: {
     type: Number,
