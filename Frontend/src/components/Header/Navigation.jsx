@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Flex,
@@ -60,11 +60,15 @@ const NAV_ITEMS = [
 
 const DesktopNav = () => {
   const { pathname } = useLocation(); // Get current path
+  const [openMenu, setOpenMenu] = React.useState(null); // Track which menu is open
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("blue.400", "blue.300");
   const activeTabBgColor = useColorModeValue("teal.50", "white.700");
   const activeBorderColor = useColorModeValue("blue.500", "blue.300");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
+
+  const handleMenuOpen = (label) => setOpenMenu(label);
+  const handleMenuClose = () => setOpenMenu(null);
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -74,16 +78,28 @@ const DesktopNav = () => {
           (navItem.children &&
             navItem.children.some((child) => pathname === child.href));
 
+        const isMenuOpen = openMenu === navItem.label;
+
         return (
           <Box key={navItem.label}>
             {navItem.children ? (
-              <Popover trigger={"hover"} placement={"bottom-start"}>
+              <Popover
+                trigger={"hover"}
+                placement={"bottom-start"}
+                isOpen={isMenuOpen} // Check if this menu is open
+                onOpen={() => handleMenuOpen(navItem.label)} // Open specific menu
+                onClose={handleMenuClose} // Close menu
+              >
                 <PopoverTrigger>
                   <Box
                     as={Link}
                     to={navItem.href}
-                    p={useBreakpointValue({lg:"2", "3xl":"8"})}
-                    fontSize={useBreakpointValue({lg:"12px","xl":"sm", "3xl":"3xl"})}
+                    p={useBreakpointValue({ lg: "2", "3xl": "8" })}
+                    fontSize={useBreakpointValue({
+                      lg: "12px",
+                      xl: "sm",
+                      "3xl": "3xl",
+                    })}
                     fontWeight={500}
                     color={isActive ? linkHoverColor : linkColor}
                     bg={isActive ? activeTabBgColor : "transparent"}
@@ -110,7 +126,11 @@ const DesktopNav = () => {
                 >
                   <Stack>
                     {navItem.children.map((child) => (
-                      <DesktopSubNav key={child.label} {...child} />
+                      <DesktopSubNav
+                        key={child.label}
+                        {...child}
+                        onClose={handleMenuClose} // Close when a submenu is clicked
+                      />
                     ))}
                   </Stack>
                 </PopoverContent>
@@ -119,16 +139,16 @@ const DesktopNav = () => {
               <Box
                 as={Link}
                 to={navItem.href}
-                p={{lg:"2", "3xl":"8"}}
-                fontSize={{lg:"12px","xl":"sm", "3xl":"3xl"}}
+                p={{ lg: "2", "3xl": "8" }}
+                fontSize={{ lg: "12px", xl: "sm", "3xl": "3xl" }}
                 fontWeight={500}
                 color={isActive ? linkHoverColor : linkColor}
                 bg={isActive ? activeTabBgColor : "transparent"}
                 borderRadius="md"
                 _hover={{
                   textDecoration: "none",
-                      color: linkHoverColor,
-                      bg: "blue.50",
+                  color: linkHoverColor,
+                  bg: "blue.50",
                 }}
                 borderBottom={isActive ? "4px solid" : "none"}
                 borderColor={linkHoverColor}
@@ -143,13 +163,18 @@ const DesktopNav = () => {
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const DesktopSubNav = ({ label, href, subLabel, onClose }) => {
   const subNavHoverColor = useColorModeValue("blue.400", "blue.300");
   const { pathname } = useLocation();
   const isActive = pathname === href;
 
   return (
-    <Link to={href}>
+    <Link
+      to={href}
+      onClick={() => {
+        if (onClose) onClose(); // Close the Popover when submenu item is clicked
+      }}
+    >
       <Box
         role={"group"}
         display={"block"}
@@ -184,6 +209,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
     </Link>
   );
 };
+
  
 
 const MobileNavItem = ({ label, children, href, onClose }) => {

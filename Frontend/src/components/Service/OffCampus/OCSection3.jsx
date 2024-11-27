@@ -13,7 +13,7 @@ const Section3 = () => {
     {
       title: "Online Job Boards",
       imageUrl:
-        "https://d3g8ff7g609hps.cloudfront.net/assets/Services/Offcampus/best-job-boards.webp",
+        "https://talenetconnecttest.s3.ap-south-1.amazonaws.com/assets/Services/job-boards.webp",
       description:
         "Talentconnect’s comprehensive job portal connects employers with a vast pool of skilled candidates, enabling efficient off-campus hiring and matching.",
     },
