@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../Header/Logo"; // Ensure you have a Logo component
+import Logo from "../../Header/LogoMobile"; // Ensure you have a Logo component
 import { AuthContext } from "../../../contexts/AuthContext"; // Import your AuthContext
 
 const AffiliateHeader = () => {
@@ -60,9 +60,9 @@ const AffiliateHeader = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", lg: "start" }} align="center">
-          <Link to="/company">
+          
             <Logo />
-          </Link>
+          
           <Flex display={{ base: "none", lg: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>

@@ -11,7 +11,6 @@ import {
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BsLinkedin } from "react-icons/bs"; // Import LinkedIn icon
 import { HashLink as Link } from "react-router-hash-link"; // Import HashLink
-import logo from "../../assets/images/Logo/logo.png"; // Adjust the path if needed
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -49,7 +48,8 @@ export default function AffiliateFooter() {
           <Stack spacing={4}>
             <a href="/">
               <img
-                src={logo}
+                 src="https://talenetconnecttest.s3.ap-south-1.amazonaws.com/assets/Logo/logo.webp" 
+
                 alt="Talent Connect Logo"
                 style={{ height: "60px", width: "70px" }}
               />

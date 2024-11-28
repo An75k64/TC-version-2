@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Image } from '@chakra-ui/react';
 // Import the WhatsApp icon directly
-import whatsappIcon from '../assets/images/icons8-whatsapp-100.png';
+
 
 const WhatsAppIcon = () => {
   // Replace 'YOUR_PHONE_NUMBER' with your actual WhatsApp number (including country code, without '+' sign)
@@ -24,7 +24,7 @@ const WhatsAppIcon = () => {
       height="50px" // Ensure the Box height accommodates the Image
     >
       <Image
-        src={whatsappIcon} // Use the imported image directly
+       src= "https://talenetconnecttest.s3.ap-south-1.amazonaws.com/assets/icons8-whatsapp-100.png"
         alt="WhatsApp"
         boxSize="full"  // Ensures the image covers the Box dimensions
         objectFit="contain"  // Adjust this to 'contain' to avoid cropping

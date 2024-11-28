@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Image, Text, useBreakpointValue } from "@chakra-ui/react";
-import logo from "../../assets/images/Logo/logo.png"; // Adjust the path to your logo image
+
 
 const Logo = () => {
   return (
@@ -14,7 +14,8 @@ const Logo = () => {
         
       >
         <Image
-          src={logo}
+          src="https://talenetconnecttest.s3.ap-south-1.amazonaws.com/assets/Logo/logo.webp" 
+
           alt="Logo"
           className="logo"
           width={{base:"50px" ,lg:"50px","xl":"55px" ,"3xl":"100px"}}

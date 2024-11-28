@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, Image, Text, useBreakpointValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import backgroundImg from '../../assets/images/campustocubicle/col.png'; // Import background image
+
 
 // Motion component for animation
 const MotionBox = motion(Box);
@@ -12,7 +12,7 @@ function OnlineLearningPage() {
             justifyContent="center"
             alignItems="center"
             minH="100vh"  // Ensure the height is 100% of the viewport
-            bgImage={`url(${backgroundImg})`}  // Use imported background image
+            bgImage={`url("https://talenetconnecttest.s3.ap-south-1.amazonaws.com/assets/Campus/col.png")`} // Use imported background image
             bgPos="center"  // Center the background
             bgSize="contain"  // Ensure the image is fully visible without cropping
             bgRepeat="no-repeat"  // Prevent repeating the background image
