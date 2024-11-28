@@ -124,7 +124,7 @@ export default function WhyChooseTalentConnect() {
         We offer seamless campus-to-cubicle programs, innovative recruitment solutions, and personalized career services
         to meet your unique needs.
       </Text>
-      <SimpleGrid columns={{ base: 1, xl: 3 }} spacing={8}>
+      <SimpleGrid columns={{ base: 1, xl: 3 }} spacing={{base:12, xl:8}}>
         <Feature
           icon={<Icon as={FcReadingEbook} w={10} h={10}  />}
           title={"Seamless Campus-to-Cubicle Programs"}
@@ -141,7 +141,7 @@ export default function WhyChooseTalentConnect() {
           icon={<Icon as={FcGraduationCap} w={10} h={10} />}
           title={"Personalized Career Services"}
           text={"Tailored to your individual goals and aspirations."}
-          link="/careercraft"
+          link="/services/careercraft"
         />
       </SimpleGrid>
     </Box>

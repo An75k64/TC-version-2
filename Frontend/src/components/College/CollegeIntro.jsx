@@ -113,9 +113,9 @@ export default function CollegeIntro() {
                 </Text>
               </Box>
               <Box>
-                <Text fontSize={"lg"} color={"gray.500"}>Successful Placements</Text>
+                <Text fontSize={"lg"} color={"black"}>Successful Placements</Text>
                 <Text fontSize={"2xl"} color={"black"} fontWeight={700}>
-                  {isInView ? <CountUp end={10000} duration={2} suffix="+" /> : "10000+"}
+                  {isInView ? <CountUp end={10000} duration={2} suffix="+" /> : "5000+"}
                 </Text>
               </Box>
             </Stack>

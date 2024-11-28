@@ -18,8 +18,10 @@ import {
   Textarea,
   useTheme,
   VStack,
-  CloseButton
+  CloseButton,
+  IconButton
 } from '@chakra-ui/react';
+import { FaChevronDown } from "react-icons/fa"; 
 
 
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -65,6 +67,7 @@ const CompanyForm = () => {
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState(null); // 'success' or 'error'
   const [filteredStates, setFilteredStates] = useState(indianStates); // Define filteredStates
+  const [showSuggestions, setShowSuggestions] = useState(false); // Track whether the suggestions box is visible
 
   const formik = useFormik({
     initialValues: {
@@ -281,54 +284,77 @@ const CompanyForm = () => {
                   </Box>
 
                   {/* State with Searchable Dropdown */}
-                  <Box>
-                    <FormLabel fontWeight="bold" htmlFor="state">State</FormLabel>
-                    <Input
-                      id="state"
-                      placeholder="Type to search state"
-                      value={formik.values.location.state}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        formik.setFieldValue("location.state", value);
-                        setFilteredStates(
-                          indianStates.filter((state) =>
-                            state.toLowerCase().startsWith(value.toLowerCase())
-                          )
-                        );
-                      }}
-                    />
-                    {filteredStates.length > 0 && (
-                      <VStack
-                        spacing={1}
-                        mt={2}
-                        maxH="150px"
-                        overflowY="auto"
-                        border="1px solid"
-                        borderColor="gray.300"
-                        borderRadius="md"
-                        boxShadow="sm"
-                        bg="white"
-                      >
-                        {filteredStates.map((state) => (
-                          <Box
-                            key={state}
-                            w="100%"
-                            px={2}
-                            py={1}
-                            _hover={{ bg: "gray.100", cursor: "pointer" }}
-                            onClick={() => {
-                              formik.setFieldValue("location.state", state);
-                              setFilteredStates([]); // Clear the dropdown after selection
-                            }}
-                          >
-                            {state}
-                          </Box>
-                        ))}
-                      </VStack>
-                    )}
-                    <Text color="red.500" fontSize="sm">{formik.errors.location?.state}</Text>
-                  </Box>
 
+<Box>
+      <FormLabel fontWeight="bold" htmlFor="state">State</FormLabel>
+      <Flex align="center">
+        <Input
+          id="state"
+          placeholder="Type to search state"
+          value={formik.values.location.state}
+          onChange={(e) => {
+            const value = e.target.value;
+            formik.setFieldValue("location.state", value);
+            setFilteredStates(
+              indianStates.filter((state) =>
+                state.toLowerCase().startsWith(value.toLowerCase())
+              )
+            );
+            // Only show suggestions if input is not empty
+            if (value) setShowSuggestions(true);
+            else setShowSuggestions(false); // Hide suggestions if input is cleared
+          }}
+          onFocus={(e) => {
+            // Prevent suggestions from opening when the user focuses on the input
+            e.preventDefault();
+          }}
+          flex="1" // Allow the input to take up remaining space in the row
+        />
+        <IconButton
+          aria-label="Toggle dropdown"
+          icon={<FaChevronDown />}
+          onClick={() => {
+            if (filteredStates.length > 0 || formik.values.location.state) {
+              setShowSuggestions((prev) => !prev); // Toggle suggestions box when clicking the icon
+            }
+          }}
+          ml={2} // Add some margin between the input and the icon
+        />
+      </Flex>
+      {showSuggestions && filteredStates.length > 0 && (
+        <VStack
+          spacing={1}
+          mt={2}
+          maxH="150px"
+          overflowY="auto"
+          border="1px solid"
+          borderColor="gray.300"
+          borderRadius="md"
+          boxShadow="sm"
+          bg="white"
+        >
+          {filteredStates.map((state) => (
+            <Box
+              key={state}
+              w="100%"
+              px={2}
+              py={1}
+              _hover={{ bg: "gray.100", cursor: "pointer" }}
+              onClick={() => {
+                formik.setFieldValue("location.state", state);
+                setFilteredStates([]); // Clear the dropdown after selection
+                setShowSuggestions(false); // Close the suggestions box after selection
+              }}
+            >
+              {state}
+            </Box>
+          ))}
+        </VStack>
+      )}
+      <Text color="red.500" fontSize="sm">{formik.errors.location?.state}</Text>
+    </Box>
+
+    
                   {/* City */}
                   <Box>
                     <FormLabel fontWeight="bold" htmlFor="city">City</FormLabel>
