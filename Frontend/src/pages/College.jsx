@@ -3,7 +3,6 @@ import CollegeHero from '../components/College/CollegeHero';
 import CollegeIntro from '../components/College/CollegeIntro';
 import CollegeChallenges from '../components/College/CollegeChallenges';
 import CollegeSolutions from '../components/College/CollegeSolutions';
-import TestimonialPage from '../components/College/TestimonialPage';
 import CollegeCTA from '../components/College/CollegeCTA';
 
 const College = () => {
@@ -14,7 +13,6 @@ const College = () => {
             <CollegeIntro />
             <CollegeChallenges />
             <CollegeSolutions />
-          {/*  <TestimonialPage /> */} 
             <CollegeCTA />
            
         </div>
